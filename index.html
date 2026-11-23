@@ -114,6 +114,8 @@
         color: var(--ink-dim);
       }
       .total-sub b { color: var(--head-bright); font-weight: 700; }
+      /* BIOパネル末尾へ移設した統計ブロック（旧ヘッダー分・中央寄せを維持） */
+      .bio-stats { text-align: center; margin: 0 0 10px; }
       .status-strip {
         display: inline-flex; align-items: center; gap: 9px;
         margin-top: 20px; padding: 7px 18px;
@@ -927,6 +929,7 @@
   <body>
     <div class="wrap">
 
+      <div class="tab-panel" id="panel-home" data-panel="home" role="tabpanel" aria-labelledby="tab-home">
       <header class="masthead">
         <h1 class="visually-hidden">GRIMOIRE（グリモア）ライブ履歴</h1>
         <div class="header-band band-bleed">
@@ -969,20 +972,12 @@
             <p class="home-more"><button type="button" class="home-more-link" data-goto-tab="tab-live">ライブ一覧<span aria-hidden="true"> →</span></button></p>
           </aside>
         </div>
-        <p class="period">始動 <b>2015.08.23</b> ― <b>2026.10.31</b></p>
-        <p class="total-count">
-          <span class="tc-label">総ライブ本数</span>
-          <span class="tc-value"><span class="tc-num" id="totalCount">308</span><span class="tc-unit">本</span></span>
-        </p>
-        <p class="total-sub" id="totalAll">＋インストア<b>49</b>件／全<b>357</b>件</p>
-        <div>
-          <span class="status-strip"><span class="dot" aria-hidden="true"></span>随時更新中</span>
-        </div>
       </header>
+      </div>
 
       <nav class="tab-nav" aria-label="セクション切り替え">
         <div class="tab-list" role="tablist">
-          <button type="button" class="tab-btn is-active" id="tab-home" role="tab" data-nav="home" data-tab="artist" aria-controls="panel-artist" aria-selected="true">HOME</button>
+          <button type="button" class="tab-btn is-active" id="tab-home" role="tab" data-nav="home" data-tab="home" aria-controls="panel-home" aria-selected="true">HOME</button>
           <button type="button" class="tab-btn" id="tab-news" role="tab" data-nav="news" data-tab="news" aria-controls="panel-news" aria-selected="false">NEWS</button>
           <button type="button" class="tab-btn" id="tab-live" role="tab" data-nav="live" data-tab="live" aria-controls="panel-live" aria-selected="false">LIVE</button>
           <button type="button" class="tab-btn" id="tab-bio" role="tab" data-nav="bio" data-tab="artist" aria-controls="panel-artist" aria-selected="false">BIO</button>
@@ -993,7 +988,7 @@
         </div>
       </nav>
 
-      <div class="tab-panel" id="panel-artist" data-panel="artist" role="tabpanel" aria-labelledby="tab-home">
+      <div class="tab-panel" id="panel-artist" data-panel="artist" role="tabpanel" aria-labelledby="tab-bio" hidden>
         <div class="bio-intro">
           <p class="bio-logo">GRIMOIRE</p>
           <p class="bio-tagline">Let us eat the fruits of fate.</p>
@@ -1112,6 +1107,18 @@
           <p>前身バンド『ニワカアメ』（2015年2月11日始動〜2015年6月24日活動終了）は、後にGRIMOIREを結成するメンバーが在籍したバンド。楽曲『にわかあめ』はGRIMOIRE始動時から演奏され、2019年にシングルとして音源化された。2021年にはGRIMOIREの別名義として一度限りの公演を行っており、その公演（2021年11月3日 四谷HoneyBurst）はLIVE一覧に『ニワカアメ名義』として収録している。</p>
         </div>
       </section>
+
+        <div class="bio-stats">
+          <p class="period">始動 <b>2015.08.23</b> ― <b>2026.10.31</b></p>
+          <p class="total-count">
+            <span class="tc-label">総ライブ本数</span>
+            <span class="tc-value"><span class="tc-num" id="totalCount">308</span><span class="tc-unit">本</span></span>
+          </p>
+          <p class="total-sub" id="totalAll">＋インストア<b>49</b>件／全<b>357</b>件</p>
+          <div>
+            <span class="status-strip"><span class="dot" aria-hidden="true"></span>随時更新中</span>
+          </div>
+        </div>
       </div>
 
       <div class="tab-panel" id="panel-news" data-panel="news" role="tabpanel" aria-labelledby="tab-news" hidden>
@@ -2195,31 +2202,85 @@
       }
     </script>
     <script>
-      /* タブ切り替え（HOME／NEWS／LIVE／BIO／DISCO／MEDIA／GOODS／CONTACT） */
+      /* ページ式ナビゲーション（ハッシュルーティング）
+         各タブに固有のURL（#home／#news／#live／#bio／#disco／#media／#goods／#contact）を持たせ、
+         タブを切り替えるとそのパネルだけを表示し、ページ先頭から表示する（別ページ遷移のような挙動）。
+         ブラウザの戻る／進むでもタブ間を移動でき、ハッシュ付きURLで直接開いた場合はそのパネルが初期表示になる。
+         パネル内アンカー（BIOのメンバー名 #member-xxxx、LIVEの年別 #year-xxxx 等）は、
+         対象を含むパネルを表示してからその位置へスクロールする */
       (function () {
+        var ROUTES = {
+          home: "panel-home",
+          news: "panel-news",
+          live: "panel-live",
+          bio: "panel-artist",
+          disco: "panel-discography",
+          media: "panel-media",
+          goods: "panel-goods",
+          contact: "panel-contact"
+        };
+        /* 旧ハッシュ（#discography／#panel-xxxx 等）の互換 */
+        var ALIASES = {
+          "panel-home": "home", "panel-news": "news", "panel-live": "live",
+          "panel-artist": "bio", "panel-discography": "disco",
+          "panel-media": "media", "panel-goods": "goods", "panel-contact": "contact",
+          "discography": "disco", "artist": "bio"
+        };
+        var PANEL_NAV = {
+          "panel-home": "home", "panel-news": "news", "panel-live": "live",
+          "panel-artist": "bio", "panel-discography": "disco",
+          "panel-media": "media", "panel-goods": "goods", "panel-contact": "contact"
+        };
         var btns = Array.prototype.slice.call(document.querySelectorAll(".tab-btn"));
-        var panels = {};
-        btns.forEach(function (b) {
-          var name = b.getAttribute("data-tab");
-          if (!panels[name]) panels[name] = document.getElementById(b.getAttribute("aria-controls"));
-        });
-        /* 表示中パネルに対応するアクティブなナビ項目（アーティスト表示中は HOME） */
-        var activeNav = { artist: "home", news: "news", live: "live", discography: "disco", media: "media", goods: "goods", contact: "contact" };
-        function activate(name, focus) {
-          Object.keys(panels).forEach(function (k) {
-            if (panels[k]) panels[k].hidden = k !== name;
-          });
+        var panels = Array.prototype.slice.call(document.querySelectorAll(".tab-panel"));
+
+        function showPanel(panelId) {
+          panels.forEach(function (p) { p.hidden = p.id !== panelId; });
+          var nav = PANEL_NAV[panelId];
           btns.forEach(function (b) {
-            var on = b.getAttribute("data-nav") === activeNav[name];
+            var on = b.getAttribute("data-nav") === nav;
             b.classList.toggle("is-active", on);
             b.setAttribute("aria-selected", on ? "true" : "false");
-            if (on && focus) b.focus();
           });
         }
+        /* ページ遷移らしく、先頭へ即座に戻す（CSSの smooth を一時的に無効化） */
+        function scrollTop() {
+          var el = document.documentElement;
+          var prev = el.style.scrollBehavior;
+          el.style.scrollBehavior = "auto";
+          window.scrollTo(0, 0);
+          el.style.scrollBehavior = prev;
+        }
+        function render() {
+          var raw = location.hash.replace(/^#/, "");
+          if (ROUTES[raw]) { showPanel(ROUTES[raw]); scrollTop(); return; }
+          if (ALIASES[raw]) { showPanel(ROUTES[ALIASES[raw]]); scrollTop(); return; }
+          if (raw) {
+            var target = document.getElementById(raw);
+            if (target) {
+              var p = target;
+              while (p && !(p.classList && p.classList.contains("tab-panel"))) p = p.parentNode;
+              if (p) {
+                showPanel(p.id);
+                target.scrollIntoView();
+                return;
+              }
+            }
+            showPanel(ROUTES.home);
+            scrollTop();
+            return;
+          }
+          showPanel(ROUTES.home);
+        }
+        function navigate(route) {
+          if (location.hash === "#" + route) render();
+          else location.hash = route;
+        }
         btns.forEach(function (b) {
-          b.addEventListener("click", function () { activate(b.getAttribute("data-tab"), false); });
+          b.addEventListener("click", function () { navigate(b.getAttribute("data-nav")); });
         });
-        /* フッター：「▲上へ戻る」はページ先頭へ、「HOME」はアーティストタブへ */
+        window.addEventListener("hashchange", render);
+        /* フッター：「▲上へ戻る」はページ先頭へ、「HOME」はHOMEページへ */
         var toTop = document.getElementById("toTop");
         if (toTop) toTop.addEventListener("click", function (e) {
           e.preventDefault();
@@ -2228,29 +2289,10 @@
         var footHome = document.getElementById("footHome");
         if (footHome) footHome.addEventListener("click", function (e) {
           e.preventDefault();
-          activate("artist", false);
-          window.scrollTo({ top: 0, behavior: "smooth" });
+          navigate("home");
+          scrollTop();
         });
-        /* URLハッシュに応じて初期タブを選ぶ */
-        var hash = location.hash;
-        if (hash === "#discography" || hash === "#panel-discography" || hash === "#disco") {
-          activate("discography", false);
-        } else if (hash === "#news" || hash === "#panel-news") {
-          activate("news", false);
-        } else if (hash === "#media" || hash === "#panel-media") {
-          activate("media", false);
-        } else if (hash === "#goods" || hash === "#panel-goods") {
-          activate("goods", false);
-        } else if (hash === "#contact" || hash === "#panel-contact") {
-          activate("contact", false);
-        } else if (hash === "#live" || hash === "#panel-live" || /^#year-/.test(hash) || /^#ref-/.test(hash)) {
-          activate("live", false);
-          var target = null;
-          try { target = document.querySelector(hash); } catch (err) { /* 不正なハッシュは無視 */ }
-          if (target) setTimeout(function () { target.scrollIntoView(); }, 0);
-        } else if (hash === "#profile" || hash === "#panel-artist") {
-          activate("artist", false);
-        }
+        render();
       })();
     </script>
     <script>
@@ -2303,12 +2345,10 @@
             if (venueEl) venueEl.textContent = latest.venue || "";
           }
         }
-        var nav = document.querySelector("nav.tab-nav");
         Array.prototype.forEach.call(document.querySelectorAll("[data-goto-tab]"), function (btn) {
           btn.addEventListener("click", function () {
             var tab = document.getElementById(btn.getAttribute("data-goto-tab"));
             if (tab) tab.click();
-            if (nav) nav.scrollIntoView({ behavior: "smooth", block: "start" });
           });
         });
       })();
