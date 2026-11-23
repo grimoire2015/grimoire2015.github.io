@@ -452,6 +452,73 @@
         margin: 2px 0 6px;
         font-size: 12px; line-height: 1.7; color: var(--ink-faint);
       }
+      /* ---------- Live schedule（旧公式サイトSCHEDULE形式） ---------- */
+      .sched-heading {
+        margin: 36px 0 4px; font-size: 15px; font-weight: 400;
+        letter-spacing: .3em; color: #e8e8e8;
+      }
+      .sched-heading .tri { color: var(--head-bright); margin-right: 10px; }
+      .sched { margin: 0 0 36px; }
+      .sched-row {
+        display: flex; gap: 14px; align-items: baseline;
+        padding: 10px 2px;
+        border-bottom: 1px dotted var(--dot);
+      }
+      .sched-label {
+        flex: 0 0 84px;
+        font-size: 11.5px; letter-spacing: .22em; color: var(--ink-faint);
+      }
+      .sched-value {
+        flex: 1 1 auto; min-width: 0;
+        font-size: 14.5px; color: #d8d8d8; line-height: 1.7;
+        overflow-wrap: anywhere;
+      }
+      .sched-value.sched-title { color: #eeeeee; font-size: 15.5px; }
+      .sched-value .unknown { color: var(--ink-faint); }
+      .detail-toggle {
+        background: none; border: none; padding: 2px 0; cursor: pointer;
+        font: inherit; font-size: 14px; font-weight: 400; letter-spacing: .08em;
+        color: #d3a3a3; text-align: left;
+      }
+      .detail-toggle:hover, .detail-toggle:focus-visible { color: #eeeeee; }
+      .sched-detail {
+        padding: 14px 2px 16px 100px;
+        border-bottom: 1px dotted var(--dot);
+      }
+      .detail-block h4 {
+        margin: 0 0 4px; font-size: 12px; font-weight: 400;
+        letter-spacing: .2em; color: var(--ink-faint);
+      }
+      .detail-block + .detail-block { margin-top: 14px; }
+      .cast-line { margin: 0; font-size: 13.5px; line-height: 1.8; color: #c9c9c9; }
+      .detail-note { font-size: 12px; color: var(--ink-faint); margin-left: 6px; }
+      ol.detail-setlist {
+        margin: 2px 0 4px; padding-left: 1.7em;
+        font-size: 13.5px; line-height: 1.85; color: var(--ink-dim);
+      }
+      ol.detail-setlist li::marker { color: var(--ink-faint); font-size: 11.5px; }
+      .sched-detail .encore-line {
+        margin: 2px 0 4px;
+        font-size: 13px; color: #d3a3a3;
+      }
+      .sched-detail .encore-line .encore-label {
+        font-size: 11.5px; letter-spacing: .14em; color: var(--head-bright);
+        border: 1px solid var(--head); padding: 0 7px; margin-right: 8px;
+      }
+      .sched-detail .setlist-note {
+        margin: 2px 0 6px;
+        font-size: 12px; line-height: 1.7; color: var(--ink-faint);
+      }
+      .sched-detail .partial-line { margin-top: 2px; }
+      .sched-empty {
+        color: var(--ink-faint); text-align: center;
+        padding: 22px 14px; letter-spacing: .14em; font-size: 13.5px;
+      }
+      @media (max-width: 560px) {
+        .sched-label { flex-basis: 60px; }
+        .sched-detail { padding-left: 76px; }
+      }
+
       /* ---------- Reference sections (solo / instore) ---------- */
       details.year.ref { margin-top: 40px; }
       .ref-note {
@@ -751,21 +818,71 @@
       @media (max-width: 640px) {
         a.news-link, a.home-news-link { flex-direction: column; gap: 2px; }
       }
-      /* NEWS：記事詳細ページ */
+      /* NEWS：記事詳細ページ（旧公式モバイル版 gri-moire.com のタイポグラフィ再現） */
       .news-detail-article[hidden] { display: none; }
+      .news-detail-article {
+        font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", YuGothic, "Yu Gothic", sans-serif;
+        font-weight: 400;
+        color: #999999;
+        text-align: left;
+      }
       .news-detail-date {
-        margin: 0; font-family: var(--font-serif);
-        color: var(--head-bright); letter-spacing: .06em; font-size: 14px;
+        margin: 0; font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", YuGothic, "Yu Gothic", sans-serif;
+        color: #999999; letter-spacing: normal; font-size: 14px; line-height: 1.9;
       }
       .news-detail-title {
         margin: 8px 0 0; padding-bottom: 16px;
         border-bottom: 1px dotted var(--dot);
-        color: #dedede; font-weight: 400;
-        font-size: clamp(19px, 4.6vw, 23px); line-height: 1.6; letter-spacing: .04em;
+        font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", YuGothic, "Yu Gothic", sans-serif;
+        color: #999999; font-weight: 400;
+        font-size: clamp(19px, 4.6vw, 23px); line-height: 1.6; letter-spacing: normal;
       }
-      .news-detail-article .n-text { margin: 14px 0 0; color: var(--ink-dim); font-size: 14.5px; line-height: 1.9; }
-      .news-detail-article .n-text b { color: #d2d2d2; }
-      .news-detail-article .news-official { margin-top: 18px; }
+      .news-detail-article .n-text {
+        margin: 0 0 1.9em; color: #999999;
+        font-size: 14px; line-height: 1.9; font-weight: 400; letter-spacing: normal;
+      }
+      .news-detail-article .news-detail-title + .n-text,
+      .news-detail-article .news-detail-title + .news-official { margin-top: 22px; }
+      .news-detail-article .n-text b { color: #999999; }
+      /* 公式お知らせ本文は枠なし・余白なしで本文幅いっぱいに流す（スクショの版面） */
+      .news-detail-article .news-official {
+        margin-top: 22px; border: none; padding: 0; background: transparent;
+      }
+      .news-detail-article .news-official p {
+        margin: 0 0 1.9em; color: #999999;
+        font-size: 14px; line-height: 1.9; font-weight: 400; letter-spacing: normal;
+      }
+      .news-detail-article .news-official .sign { color: #999999; letter-spacing: normal; }
+      /* 記事末尾のPosted行：右寄せ・グレー・本文より少し小さく */
+      .news-detail-article .news-posted {
+        margin: 30px 0 0; text-align: right;
+        color: #999999; font-size: 12.5px; line-height: 1.9; font-weight: 400; letter-spacing: normal;
+      }
+      /* 2016.04.08 チェキケース記事：タイトル・本文すべて中央寄せ（Posted行のみ右寄せ） */
+      .news-detail-article[data-news-slug="20160408"] { text-align: center; }
+      .news-detail-article[data-news-slug="20160408"] .news-detail-date,
+      .news-detail-article[data-news-slug="20160408"] .news-detail-title,
+      .news-detail-article[data-news-slug="20160408"] .n-text { text-align: center; }
+      .news-detail-article[data-news-slug="20160408"] .news-posted { text-align: right; }
+      /* 2015.06.26 おでかけ。：タイトル・本文すべて中央寄せ（Posted行のみ右寄せ） */
+      .news-detail-article[data-news-slug="20150626"] { text-align: center; }
+      .news-detail-article[data-news-slug="20150626"] .news-detail-date,
+      .news-detail-article[data-news-slug="20150626"] .news-detail-title,
+      .news-detail-article[data-news-slug="20150626"] .n-text { text-align: center; }
+      .news-detail-article[data-news-slug="20150626"] .news-posted { text-align: right; }
+      /* 2015.11.10 ぼくとタルパ発売＆おはなし会：タイトル・本文すべて中央寄せ（Posted行のみ右寄せ） */
+      .news-detail-article[data-news-slug="20151110"] { text-align: center; }
+      .news-detail-article[data-news-slug="20151110"] .news-detail-date,
+      .news-detail-article[data-news-slug="20151110"] .news-detail-title,
+      .news-detail-article[data-news-slug="20151110"] .n-text { text-align: center; }
+      .news-detail-article[data-news-slug="20151110"] .news-posted { text-align: right; }
+      /* 2018.08.22 Amu脱退のお知らせ：タイトル・本文・署名「GRIMOIRE」行とも左寄せ（Posted行のみ右寄せ） */
+      .news-detail-article[data-news-slug="20180822"] .news-official .sign { text-align: left; }
+      .news-detail-article[data-news-slug="20180822"] .news-posted { text-align: right; }
+      @media (max-width: 640px) {
+        /* モバイルでは本文の左右余白を約12pxに詰めてスクショの版面に近づける（.wrapの14pxから2px分を相殺） */
+        .news-detail-article { margin-left: -2px; margin-right: -2px; }
+      }
       .news-back { margin: 36px 0 0; }
       .news-back a {
         display: inline-block; min-height: 2.25rem; line-height: 2.25rem; padding: 0 4px;
@@ -1180,7 +1297,9 @@
           <li><a class="news-link" href="#news-20161123"><span class="n-date">2016.11.23</span><span class="n-body">初の全国流通作品『マイムマイム』発売</span></a></li>
           <li><a class="news-link" href="#news-2016"><span class="n-date">2016年</span><span class="n-body">TIMELY RECORDS所属</span></a></li>
           <li><a class="news-link" href="#news-20160408"><span class="n-date">2016.04.08</span><span class="n-body">オリジナルチェキケース販売＆「ひとりトピア」50枚限定増版決定</span></a></li>
+          <li><a class="news-link" href="#news-20151110"><span class="n-date">2015.11.10</span><span class="n-body">1stシングル「ぼくとタルパ」発売＆インストアイベント「おはなし会」開催</span></a></li>
           <li><a class="news-link" href="#news-20150823"><span class="n-date">2015.08.23</span><span class="n-body">始動ワンマン「おひろめえんそうかい 〜はじまりエンドロール〜」（新宿RUIDO K4）</span></a></li>
+          <li><a class="news-link" href="#news-20150626"><span class="n-date">2015.06.26</span><span class="n-body">おでかけ。</span></a></li>
         </ul>
       </section>
       </div>
@@ -1191,14 +1310,17 @@
         <article class="news-detail-article" data-news-slug="20260823" hidden>
           <p class="news-detail-date">2026.08.23</p>
           <h3 class="news-detail-title">11周年ワンマン「カーテンコール」（池袋EDGE）</h3>
+          <p class="news-posted">Posted : 2026.08.23</p>
         </article>
         <article class="news-detail-article" data-news-slug="20250823" hidden>
           <p class="news-detail-date">2025.08.23</p>
           <h3 class="news-detail-title">復活・10周年ワンマン</h3>
+          <p class="news-posted">Posted : 2025.08.23</p>
         </article>
         <article class="news-detail-article" data-news-slug="20220507" hidden>
           <p class="news-detail-date">2022.05.07</p>
           <h3 class="news-detail-title">活動休止</h3>
+          <p class="news-posted">Posted : 2022.05.07</p>
         </article>
         <article class="news-detail-article" data-news-slug="2019" hidden>
           <p class="news-detail-date">2019年</p>
@@ -1207,14 +1329,17 @@
         <article class="news-detail-article" data-news-slug="20181226" hidden>
           <p class="news-detail-date">2018.12.26</p>
           <h3 class="news-detail-title">新体制第一弾ミニアルバム『ノベルファンタジア』発売</h3>
+          <p class="news-posted">Posted : 2018.12.26</p>
         </article>
         <article class="news-detail-article" data-news-slug="20181204" hidden>
           <p class="news-detail-date">2018.12.04</p>
           <h3 class="news-detail-title">第二章始動（新章おひろめワンマン）</h3>
+          <p class="news-posted">Posted : 2018.12.04</p>
         </article>
         <article class="news-detail-article" data-news-slug="20180825" hidden>
           <p class="news-detail-date">2018.08.25</p>
           <h3 class="news-detail-title">Gt.Amu 脱退（「ぼくのなつやすみ」ファイナル）</h3>
+          <p class="news-posted">Posted : 2018.08.25</p>
         </article>
         <article class="news-detail-article" data-news-slug="20180822" hidden>
           <p class="news-detail-date">2018.08.22</p>
@@ -1227,10 +1352,12 @@
             <p>尚、8月26日以降のイベントの変更や中止などは一切無くGRIMOIREは引き続き活動を続けて参りますのでどうか今後とも変わらぬご愛顧を賜りますよう、何卒宜しくお願い申し上げます。</p>
             <p class="sign">GRIMOIRE</p>
           </div>
+          <p class="news-posted">Posted : 2018.08.22</p>
         </article>
         <article class="news-detail-article" data-news-slug="20161123" hidden>
           <p class="news-detail-date">2016.11.23</p>
           <h3 class="news-detail-title">初の全国流通作品『マイムマイム』発売</h3>
+          <p class="news-posted">Posted : 2016.11.23</p>
         </article>
         <article class="news-detail-article" data-news-slug="2016" hidden>
           <p class="news-detail-date">2016年</p>
@@ -1243,10 +1370,30 @@
           <p class="n-text">どちらも2016.04.22より会場限定で販売を開始致します。</p>
           <p class="n-text">尚、「ひとりトピア」をご購入して頂いたお客様には【メンバーサイン入りポスター】を差し上げます。</p>
           <p class="n-text">商品詳細<br />オリジナルチェキケース　1500円<br />おひろめきねん0thシングル「ひとりトピア」　1200円</p>
+          <p class="news-posted">Posted : 2016.04.08</p>
+        </article>
+        <article class="news-detail-article" data-news-slug="20151110" hidden>
+          <p class="news-detail-date">2015.11.10</p>
+          <h3 class="news-detail-title">1stシングル「ぼくとタルパ」発売＆インストアイベント「おはなし会」開催</h3>
+          <p class="n-text">12月16日(水)<br />全国のリトルハーツ、ライカエジソンにて発売</p>
+          <p class="n-text">[CD]<br />価格：￥1,200(tax in)<br />品番：GMPI-0002<br />[CD]<br />1.ぼくとタルパ / 2.ゼロとくろ</p>
+          <p class="n-text">1stシングル発売に伴い、<br />インストアイベント「おはなし会」開催</p>
+          <p class="n-text">日程／2016年1月24日（日）<br />時間／START 15：00～<br />会場／リトルハーツ新宿店<br />条件／リトルハーツ新宿店でCDをご購入の方<br />内容／トーク&amp;握手会</p>
+          <p class="n-text">日程／2016年1月24日（日）<br />時間／START 18：00～<br />会場／ライカエジソン東京店<br />条件／ライカエジソン東京店でCDをご購入の方<br />内容／トーク&amp;サイン会<br />※サインはCDジャケットのみとさせて頂きます。</p>
+          <p class="news-posted">Posted : 2015.11.10</p>
         </article>
         <article class="news-detail-article" data-news-slug="20150823" hidden>
           <p class="news-detail-date">2015.08.23</p>
           <h3 class="news-detail-title">始動ワンマン「おひろめえんそうかい 〜はじまりエンドロール〜」（新宿RUIDO K4）</h3>
+          <p class="news-posted">Posted : 2015.08.23</p>
+        </article>
+        <article class="news-detail-article" data-news-slug="20150626" hidden>
+          <p class="news-detail-date">2015.06.26</p>
+          <h3 class="news-detail-title">おでかけ。</h3>
+          <p class="n-text">6月29日</p>
+          <p class="n-text">新宿アルタ<br />17:00～</p>
+          <p class="n-text">19:00～</p>
+          <p class="news-posted">Posted : 2015.06.26</p>
         </article>
         <p class="news-back"><a href="#news"><span aria-hidden="true">← </span>おしらせ一覧へ戻る</a></p>
       </section>
@@ -1454,6 +1601,7 @@
       <section class="live-section" id="live" aria-labelledby="live-heading">
         <h2 class="section-heading" id="live-heading"><span class="en">LIVE</span><span class="jp">ライブ履歴</span></h2>
         <nav class="year-nav" id="yearNav" aria-label="年別ジャンプ"></nav>
+        <h3 class="sched-heading"><span class="tri" aria-hidden="true">▶</span>LIVE SCHEDULE</h3>
         <main id="yearsRoot"></main>
       </section>
 
@@ -2063,6 +2211,7 @@
       var HIATUS_YEARS = { 2023: true, 2024: true };
 
       var DOW = ["日", "月", "火", "水", "木", "金", "土"];
+      var DOW_EN = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
       function esc(s) {
         return String(s == null ? "" : s)
@@ -2075,7 +2224,8 @@
         var d = new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
         return {
           text: p[0] + "." + p[1] + "." + p[2],
-          dow: DOW[d.getDay()]
+          dow: DOW[d.getDay()],
+          dowEn: DOW_EN[d.getDay()]
         };
       }
 
@@ -2122,70 +2272,82 @@
           html += "</summary>";
           html += '<div class="year-body">';
 
-          html += '<div class="table-scroll"><table class="lives">';
-          html += "<thead><tr>" +
-            "<th scope=\"col\">日付</th>" +
-            "<th scope=\"col\">会場</th>" +
-            "<th scope=\"col\">イベント・公演名</th>" +
-            "<th scope=\"col\">種別</th>" +
-            "</tr></thead><tbody>";
-
           if (n === 0) {
-            html += '<tr class="empty-row"><td colspan="4">' +
+            html += '<p class="sched-empty">' +
               (isHiatus ? "活動休止期間のため公演なし" : "公演情報は確認でき次第、順次追加します") +
-              "</td></tr>";
+              "</p>";
           } else {
             rows.forEach(function (r) {
               var f = fmtDate(r.date);
-              var ev = r.event
+              var actName = r.niwakame ? "ニワカアメ" : "GRIMOIRE";
+              var title = r.event
                 ? esc(r.event)
                 : '<span class="unknown">（不明）</span>';
               if (r.official) {
-                ev += '<span class="official-note">公式確認</span>';
+                title += '<span class="official-note">公式確認</span>';
               }
               if (r.x) {
-                ev += '<span class="x-note">公式X確認</span>';
+                title += '<span class="x-note">公式X確認</span>';
               }
               if (r.self) {
-                ev += '<span class="self-note">本人参加記録</span>';
+                title += '<span class="self-note">本人参加記録</span>';
               }
               if (r.niwakame) {
-                ev += '<span class="alias-note">ニワカアメ名義</span>';
+                title += '<span class="alias-note">ニワカアメ名義</span>';
               }
               if (!r.official && !r.x && !r.self && r.single) {
-                ev += '<span class="single-note">※単一ソース</span>';
+                title += '<span class="single-note">※単一ソース</span>';
               }
               if (r.note) {
-                ev += '<span class="corr-note">' + esc(r.note) + '</span>';
+                title += '<span class="corr-note">' + esc(r.note) + '</span>';
               }
+
+              html += '<article class="sched">';
+              html += '<div class="sched-row"><div class="sched-label">TITLE</div>' +
+                '<div class="sched-value sched-title">' + title + "</div></div>";
+              html += '<div class="sched-row"><div class="sched-label">LIVE</div>' +
+                '<div class="sched-value">' + esc(f.text) + " [" + f.dowEn + "] " + esc(r.venue) + "</div></div>";
+              html += '<div class="sched-row"><div class="sched-label">ACT</div>' +
+                '<div class="sched-value">' + esc(actName) + "</div></div>";
+              html += '<div class="sched-row"><div class="sched-label">TIME</div>' +
+                '<div class="sched-value">' + (r.time ? esc(r.time) : "") + "</div></div>";
+              html += '<div class="sched-row"><div class="sched-label">TICKET</div>' +
+                '<div class="sched-value">' + (r.ticket ? esc(r.ticket) : "") + "</div></div>";
+              html += '<div class="sched-row"><div class="sched-label">DETAIL</div>' +
+                '<div class="sched-value"><button type="button" class="detail-toggle" aria-expanded="false">&gt;&gt; 詳細を見る</button></div></div>';
+
+              /* DETAILプルダウン：出演者とセトリ（データがある項目のみ中身を表示） */
+              html += '<div class="sched-detail" hidden>';
+              var cast = esc(actName);
               if (r.with) {
-                ev += '<span class="with-line"><span class="with-label">' + (r.withPartial ? "共演（一部）：" : "共演：") + '</span>' + esc(r.with) + '</span>';
+                cast += " / " + esc(r.with);
               }
+              html += '<div class="detail-block"><h4>出演者</h4>' +
+                '<p class="cast-line">' + cast +
+                (r.with && r.withPartial ? '<span class="detail-note">（出演者は一部のみ確認）</span>' : "") +
+                "</p></div>";
+              html += '<div class="detail-block"><h4>セットリスト</h4>';
               if (r.setlist) {
-                var songCount = r.setlist.length + (r.encore ? r.encore.length : 0);
-                ev += '<details class="setlist"><summary>セットリスト（全' + songCount + '曲）</summary>';
-                ev += "<ol>" + r.setlist.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ol>";
+                html += '<ol class="detail-setlist">' + r.setlist.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ol>";
                 if (r.encore) {
-                  ev += '<p class="encore-line"><span class="encore-label">' + esc(r.encoreLabel || "アンコール") + "</span>" + r.encore.map(esc).join("／") + "</p>";
+                  html += '<p class="encore-line"><span class="encore-label">' + esc(r.encoreLabel || "アンコール") + "</span>" + r.encore.map(esc).join("／") + "</p>";
                 }
                 if (r.setlistNote) {
-                  ev += '<p class="setlist-note">' + esc(r.setlistNote) + "</p>";
+                  html += '<p class="setlist-note">' + esc(r.setlistNote) + "</p>";
                 }
-                ev += "</details>";
               }
               if (r.partial) {
-                ev += '<span class="partial-line"><span class="partial-label">部分セトリ（本人の参加投稿より）：</span>' + esc(r.partial) + '</span>';
+                html += '<p class="partial-line"><span class="partial-label">部分セトリ（本人の参加投稿より）：</span>' + esc(r.partial) + "</p>";
               }
-              html += "<tr>";
-              html += '<td class="date">' + esc(f.text) + '<span class="dow">（' + f.dow + "）</span></td>";
-              html += '<td class="venue">' + esc(r.venue) + "</td>";
-              html += '<td class="event">' + ev + "</td>";
-              html += '<td class="type"><span class="' + typeClass(r.type) + '">' + esc(r.type) + "</span></td>";
-              html += "</tr>";
+              html += "</div>";
+              html += "</div>";
+
+              html += '<div class="sched-row"><div class="sched-label">INFO</div>' +
+                '<div class="sched-value"></div></div>';
+              html += "</article>";
             });
           }
 
-          html += "</tbody></table></div>";
           html += "</div>";
           html += "</details>";
         });
@@ -2278,6 +2440,21 @@
       buildNav(YEARS);
       buildSections(YEARS);
       buildRefSections();
+
+      /* DETAIL「>> 詳細を見る」のプルダウン開閉 */
+      document.getElementById("yearsRoot").addEventListener("click", function (e) {
+        var btn = e.target;
+        while (btn && !(btn.classList && btn.classList.contains("detail-toggle"))) btn = btn.parentNode;
+        if (!btn) return;
+        var row = btn.parentNode;
+        while (row && !(row.classList && row.classList.contains("sched-row"))) row = row.parentNode;
+        if (!row) return;
+        var panel = row.nextElementSibling;
+        if (!panel || !panel.classList.contains("sched-detail")) return;
+        var willOpen = panel.hidden;
+        panel.hidden = !willOpen;
+        btn.setAttribute("aria-expanded", willOpen ? "true" : "false");
+      });
 
       /* 年別ナビからジャンプした場合は、対象年のアコーディオンを開く */
       document.getElementById("yearNav").addEventListener("click", function (e) {
