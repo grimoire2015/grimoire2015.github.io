@@ -28,6 +28,7 @@
         --font-hand: "Yomogi", "Hiragino Maru Gothic ProN", "Hiragino Sans", sans-serif;
       }
       * { box-sizing: border-box; }
+      b, strong { font-weight: 400; }
       html { scroll-behavior: smooth; }
       body {
         margin: 0;
@@ -80,7 +81,7 @@
         font-size: 14px; letter-spacing: .28em; text-indent: .28em;
         color: var(--ink-dim);
       }
-      .period b { color: var(--head-bright); font-weight: 700; }
+      .period b { color: var(--head-bright); font-weight: 400; }
       /* 総ライブ本数（本表のみ・JSで自動集計） */
       .total-count {
         margin: 26px 0 0;
@@ -89,7 +90,7 @@
       }
       .total-count .tc-label {
         font-size: clamp(15px, 3.6vw, 19px);
-        font-weight: 700;
+        font-weight: 400;
         letter-spacing: .34em; text-indent: .34em;
         color: #cfcfcf;
       }
@@ -104,7 +105,7 @@
       }
       .total-count .tc-unit {
         font-size: clamp(19px, 4.6vw, 25px);
-        font-weight: 700;
+        font-weight: 400;
         color: var(--head);
       }
       /* インストア込みの総数（JSで自動集計） */
@@ -113,7 +114,7 @@
         font-size: 13.5px; letter-spacing: .18em;
         color: var(--ink-dim);
       }
-      .total-sub b { color: var(--head-bright); font-weight: 700; }
+      .total-sub b { color: var(--head-bright); font-weight: 400; }
       /* BIOパネル末尾へ移設した統計ブロック（旧ヘッダー分・中央寄せを維持） */
       .bio-stats { text-align: center; margin: 0 0 10px; }
       .status-strip {
@@ -176,7 +177,7 @@
       .home-next .home-block-title { border-bottom: none; padding-bottom: 2px; margin-bottom: 8px; }
       .home-next .next-date {
         margin: 0;
-        font-family: var(--font-serif); font-weight: 700;
+        font-family: var(--font-serif); font-weight: 400;
         font-size: clamp(21px, 5vw, 25px);
         letter-spacing: .08em; color: #e2e2e2; line-height: 1.4;
       }
@@ -239,7 +240,7 @@
         display: flex; align-items: center; gap: 12px;
         padding: 14px 20px;
         font-family: var(--font-serif);
-        font-weight: 700; letter-spacing: .12em; font-size: 15px;
+        font-weight: 400; letter-spacing: .12em; font-size: 15px;
         color: var(--head-bright);
         min-height: 3rem;
       }
@@ -305,7 +306,7 @@
       }
       details.year[open ] > summary.year-head .chev { transform: rotate(180deg); }
       .year-head h2 {
-        font-family: var(--font-serif); font-weight: 700;
+        font-family: var(--font-serif); font-weight: 400;
         font-size: clamp(26px, 6vw, 34px);
         margin: 0; letter-spacing: .1em; color: #d8d8d8;
       }
@@ -333,7 +334,7 @@
       }
       table.lives caption { text-align: left; }
       table.lives thead th {
-        text-align: left; font-weight: 600; font-size: 12.5px;
+        text-align: left; font-weight: 400; font-size: 12.5px;
         letter-spacing: .18em; color: var(--ink-faint);
         padding: 12px 14px 8px;
         border-bottom: 1px dotted var(--dot);
@@ -424,7 +425,7 @@
         cursor: pointer; list-style: none;
         display: inline-flex; align-items: center; gap: 7px;
         min-height: 2rem; padding: 2px 2px;
-        font-size: 12.5px; letter-spacing: .14em; font-weight: 700;
+        font-size: 12.5px; letter-spacing: .14em; font-weight: 400;
         color: #d3a3a3;
       }
       details.setlist summary::-webkit-details-marker { display: none; }
@@ -460,7 +461,7 @@
       td.act, td.note-cell { color: var(--ink-dim); }
       td.event .unknown { color: var(--ink-faint); }
       tr.placeholder-row td { color: var(--ink-dim); }
-      tr.placeholder-row td.event { color: #d3a3a3; font-weight: 700; letter-spacing: .08em; }
+      tr.placeholder-row td.event { color: #d3a3a3; font-weight: 400; letter-spacing: .08em; }
       .empty-row td {
         color: var(--ink-faint); text-align: center;
         padding: 22px 14px; letter-spacing: .14em; font-size: 13.5px;
@@ -476,9 +477,10 @@
         display: flex; flex-direction: column; align-items: flex-start; gap: 7px;
         border-bottom: 1px dotted var(--dot);
         padding-bottom: 16px; margin: 0 0 26px;
+        font-weight: 400;
       }
       .section-heading .en {
-        font-family: var(--font-serif); font-weight: 700;
+        font-family: var(--font-serif); font-weight: 400;
         font-size: clamp(30px, 6.4vw, 40px);
         letter-spacing: .32em; color: var(--head); line-height: 1.25;
       }
@@ -493,7 +495,7 @@
         border: 1px solid var(--head); padding: 2px 12px;
       }
       .sub-head {
-        font-family: var(--font-serif); font-weight: 700;
+        font-family: var(--font-serif); font-weight: 400;
         font-size: 17px; letter-spacing: .12em; color: var(--head-bright);
         margin: 28px 0 12px; padding-bottom: 8px;
         border-bottom: 1px dotted var(--dot);
@@ -514,7 +516,7 @@
         padding: 16px 18px 6px;
       }
       .sub-box h4 {
-        margin: 0 0 8px; font-size: 15px; letter-spacing: .1em; color: #d2d2d2;
+        margin: 0 0 8px; font-size: 15px; font-weight: 400; letter-spacing: .1em; color: #d2d2d2;
       }
       .sub-box p { margin: 0 0 12px; color: var(--ink-dim); font-size: 14.5px; line-height: 1.9; }
 
@@ -541,7 +543,7 @@
         margin: 6px 0 20px;
       }
       .bio-intro .bio-title {
-        font-family: var(--font-serif); font-weight: 700;
+        font-family: var(--font-serif); font-weight: 400;
         font-size: clamp(24px, 5.4vw, 30px);
         letter-spacing: .34em; text-indent: .34em;
         color: #dcdcdc;
@@ -596,7 +598,7 @@
       }
       table.info-table th {
         width: 22%; min-width: 110px; white-space: nowrap;
-        font-weight: 600; font-size: 12.5px; letter-spacing: .18em;
+        font-weight: 400; font-size: 12.5px; letter-spacing: .18em;
         color: var(--ink-faint);
       }
       table.info-table td { color: #c4c4c4; }
@@ -617,7 +619,7 @@
         padding-bottom: 9px; margin-bottom: 10px;
       }
       .member-card .mc-name {
-        font-family: var(--font-serif); font-weight: 700; font-size: 22px;
+        font-family: var(--font-serif); font-weight: 400; font-size: 22px;
         letter-spacing: .06em; color: #e0e0e0; line-height: 1.2;
       }
       .member-card .mc-animal { color: #b58a8a; font-size: 13px; letter-spacing: .1em; }
@@ -634,7 +636,7 @@
         letter-spacing: .12em; padding-top: 2px;
       }
       .member-card dd { margin: 0; color: var(--ink-dim); line-height: 1.7; }
-      .member-card dd b { color: #d5d5d5; font-weight: 600; }
+      .member-card dd b { color: #d5d5d5; font-weight: 400; }
       .member-card .mc-leave {
         margin: 10px 0 4px; padding-top: 9px;
         border-top: 1px dotted var(--dot);
@@ -675,7 +677,7 @@
         font-size: 14.5px; min-width: 640px;
       }
       table.disco thead th {
-        text-align: left; font-weight: 600; font-size: 12.5px;
+        text-align: left; font-weight: 400; font-size: 12.5px;
         letter-spacing: .18em; color: var(--ink-faint);
         padding: 12px 14px 8px;
         border-bottom: 1px dotted var(--dot);
@@ -688,7 +690,7 @@
       }
       table.disco tbody tr:hover { background: rgba(153, 102, 102, .06); }
       table.disco td.d-date { white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--ink-dim); letter-spacing: .05em; }
-      table.disco td.d-title { color: #dedede; font-weight: 700; min-width: 150px; }
+      table.disco td.d-title { color: #dedede; font-weight: 400; min-width: 150px; }
       table.disco td.d-title .d-ver { display: block; font-weight: 400; font-size: 13px; color: var(--ink-dim); margin-top: 2px; }
       table.disco td.d-note { color: var(--ink-dim); font-size: 13.5px; min-width: 150px; }
       table.disco th.d-jacket-head { width: 92px; }
@@ -758,7 +760,7 @@
       .news-detail-title {
         margin: 8px 0 0; padding-bottom: 16px;
         border-bottom: 1px dotted var(--dot);
-        color: #dedede; font-weight: 700;
+        color: #dedede; font-weight: 400;
         font-size: clamp(19px, 4.6vw, 23px); line-height: 1.6; letter-spacing: .04em;
       }
       .news-detail-article .n-text { margin: 14px 0 0; color: var(--ink-dim); font-size: 14.5px; line-height: 1.9; }
@@ -774,7 +776,7 @@
       .news-back a:focus-visible { outline: 2px solid var(--head); outline-offset: 2px; }
       /* NEWS：本文付きの詳細項目 */
       ul.news-list li.news-rich { flex-direction: column; align-items: stretch; gap: 2px; }
-      .news-rich .n-title { color: #dedede; font-weight: 700; font-size: 15px; }
+      .news-rich .n-title { color: #dedede; font-weight: 400; font-size: 15px; }
       .news-rich .n-text { margin: 6px 0 0; color: var(--ink-dim); font-size: 14px; line-height: 1.9; }
       .news-rich .n-text b { color: #d2d2d2; }
       details.news-more { margin-top: 10px; }
@@ -782,7 +784,7 @@
         cursor: pointer; list-style: none;
         display: inline-flex; align-items: center; gap: 7px;
         min-height: 2rem; padding: 2px 2px;
-        font-size: 12.5px; letter-spacing: .14em; font-weight: 700;
+        font-size: 12.5px; letter-spacing: .14em; font-weight: 400;
         color: #d3a3a3;
       }
       details.news-more > summary::-webkit-details-marker { display: none; }
@@ -840,7 +842,7 @@
       ul.media-list li { padding: 16px 4px; border-bottom: 1px dotted var(--dot); }
       .mv-title {
         margin: 0;
-        font-family: var(--font-serif); font-weight: 700;
+        font-family: var(--font-serif); font-weight: 400;
         font-size: 18px; color: #dedede; letter-spacing: .08em;
       }
       .mv-note { margin: 4px 0 0; font-size: 13.5px; color: var(--ink-dim); }
@@ -888,7 +890,7 @@
       }
       .contact-name {
         margin: 0;
-        font-family: var(--font-serif); font-weight: 700;
+        font-family: var(--font-serif); font-weight: 400;
         font-size: 22px; color: #dedede; letter-spacing: .14em;
       }
       .contact-x { margin: 12px 0 0; font-size: 15px; letter-spacing: .1em; }
@@ -934,7 +936,7 @@
           display: block; border-bottom: none;
           padding: 2px 0;
         }
-        table.lives td.date { font-size: 15.5px; font-weight: 700; color: #d3a3a3; }
+        table.lives td.date { font-size: 15.5px; font-weight: 400; color: #d3a3a3; }
         table.lives td.venue { white-space: normal; font-size: 15px; }
         table.lives td.event { font-size: 14.5px; }
         table.lives td.type { padding-top: 6px; }
@@ -1177,7 +1179,7 @@
           <li><a class="news-link" href="#news-20180822"><span class="n-date">2018.08.22</span><span class="n-body">【大切なお知らせ】Amu脱退のお知らせ</span></a></li>
           <li><a class="news-link" href="#news-20161123"><span class="n-date">2016.11.23</span><span class="n-body">初の全国流通作品『マイムマイム』発売</span></a></li>
           <li><a class="news-link" href="#news-2016"><span class="n-date">2016年</span><span class="n-body">TIMELY RECORDS所属</span></a></li>
-          <li><a class="news-link" href="#news-20160408"><span class="n-date">2016.04.08</span><span class="n-body">オリジナルチェキケース販売＆『ひとりトピア』50枚限定増版決定</span></a></li>
+          <li><a class="news-link" href="#news-20160408"><span class="n-date">2016.04.08</span><span class="n-body">オリジナルチェキケース販売＆「ひとりトピア」50枚限定増版決定</span></a></li>
           <li><a class="news-link" href="#news-20150823"><span class="n-date">2015.08.23</span><span class="n-body">始動ワンマン「おひろめえんそうかい 〜はじまりエンドロール〜」（新宿RUIDO K4）</span></a></li>
         </ul>
       </section>
@@ -1219,7 +1221,9 @@
           <h3 class="news-detail-title">【大切なお知らせ】Amu脱退のお知らせ</h3>
           <div class="news-official">
             <p>いつもGRIMOIREを応援して頂きありがとうございます。</p>
-            <p>この度、8月25日(土)青山RizMワンマンライブを持ちましてAmu (Gt)の脱退が決定致しました。<br />応援して頂いている皆様、関係者の方々、急な発表となってしまい大変申し訳ございません。<br />長期に渡りスタッフ含め協議して参りましたが結果として悲しいご報告となってしまった事、重ねてお詫び申し上げます。</p>
+            <p>この度、8月25日(土)青山RizMワンマンライブを持ちましてAmu (Gt)の脱退が決定致しました。</p>
+            <p>応援して頂いている皆様、関係者の方々、急な発表となってしまい大変申し訳ございません。</p>
+            <p>長期に渡りスタッフ含め協議して参りましたが結果として悲しいご報告となってしまった事、重ねてお詫び申し上げます。</p>
             <p>尚、8月26日以降のイベントの変更や中止などは一切無くGRIMOIREは引き続き活動を続けて参りますのでどうか今後とも変わらぬご愛顧を賜りますよう、何卒宜しくお願い申し上げます。</p>
             <p class="sign">GRIMOIRE</p>
           </div>
@@ -1234,9 +1238,11 @@
         </article>
         <article class="news-detail-article" data-news-slug="20160408" hidden>
           <p class="news-detail-date">2016.04.08</p>
-          <h3 class="news-detail-title">オリジナルチェキケース販売＆『ひとりトピア』50枚限定増版決定</h3>
-          <p class="n-text">初主催イベント「おともだちごっこ」の開催と1stシングル「ぼくとタルパ」完売を記念し、<b>オリジナルチェキケース</b>の販売と<b>【おひろめきねん0thシングル「ひとりトピア」】の50枚限定増版</b>が決定。どちらも<b>2016.04.22より会場限定</b>で販売を開始した。なお、「ひとりトピア」を購入したお客様には<b>メンバーサイン入りポスター</b>がプレゼントされた。</p>
-          <p class="n-text">商品詳細：オリジナルチェキケース 1,500円／おひろめきねん0thシングル「ひとりトピア」 1,200円</p>
+          <h3 class="news-detail-title">オリジナルチェキケース販売＆「ひとりトピア」50枚限定増版決定</h3>
+          <p class="n-text">グリモア初主催イベント「おともだちごっこ」の開催と1stシングル「ぼくとタルパ」完売を記念致しまして【オリジナルチェキケース】の販売と【おひろめきねん0thシングル「ひとりトピア」】の50枚限定増版が決定致しました。</p>
+          <p class="n-text">どちらも2016.04.22より会場限定で販売を開始致します。</p>
+          <p class="n-text">尚、「ひとりトピア」をご購入して頂いたお客様には【メンバーサイン入りポスター】を差し上げます。</p>
+          <p class="n-text">商品詳細<br />オリジナルチェキケース　1500円<br />おひろめきねん0thシングル「ひとりトピア」　1200円</p>
         </article>
         <article class="news-detail-article" data-news-slug="20150823" hidden>
           <p class="news-detail-date">2015.08.23</p>
