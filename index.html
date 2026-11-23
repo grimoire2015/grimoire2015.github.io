@@ -466,21 +466,30 @@
       }
       .sched-label {
         flex: 0 0 84px;
-        font-size: 11.5px; letter-spacing: .22em; color: var(--ink-faint);
+        font-size: 10.5px; letter-spacing: .22em; color: #666666;
       }
       .sched-value {
         flex: 1 1 auto; min-width: 0;
-        font-size: 14.5px; color: #d8d8d8; line-height: 1.7;
+        font-size: 14.5px; color: #999999; line-height: 1.7; font-weight: 400;
         overflow-wrap: anywhere;
       }
-      .sched-value.sched-title { color: #eeeeee; font-size: 15.5px; }
+      /* 旧公式SCHEDULEの例外：TITLE行とLIVE行の値だけ太字で強調する（他行は通常の太さ） */
+      .sched-value.sched-title { color: #999999; font-size: 15.5px; font-weight: 700; }
+      .sched-value.sched-live { color: #999999; font-weight: 700; }
+      /* タイトル内の注記バッジ・補足は太字にしない */
+      .sched-value.sched-title .official-note,
+      .sched-value.sched-title .x-note,
+      .sched-value.sched-title .self-note,
+      .sched-value.sched-title .alias-note,
+      .sched-value.sched-title .single-note,
+      .sched-value.sched-title .corr-note { font-weight: 400; }
       .sched-value .unknown { color: var(--ink-faint); }
       .detail-toggle {
         background: none; border: none; padding: 2px 0; cursor: pointer;
         font: inherit; font-size: 14px; font-weight: 400; letter-spacing: .08em;
-        color: #d3a3a3; text-align: left;
+        color: #999999; text-align: left;
       }
-      .detail-toggle:hover, .detail-toggle:focus-visible { color: #eeeeee; }
+      .detail-toggle:hover, .detail-toggle:focus-visible { color: #cccccc; }
       .sched-detail {
         padding: 14px 2px 16px 100px;
         border-bottom: 1px dotted var(--dot);
@@ -821,43 +830,50 @@
       /* NEWS：記事詳細ページ（旧公式モバイル版 gri-moire.com のタイポグラフィ再現） */
       .news-detail-article[hidden] { display: none; }
       .news-detail-article {
+        /* 旧公式モバイル版の版面：1行に全角約33字が収まる小さな文字（上限12px・下限10px） */
+        --news-fs: clamp(10px, calc((100vw - 24px) / 33), 12px);
         font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", YuGothic, "Yu Gothic", sans-serif;
         font-weight: 400;
+        font-size: var(--news-fs);
+        line-height: 1.9;
         color: #999999;
         text-align: left;
       }
       .news-detail-date {
         margin: 0; font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", YuGothic, "Yu Gothic", sans-serif;
-        color: #999999; letter-spacing: normal; font-size: 14px; line-height: 1.9;
+        color: #999999; letter-spacing: normal; font-size: var(--news-fs); line-height: 1.9;
       }
+      /* タイトルは見出しにせず、本文と同じ大きさ・太さの地の文にする */
       .news-detail-title {
-        margin: 8px 0 0; padding-bottom: 16px;
-        border-bottom: 1px dotted var(--dot);
+        margin: 0; padding: 0; border-bottom: none;
         font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", YuGothic, "Yu Gothic", sans-serif;
         color: #999999; font-weight: 400;
-        font-size: clamp(19px, 4.6vw, 23px); line-height: 1.6; letter-spacing: normal;
+        font-size: var(--news-fs); line-height: 1.9; letter-spacing: normal;
       }
       .news-detail-article .n-text {
         margin: 0 0 1.9em; color: #999999;
-        font-size: 14px; line-height: 1.9; font-weight: 400; letter-spacing: normal;
+        font-size: var(--news-fs); line-height: 1.9; font-weight: 400; letter-spacing: normal;
       }
+      /* タイトルと本文の間は空行1行分のみ */
       .news-detail-article .news-detail-title + .n-text,
-      .news-detail-article .news-detail-title + .news-official { margin-top: 22px; }
+      .news-detail-article .news-detail-title + .news-official { margin-top: 1.9em; }
       .news-detail-article .n-text b { color: #999999; }
       /* 公式お知らせ本文は枠なし・余白なしで本文幅いっぱいに流す（スクショの版面） */
       .news-detail-article .news-official {
-        margin-top: 22px; border: none; padding: 0; background: transparent;
+        margin: 0; border: none; padding: 0; background: transparent;
       }
       .news-detail-article .news-official p {
         margin: 0 0 1.9em; color: #999999;
-        font-size: 14px; line-height: 1.9; font-weight: 400; letter-spacing: normal;
+        font-size: var(--news-fs); line-height: 1.9; font-weight: 400; letter-spacing: normal;
       }
       .news-detail-article .news-official .sign { color: #999999; letter-spacing: normal; }
-      /* 記事末尾のPosted行：右寄せ・グレー・本文より少し小さく */
+      /* 記事末尾のPosted行：右寄せ・グレー・本文より少し小さく。
+         本文との間は空行1行分（直前の段落の下余白1.9emで作るため上余白は重ねない） */
       .news-detail-article .news-posted {
-        margin: 30px 0 0; text-align: right;
-        color: #999999; font-size: 12.5px; line-height: 1.9; font-weight: 400; letter-spacing: normal;
+        margin: 0; text-align: right;
+        color: #999999; font-size: calc(var(--news-fs) * 0.92); line-height: 1.9; font-weight: 400; letter-spacing: normal;
       }
+      .news-detail-article .news-detail-title + .news-posted { margin-top: 1.9em; }
       /* 2016.04.08 チェキケース記事：タイトル・本文すべて中央寄せ（Posted行のみ右寄せ） */
       .news-detail-article[data-news-slug="20160408"] { text-align: center; }
       .news-detail-article[data-news-slug="20160408"] .news-detail-date,
@@ -879,15 +895,18 @@
       /* 2018.08.22 Amu脱退のお知らせ：タイトル・本文・署名「GRIMOIRE」行とも左寄せ（Posted行のみ右寄せ） */
       .news-detail-article[data-news-slug="20180822"] .news-official .sign { text-align: left; }
       .news-detail-article[data-news-slug="20180822"] .news-posted { text-align: right; }
-      /* 2018.08.22 Amu脱退のお知らせ本文：旧公式モバイル版スクショの行構成を固定改行で再現する。
-         各行は折り返さず指定位置でのみ改行し、最長行（約33em）がスマホ幅に収まるよう
-         この記事だけフォントサイズを画面幅に応じて微調整する（上限は他記事と同じ14px） */
-      .news-detail-article[data-news-slug="20180822"] .news-official p {
-        font-size: min(14px, calc((100vw - 24px) / 35));
-        white-space: nowrap;
+      /* スクショがある4記事は固定改行で再現する：指定位置以外では折り返さない。
+         最長行（約33.1em）が画面幅に収まるよう、長い行を持つ2記事は文字を少し絞る */
+      .news-detail-article[data-news-slug="20180822"],
+      .news-detail-article[data-news-slug="20160408"] {
+        --news-fs: min(12px, calc((100vw - 24px) / 34.5));
       }
-      /* 署名「GRIMOIRE」の下の空行は署名段落の下余白（1行分）で作り、Posted行の上余白は重ねない */
-      .news-detail-article[data-news-slug="20180822"] .news-posted { margin-top: 0; }
+      .news-detail-article[data-news-slug="20180822"] .news-official p,
+      .news-detail-article[data-news-slug="20160408"] .n-text,
+      .news-detail-article[data-news-slug="20151110"] .n-text,
+      .news-detail-article[data-news-slug="20150626"] .n-text { white-space: nowrap; }
+      /* 2016.04.08のタイトルは1行で収める */
+      .news-detail-article[data-news-slug="20160408"] .news-detail-title { white-space: nowrap; }
       @media (max-width: 640px) {
         /* モバイルでは本文の左右余白を約12pxに詰めてスクショの版面に近づける（.wrapの14pxから2px分を相殺） */
         .news-detail-article { margin-left: -2px; margin-right: -2px; }
@@ -1373,10 +1392,9 @@
         <article class="news-detail-article" data-news-slug="20160408" hidden>
           <p class="news-detail-date">2016.04.08</p>
           <h3 class="news-detail-title">オリジナルチェキケース販売＆「ひとりトピア」50枚限定増版決定</h3>
-          <p class="n-text">グリモア初主催イベント「おともだちごっこ」の開催と1stシングル「ぼくとタルパ」完売を記念致しまして【オリジナルチェキケース】の販売と【おひろめきねん0thシングル「ひとりトピア」】の50枚限定増版が決定致しました。</p>
-          <p class="n-text">どちらも2016.04.22より会場限定で販売を開始致します。</p>
-          <p class="n-text">尚、「ひとりトピア」をご購入して頂いたお客様には【メンバーサイン入りポスター】を差し上げます。</p>
-          <p class="n-text">商品詳細<br />オリジナルチェキケース　1500円<br />おひろめきねん0thシングル「ひとりトピア」　1200円</p>
+          <p class="n-text">グリモア初主催イベント「おともだちごっこ」の開催と1stシングル「ぼ<br />くとタルパ」完売を記念致しまして【オリジナルチェキケース】の販売と<br />【おひろめきねん0thシングル「ひとりトピア」】の50枚限定増版が決定<br />致しました。<br />どちらも2016.04.22より会場限定で販売を開始致します。<br />尚、「ひとりトピア」をご購入して頂いたお客様には【メンバーサイン入<br />りポスター】を差し上げます。</p>
+          <p class="n-text">商品詳細</p>
+          <p class="n-text">オリジナルチェキケース　1500円<br />おひろめきねん0thシングル「ひとりトピア」　1200円</p>
           <p class="news-posted">Posted : 2016.04.08</p>
         </article>
         <article class="news-detail-article" data-news-slug="20151110" hidden>
@@ -2313,7 +2331,7 @@
               html += '<div class="sched-row"><div class="sched-label">TITLE</div>' +
                 '<div class="sched-value sched-title">' + title + "</div></div>";
               html += '<div class="sched-row"><div class="sched-label">LIVE</div>' +
-                '<div class="sched-value">' + esc(f.text) + " [" + f.dowEn + "] " + esc(r.venue) + "</div></div>";
+                '<div class="sched-value sched-live">' + esc(f.text) + " [" + f.dowEn + "] " + esc(r.venue) + "</div></div>";
               html += '<div class="sched-row"><div class="sched-label">ACT</div>' +
                 '<div class="sched-value">' + esc(actName) + "</div></div>";
               html += '<div class="sched-row"><div class="sched-label">TIME</div>' +
