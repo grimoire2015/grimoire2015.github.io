@@ -829,11 +829,10 @@
       @media (max-width: 640px) {
         a.news-link, a.home-news-link { flex-direction: column; gap: 2px; }
       }
-      /* NEWS：記事詳細ページ（旧公式モバイル版 gri-moire.com のタイポグラフィ再現） */
+      /* NEWS：記事詳細ページ（本文サイズは他タブと統一：14.5px） */
       .news-detail-article[hidden] { display: none; }
       .news-detail-article {
-        /* 旧公式モバイル版の版面：1行に全角約33字が収まる小さな文字（上限12px・下限10px） */
-        --news-fs: clamp(10px, calc((100vw - 24px) / 33), 12px);
+        --news-fs: 14.5px;
         font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", YuGothic, "Yu Gothic", sans-serif;
         font-weight: 400;
         font-size: var(--news-fs);
@@ -845,12 +844,12 @@
         margin: 0; font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", YuGothic, "Yu Gothic", sans-serif;
         color: #999999; letter-spacing: normal; font-size: var(--news-fs); line-height: 1.9;
       }
-      /* タイトルは見出しにせず、本文と同じ大きさ・太さの地の文にする */
+      /* タイトルは本文より一段大きくして見出しらしくする（色は従来どおり#999） */
       .news-detail-title {
         margin: 0; padding: 0; border-bottom: none;
         font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", YuGothic, "Yu Gothic", sans-serif;
         color: #999999; font-weight: 400;
-        font-size: var(--news-fs); line-height: 1.9; letter-spacing: normal;
+        font-size: 17px; line-height: 1.6; letter-spacing: normal;
       }
       .news-detail-article .n-text {
         margin: 0 0 1.9em; color: #999999;
@@ -897,22 +896,13 @@
       /* 2018.08.22 Amu脱退のお知らせ：タイトル・本文・署名「GRIMOIRE」行とも左寄せ（Posted行のみ右寄せ） */
       .news-detail-article[data-news-slug="20180822"] .news-official .sign { text-align: left; }
       .news-detail-article[data-news-slug="20180822"] .news-posted { text-align: right; }
-      /* スクショがある4記事は固定改行で再現する：指定位置以外では折り返さない。
-         最長行（約33.1em）が画面幅に収まるよう、長い行を持つ2記事は文字を少し絞る */
-      .news-detail-article[data-news-slug="20180822"],
-      .news-detail-article[data-news-slug="20160408"] {
-        --news-fs: min(12px, calc((100vw - 24px) / 34.5));
-      }
+      /* スクショがある4記事は本文中の<br>による固定改行の位置をそのまま維持する。
+         文字サイズ統一後は行が画面幅を超えるため、固定改行の位置以外でも自然に折り返す
+         （横スクロールを出さない） */
       .news-detail-article[data-news-slug="20180822"] .news-official p,
       .news-detail-article[data-news-slug="20160408"] .n-text,
       .news-detail-article[data-news-slug="20151110"] .n-text,
-      .news-detail-article[data-news-slug="20150626"] .n-text { white-space: nowrap; }
-      /* 2016.04.08のタイトルは1行で収める */
-      .news-detail-article[data-news-slug="20160408"] .news-detail-title { white-space: nowrap; }
-      @media (max-width: 640px) {
-        /* モバイルでは本文の左右余白を約12pxに詰めてスクショの版面に近づける（.wrapの14pxから2px分を相殺） */
-        .news-detail-article { margin-left: -2px; margin-right: -2px; }
-      }
+      .news-detail-article[data-news-slug="20150626"] .n-text { overflow-wrap: anywhere; }
       .news-back { margin: 36px 0 0; }
       .news-back a {
         display: inline-block; min-height: 2.25rem; line-height: 2.25rem; padding: 0 4px;
