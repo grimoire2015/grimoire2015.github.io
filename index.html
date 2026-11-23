@@ -62,6 +62,7 @@
         position: relative;
         aspect-ratio: 750 / 503;
         overflow: hidden;
+        cursor: pointer;
       }
       .hero-slides img.hero-slide {
         position: absolute; inset: 0;
@@ -1881,16 +1882,28 @@
     </script>
     <script>
       // ヒーローのアーティスト写真を15秒ごとにクロスフェードで切り替える（無限ループ）
+      // タップ／クリックでも即座に次の写真へ切り替え、その時点から15秒タイマーをリセットする
       (function () {
+        var container = document.querySelector('.hero-slides');
         var slides = document.querySelectorAll('.hero-slides .hero-slide');
-        if (slides.length < 2) return;
+        if (!container || slides.length < 2) return;
         if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         var current = 0;
-        setInterval(function () {
+        var timer = null;
+        function showNext() {
           slides[current].classList.remove('is-active');
           current = (current + 1) % slides.length;
           slides[current].classList.add('is-active');
-        }, 15000);
+        }
+        function startTimer() {
+          if (timer) clearInterval(timer);
+          timer = setInterval(showNext, 15000);
+        }
+        container.addEventListener('click', function () {
+          showNext();
+          startTimer();
+        });
+        startTimer();
       })();
     </script>
   </body>
