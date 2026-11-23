@@ -161,6 +161,14 @@
         font-size: 13px;
       }
       ul.home-news-list .n-body { color: #c4c4c4; }
+      ul.home-news-list li:hover { background: rgba(153, 102, 102, .06); }
+      a.home-news-link {
+        display: flex; gap: 4px 14px; align-items: baseline; flex-wrap: wrap;
+        flex: 1 1 auto; min-height: 2.25rem;
+        color: inherit; text-decoration: none;
+      }
+      a.home-news-link:hover .n-body, a.home-news-link:focus-visible .n-body { color: #eeeeee; text-decoration: underline; text-underline-offset: 3px; }
+      a.home-news-link:focus-visible { outline: 2px solid var(--head); outline-offset: 2px; }
       .home-next {
         border: 1px dotted var(--dot);
         padding: 16px 18px 8px;
@@ -730,6 +738,40 @@
         font-size: 13.5px;
       }
       ul.news-list .n-body { color: #c9c9c9; }
+      ul.news-list li:hover { background: rgba(153, 102, 102, .06); }
+      a.news-link {
+        display: flex; gap: 8px 16px; align-items: baseline; flex-wrap: wrap;
+        flex: 1 1 auto; min-height: 2.25rem;
+        color: inherit; text-decoration: none;
+      }
+      a.news-link:hover .n-body, a.news-link:focus-visible .n-body { color: #eeeeee; text-decoration: underline; text-underline-offset: 3px; }
+      a.news-link:focus-visible { outline: 2px solid var(--head); outline-offset: 2px; }
+      @media (max-width: 640px) {
+        a.news-link, a.home-news-link { flex-direction: column; gap: 2px; }
+      }
+      /* NEWS：記事詳細ページ */
+      .news-detail-article[hidden] { display: none; }
+      .news-detail-date {
+        margin: 0; font-family: var(--font-serif);
+        color: var(--head-bright); letter-spacing: .06em; font-size: 14px;
+      }
+      .news-detail-title {
+        margin: 8px 0 0; padding-bottom: 16px;
+        border-bottom: 1px dotted var(--dot);
+        color: #dedede; font-weight: 700;
+        font-size: clamp(19px, 4.6vw, 23px); line-height: 1.6; letter-spacing: .04em;
+      }
+      .news-detail-article .n-text { margin: 14px 0 0; color: var(--ink-dim); font-size: 14.5px; line-height: 1.9; }
+      .news-detail-article .n-text b { color: #d2d2d2; }
+      .news-detail-article .news-official { margin-top: 18px; }
+      .news-back { margin: 36px 0 0; }
+      .news-back a {
+        display: inline-block; min-height: 2.25rem; line-height: 2.25rem; padding: 0 4px;
+        font-family: var(--font-serif); font-size: 13.5px; letter-spacing: .14em;
+        color: var(--head-bright); text-decoration: none;
+      }
+      .news-back a:hover { color: #eeeeee; text-decoration: underline; }
+      .news-back a:focus-visible { outline: 2px solid var(--head); outline-offset: 2px; }
       /* NEWS：本文付きの詳細項目 */
       ul.news-list li.news-rich { flex-direction: column; align-items: stretch; gap: 2px; }
       .news-rich .n-title { color: #dedede; font-weight: 700; font-size: 15px; }
@@ -956,11 +998,11 @@
           <section class="home-news" aria-labelledby="home-news-heading">
             <h2 class="home-block-title" id="home-news-heading">おしらせ</h2>
             <ul class="home-news-list">
-              <li><span class="n-date">2026.08.23</span><span class="n-body">11周年ワンマン「カーテンコール」（池袋EDGE）</span></li>
-              <li><span class="n-date">2025.08.23</span><span class="n-body">復活・10周年ワンマン</span></li>
-              <li><span class="n-date">2022.05.07</span><span class="n-body">活動休止</span></li>
-              <li><span class="n-date">2019年</span><span class="n-body">クラウドファンディング実施（特典CD「にわかあめ」）</span></li>
-              <li><span class="n-date">2018.12.26</span><span class="n-body">新体制第一弾ミニアルバム『ノベルファンタジア』発売</span></li>
+              <li><a class="home-news-link" href="#news-20260823"><span class="n-date">2026.08.23</span><span class="n-body">11周年ワンマン「カーテンコール」（池袋EDGE）</span></a></li>
+              <li><a class="home-news-link" href="#news-20250823"><span class="n-date">2025.08.23</span><span class="n-body">復活・10周年ワンマン</span></a></li>
+              <li><a class="home-news-link" href="#news-20220507"><span class="n-date">2022.05.07</span><span class="n-body">活動休止</span></a></li>
+              <li><a class="home-news-link" href="#news-2019"><span class="n-date">2019年</span><span class="n-body">クラウドファンディング実施（特典CD「にわかあめ」）</span></a></li>
+              <li><a class="home-news-link" href="#news-20181226"><span class="n-date">2018.12.26</span><span class="n-body">新体制第一弾ミニアルバム『ノベルファンタジア』発売</span></a></li>
             </ul>
             <p class="home-more"><button type="button" class="home-more-link" data-goto-tab="tab-news">おしらせ一覧<span aria-hidden="true"> →</span></button></p>
           </section>
@@ -1125,36 +1167,82 @@
       <section class="section-block" id="news" aria-labelledby="news-heading">
         <h2 class="section-heading" id="news-heading"><span class="en">NEWS</span><span class="jp">おしらせ</span></h2>
         <ul class="news-list">
-          <li><span class="n-date">2026.08.23</span><span class="n-body">11周年ワンマン「カーテンコール」（池袋EDGE）</span></li>
-          <li><span class="n-date">2025.08.23</span><span class="n-body">復活・10周年ワンマン</span></li>
-          <li><span class="n-date">2022.05.07</span><span class="n-body">活動休止</span></li>
-          <li><span class="n-date">2019年</span><span class="n-body">クラウドファンディング実施（特典CD「にわかあめ」）</span></li>
-          <li><span class="n-date">2018.12.26</span><span class="n-body">新体制第一弾ミニアルバム『ノベルファンタジア』発売</span></li>
-          <li><span class="n-date">2018.12.04</span><span class="n-body">第二章始動（新章おひろめワンマン）</span></li>
-          <li><span class="n-date">2018.08.25</span><span class="n-body">Gt.Amu 脱退（「ぼくのなつやすみ」ファイナル）</span></li>
-          <li class="news-rich">
-            <span class="n-date">2018.08.22</span>
-            <span class="n-title">【大切なお知らせ】Amu脱退のお知らせ</span>
-            <details class="news-more">
-              <summary>お知らせ全文</summary>
-              <div class="news-official">
-                <p>いつもGRIMOIREを応援して頂きありがとうございます。</p>
-                <p>この度、8月25日(土)青山RizMワンマンライブを持ちましてAmu (Gt)の脱退が決定致しました。<br />応援して頂いている皆様、関係者の方々、急な発表となってしまい大変申し訳ございません。<br />長期に渡りスタッフ含め協議して参りましたが結果として悲しいご報告となってしまった事、重ねてお詫び申し上げます。</p>
-                <p>尚、8月26日以降のイベントの変更や中止などは一切無くGRIMOIREは引き続き活動を続けて参りますのでどうか今後とも変わらぬご愛顧を賜りますよう、何卒宜しくお願い申し上げます。</p>
-                <p class="sign">GRIMOIRE</p>
-              </div>
-            </details>
-          </li>
-          <li><span class="n-date">2016.11.23</span><span class="n-body">初の全国流通作品『マイムマイム』発売</span></li>
-          <li><span class="n-date">2016年</span><span class="n-body">TIMELY RECORDS所属</span></li>
-          <li class="news-rich">
-            <span class="n-date">2016.04.08</span>
-            <span class="n-title">オリジナルチェキケース販売＆『ひとりトピア』50枚限定増版決定</span>
-            <p class="n-text">初主催イベント「おともだちごっこ」の開催と1stシングル「ぼくとタルパ」完売を記念し、<b>オリジナルチェキケース</b>の販売と<b>【おひろめきねん0thシングル「ひとりトピア」】の50枚限定増版</b>が決定。どちらも<b>2016.04.22より会場限定</b>で販売を開始した。なお、「ひとりトピア」を購入したお客様には<b>メンバーサイン入りポスター</b>がプレゼントされた。</p>
-            <p class="n-text">商品詳細：オリジナルチェキケース 1,500円／おひろめきねん0thシングル「ひとりトピア」 1,200円</p>
-          </li>
-          <li><span class="n-date">2015.08.23</span><span class="n-body">始動ワンマン「おひろめえんそうかい 〜はじまりエンドロール〜」（新宿RUIDO K4）</span></li>
+          <li><a class="news-link" href="#news-20260823"><span class="n-date">2026.08.23</span><span class="n-body">11周年ワンマン「カーテンコール」（池袋EDGE）</span></a></li>
+          <li><a class="news-link" href="#news-20250823"><span class="n-date">2025.08.23</span><span class="n-body">復活・10周年ワンマン</span></a></li>
+          <li><a class="news-link" href="#news-20220507"><span class="n-date">2022.05.07</span><span class="n-body">活動休止</span></a></li>
+          <li><a class="news-link" href="#news-2019"><span class="n-date">2019年</span><span class="n-body">クラウドファンディング実施（特典CD「にわかあめ」）</span></a></li>
+          <li><a class="news-link" href="#news-20181226"><span class="n-date">2018.12.26</span><span class="n-body">新体制第一弾ミニアルバム『ノベルファンタジア』発売</span></a></li>
+          <li><a class="news-link" href="#news-20181204"><span class="n-date">2018.12.04</span><span class="n-body">第二章始動（新章おひろめワンマン）</span></a></li>
+          <li><a class="news-link" href="#news-20180825"><span class="n-date">2018.08.25</span><span class="n-body">Gt.Amu 脱退（「ぼくのなつやすみ」ファイナル）</span></a></li>
+          <li><a class="news-link" href="#news-20180822"><span class="n-date">2018.08.22</span><span class="n-body">【大切なお知らせ】Amu脱退のお知らせ</span></a></li>
+          <li><a class="news-link" href="#news-20161123"><span class="n-date">2016.11.23</span><span class="n-body">初の全国流通作品『マイムマイム』発売</span></a></li>
+          <li><a class="news-link" href="#news-2016"><span class="n-date">2016年</span><span class="n-body">TIMELY RECORDS所属</span></a></li>
+          <li><a class="news-link" href="#news-20160408"><span class="n-date">2016.04.08</span><span class="n-body">オリジナルチェキケース販売＆『ひとりトピア』50枚限定増版決定</span></a></li>
+          <li><a class="news-link" href="#news-20150823"><span class="n-date">2015.08.23</span><span class="n-body">始動ワンマン「おひろめえんそうかい 〜はじまりエンドロール〜」（新宿RUIDO K4）</span></a></li>
         </ul>
+      </section>
+      </div>
+
+      <div class="tab-panel" id="panel-news-detail" data-panel="news-detail" role="tabpanel" aria-labelledby="tab-news" hidden>
+      <section class="section-block" id="news-detail" aria-labelledby="news-detail-heading">
+        <h2 class="section-heading" id="news-detail-heading"><span class="en">NEWS</span><span class="jp">おしらせ</span></h2>
+        <article class="news-detail-article" data-news-slug="20260823" hidden>
+          <p class="news-detail-date">2026.08.23</p>
+          <h3 class="news-detail-title">11周年ワンマン「カーテンコール」（池袋EDGE）</h3>
+        </article>
+        <article class="news-detail-article" data-news-slug="20250823" hidden>
+          <p class="news-detail-date">2025.08.23</p>
+          <h3 class="news-detail-title">復活・10周年ワンマン</h3>
+        </article>
+        <article class="news-detail-article" data-news-slug="20220507" hidden>
+          <p class="news-detail-date">2022.05.07</p>
+          <h3 class="news-detail-title">活動休止</h3>
+        </article>
+        <article class="news-detail-article" data-news-slug="2019" hidden>
+          <p class="news-detail-date">2019年</p>
+          <h3 class="news-detail-title">クラウドファンディング実施（特典CD「にわかあめ」）</h3>
+        </article>
+        <article class="news-detail-article" data-news-slug="20181226" hidden>
+          <p class="news-detail-date">2018.12.26</p>
+          <h3 class="news-detail-title">新体制第一弾ミニアルバム『ノベルファンタジア』発売</h3>
+        </article>
+        <article class="news-detail-article" data-news-slug="20181204" hidden>
+          <p class="news-detail-date">2018.12.04</p>
+          <h3 class="news-detail-title">第二章始動（新章おひろめワンマン）</h3>
+        </article>
+        <article class="news-detail-article" data-news-slug="20180825" hidden>
+          <p class="news-detail-date">2018.08.25</p>
+          <h3 class="news-detail-title">Gt.Amu 脱退（「ぼくのなつやすみ」ファイナル）</h3>
+        </article>
+        <article class="news-detail-article" data-news-slug="20180822" hidden>
+          <p class="news-detail-date">2018.08.22</p>
+          <h3 class="news-detail-title">【大切なお知らせ】Amu脱退のお知らせ</h3>
+          <div class="news-official">
+            <p>いつもGRIMOIREを応援して頂きありがとうございます。</p>
+            <p>この度、8月25日(土)青山RizMワンマンライブを持ちましてAmu (Gt)の脱退が決定致しました。<br />応援して頂いている皆様、関係者の方々、急な発表となってしまい大変申し訳ございません。<br />長期に渡りスタッフ含め協議して参りましたが結果として悲しいご報告となってしまった事、重ねてお詫び申し上げます。</p>
+            <p>尚、8月26日以降のイベントの変更や中止などは一切無くGRIMOIREは引き続き活動を続けて参りますのでどうか今後とも変わらぬご愛顧を賜りますよう、何卒宜しくお願い申し上げます。</p>
+            <p class="sign">GRIMOIRE</p>
+          </div>
+        </article>
+        <article class="news-detail-article" data-news-slug="20161123" hidden>
+          <p class="news-detail-date">2016.11.23</p>
+          <h3 class="news-detail-title">初の全国流通作品『マイムマイム』発売</h3>
+        </article>
+        <article class="news-detail-article" data-news-slug="2016" hidden>
+          <p class="news-detail-date">2016年</p>
+          <h3 class="news-detail-title">TIMELY RECORDS所属</h3>
+        </article>
+        <article class="news-detail-article" data-news-slug="20160408" hidden>
+          <p class="news-detail-date">2016.04.08</p>
+          <h3 class="news-detail-title">オリジナルチェキケース販売＆『ひとりトピア』50枚限定増版決定</h3>
+          <p class="n-text">初主催イベント「おともだちごっこ」の開催と1stシングル「ぼくとタルパ」完売を記念し、<b>オリジナルチェキケース</b>の販売と<b>【おひろめきねん0thシングル「ひとりトピア」】の50枚限定増版</b>が決定。どちらも<b>2016.04.22より会場限定</b>で販売を開始した。なお、「ひとりトピア」を購入したお客様には<b>メンバーサイン入りポスター</b>がプレゼントされた。</p>
+          <p class="n-text">商品詳細：オリジナルチェキケース 1,500円／おひろめきねん0thシングル「ひとりトピア」 1,200円</p>
+        </article>
+        <article class="news-detail-article" data-news-slug="20150823" hidden>
+          <p class="news-detail-date">2015.08.23</p>
+          <h3 class="news-detail-title">始動ワンマン「おひろめえんそうかい 〜はじまりエンドロール〜」（新宿RUIDO K4）</h3>
+        </article>
+        <p class="news-back"><a href="#news"><span aria-hidden="true">← </span>おしらせ一覧へ戻る</a></p>
       </section>
       </div>
 
@@ -2227,7 +2315,7 @@
           "discography": "disco", "artist": "bio"
         };
         var PANEL_NAV = {
-          "panel-home": "home", "panel-news": "news", "panel-live": "live",
+          "panel-home": "home", "panel-news": "news", "panel-news-detail": "news", "panel-live": "live",
           "panel-artist": "bio", "panel-discography": "disco",
           "panel-media": "media", "panel-goods": "goods", "panel-contact": "contact"
         };
@@ -2251,10 +2339,28 @@
           window.scrollTo(0, 0);
           el.style.scrollBehavior = prev;
         }
+        /* NEWS記事詳細（#news-20180822 等）：詳細パネルを表示し、該当記事だけを見せる */
+        function showNewsDetail(slug) {
+          var articles = document.querySelectorAll(".news-detail-article");
+          var found = false;
+          Array.prototype.forEach.call(articles, function (a) {
+            var on = a.getAttribute("data-news-slug") === slug;
+            a.hidden = !on;
+            if (on) found = true;
+          });
+          if (!found) return false;
+          showPanel("panel-news-detail");
+          scrollTop();
+          return true;
+        }
         function render() {
           var raw = location.hash.replace(/^#/, "");
           if (ROUTES[raw]) { showPanel(ROUTES[raw]); scrollTop(); return; }
           if (ALIASES[raw]) { showPanel(ROUTES[ALIASES[raw]]); scrollTop(); return; }
+          if (raw.indexOf("news-") === 0) {
+            if (showNewsDetail(raw.slice(5))) return;
+            showPanel(ROUTES.news); scrollTop(); return;
+          }
           if (raw) {
             var target = document.getElementById(raw);
             if (target) {
