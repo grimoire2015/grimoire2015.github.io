@@ -879,6 +879,15 @@
       /* 2018.08.22 Amu脱退のお知らせ：タイトル・本文・署名「GRIMOIRE」行とも左寄せ（Posted行のみ右寄せ） */
       .news-detail-article[data-news-slug="20180822"] .news-official .sign { text-align: left; }
       .news-detail-article[data-news-slug="20180822"] .news-posted { text-align: right; }
+      /* 2018.08.22 Amu脱退のお知らせ本文：旧公式モバイル版スクショの行構成を固定改行で再現する。
+         各行は折り返さず指定位置でのみ改行し、最長行（約33em）がスマホ幅に収まるよう
+         この記事だけフォントサイズを画面幅に応じて微調整する（上限は他記事と同じ14px） */
+      .news-detail-article[data-news-slug="20180822"] .news-official p {
+        font-size: min(14px, calc((100vw - 24px) / 35));
+        white-space: nowrap;
+      }
+      /* 署名「GRIMOIRE」の下の空行は署名段落の下余白（1行分）で作り、Posted行の上余白は重ねない */
+      .news-detail-article[data-news-slug="20180822"] .news-posted { margin-top: 0; }
       @media (max-width: 640px) {
         /* モバイルでは本文の左右余白を約12pxに詰めてスクショの版面に近づける（.wrapの14pxから2px分を相殺） */
         .news-detail-article { margin-left: -2px; margin-right: -2px; }
@@ -1346,10 +1355,8 @@
           <h3 class="news-detail-title">【大切なお知らせ】Amu脱退のお知らせ</h3>
           <div class="news-official">
             <p>いつもGRIMOIREを応援して頂きありがとうございます。</p>
-            <p>この度、8月25日(土)青山RizMワンマンライブを持ちましてAmu (Gt)の脱退が決定致しました。</p>
-            <p>応援して頂いている皆様、関係者の方々、急な発表となってしまい大変申し訳ございません。</p>
-            <p>長期に渡りスタッフ含め協議して参りましたが結果として悲しいご報告となってしまった事、重ねてお詫び申し上げます。</p>
-            <p>尚、8月26日以降のイベントの変更や中止などは一切無くGRIMOIREは引き続き活動を続けて参りますのでどうか今後とも変わらぬご愛顧を賜りますよう、何卒宜しくお願い申し上げます。</p>
+            <p>この度、8月25日(土)青山RizMワンマンライブを持ちましてAmu (Gt)の脱<br />退が決定致しました。<br />応援して頂いている皆様、関係者の方々、急な発表となってしまい大変申<br />し訳ございません。<br />長期に渡りスタッフ含め協議して参りましたが結果として悲しいご報告と<br />なってしまった事、重ねてお詫び申し上げます。</p>
+            <p>尚、8月26日以降のイベントの変更や中止などは一切無くGRIMOIREは引<br />き続き活動を続けて参りますのでどうか今後とも変わらぬご愛顧を賜りま<br />すよう、何卒宜しくお願い申し上げます。</p>
             <p class="sign">GRIMOIRE</p>
           </div>
           <p class="news-posted">Posted : 2018.08.22</p>
