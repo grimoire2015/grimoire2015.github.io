@@ -533,6 +533,22 @@
         font-size: 13.5px; color: #c98f8f; line-height: 1.7;
       }
 
+      /* メンバーSNSリンク（アイコン＋アカウント名） */
+      .member-card .mc-sns {
+        display: flex; flex-wrap: wrap; gap: 2px 18px;
+        margin-top: 10px; padding-top: 8px;
+        border-top: 1px dotted var(--dot);
+      }
+      .mc-sns .sns-link {
+        display: inline-flex; align-items: center; gap: 7px;
+        color: var(--ink-dim); text-decoration: none;
+        font-size: 12.5px; letter-spacing: .05em;
+        padding: 6px 2px; min-height: 2.25rem;
+      }
+      .mc-sns .sns-link svg { display: block; flex: 0 0 auto; }
+      .mc-sns .sns-link:hover { color: #e8e8e8; }
+      .mc-sns .sns-link:focus-visible { outline: 2px solid var(--head); outline-offset: 2px; color: #e8e8e8; }
+
       /* DISCOGRAPHY テーブル */
       table.disco {
         width: 100%; border-collapse: collapse;
@@ -612,6 +628,35 @@
         font-size: 18px; color: #dedede; letter-spacing: .08em;
       }
       .mv-note { margin: 4px 0 0; font-size: 13.5px; color: var(--ink-dim); }
+
+      /* MEDIA：YouTubeへのリンク行 */
+      a.mv-link {
+        display: flex; align-items: center; gap: 12px;
+        color: inherit; text-decoration: none;
+        margin: -6px -4px; padding: 6px 4px;
+      }
+      a.mv-link .mv-title { transition: color .2s ease; }
+      a.mv-link:hover .mv-title, a.mv-link:focus-visible .mv-title { color: #ffffff; }
+      a.mv-link:focus-visible { outline: 2px solid var(--head); outline-offset: 2px; }
+      .yt-icon { display: block; flex: 0 0 auto; }
+      .mv-tag {
+        flex: 0 0 auto; margin-left: auto;
+        font-size: 11px; letter-spacing: .16em; color: #c98f8f;
+        border: 1px solid #572b2b; padding: 3px 9px 2px; white-space: nowrap;
+      }
+      ul.media-list .mv-note.yt { padding-left: 36px; }
+      /* MEDIA：公式チャンネルへのリンク */
+      .media-channel { margin: 28px 0 0; text-align: center; }
+      .media-channel a {
+        display: inline-flex; align-items: center; gap: 11px;
+        border: 1px dotted var(--dot); padding: 13px 24px;
+        color: #d8d8d8; text-decoration: none;
+        font-family: var(--font-serif); font-size: 15px; letter-spacing: .1em;
+        min-height: 3rem;
+      }
+      .media-channel a:hover { border-color: var(--head); color: #ffffff; }
+      .media-channel a:focus-visible { outline: 2px solid var(--head); outline-offset: 3px; color: #ffffff; }
+      .media-channel .ch-arrow { color: var(--head-bright); font-family: var(--font-sans); }
 
       /* ---------- CONTACT ---------- */
       .contact-box { text-align: center; padding: 28px 0 10px; }
@@ -787,6 +832,9 @@
               <div class="mc-row"><dt>血液型</dt><dd>A型</dd></div>
               <div class="mc-row"><dt>経歴</dt><dd>Diement.（RYO）→ ニワカアメ → GRIMOIRE</dd></div>
             </dl>
+            <div class="mc-sns">
+              <a class="sns-link" href="https://x.com/boku_rynk" target="_blank" rel="noopener noreferrer" aria-label="RyNKのX（@boku_rynk）を開く"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z"/></svg><span>@boku_rynk</span></a>
+            </div>
           </article>
           <article class="member-card">
             <div class="mc-head"><span class="mc-name">Kie</span><span class="mc-animal">おおかみさん</span><span class="mc-part">Gt.</span></div>
@@ -795,6 +843,10 @@
               <div class="mc-row"><dt>血液型</dt><dd>B型</dd></div>
               <div class="mc-row"><dt>経歴</dt><dd>LHAPLUS（月陽）→ PIECE（月陽）→ 超時空アンドロイド-PIECE-（月陽）→ ニワカアメ（ツキヒ）→ GRIMOIRE</dd></div>
             </dl>
+            <div class="mc-sns">
+              <a class="sns-link" href="https://x.com/GRIMOIRE_Kie" target="_blank" rel="noopener noreferrer" aria-label="KieのX（@GRIMOIRE_Kie）を開く"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z"/></svg><span>@GRIMOIRE_Kie</span></a>
+              <a class="sns-link" href="https://www.instagram.com/grimoire_kie" target="_blank" rel="noopener noreferrer" aria-label="KieのInstagram（@grimoire_kie）を開く"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5.2"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/></svg><span>@grimoire_kie</span></a>
+            </div>
           </article>
           <article class="member-card">
             <div class="mc-head"><span class="mc-name">Lune</span><span class="mc-animal">ひつじさん</span><span class="mc-part">Ba.</span></div>
@@ -803,6 +855,9 @@
               <div class="mc-row"><dt>血液型</dt><dd>O型</dd></div>
               <div class="mc-row"><dt>経歴</dt><dd>ビスコ（たきる）→ LHAPLUS（たきる）→ PIECE（たきる）→ 超時空アンドロイド-PIECE-（たきる→たきるん）→ ニワカアメ（タキル）→ GRIMOIRE</dd></div>
             </dl>
+            <div class="mc-sns">
+              <a class="sns-link" href="https://x.com/grimoire_lune" target="_blank" rel="noopener noreferrer" aria-label="LuneのX（@grimoire_lune）を開く"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z"/></svg><span>@grimoire_lune</span></a>
+            </div>
           </article>
           <article class="member-card">
             <div class="mc-head"><span class="mc-name">Mel</span><span class="mc-animal">うさぎさん</span><span class="mc-part">Dr.</span></div>
@@ -811,6 +866,10 @@
               <div class="mc-row"><dt>血液型</dt><dd>A型</dd></div>
               <div class="mc-row"><dt>経歴</dt><dd>Diement.（Rem）→ Vanish（Rem）→ マーブルヘッド（サポート）→ GRIMOIRE</dd></div>
             </dl>
+            <div class="mc-sns">
+              <a class="sns-link" href="https://x.com/GRIMOIRE_Mel" target="_blank" rel="noopener noreferrer" aria-label="MelのX（@GRIMOIRE_Mel）を開く"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z"/></svg><span>@GRIMOIRE_Mel</span></a>
+              <a class="sns-link" href="https://www.instagram.com/mel_grimoire" target="_blank" rel="noopener noreferrer" aria-label="MelのInstagram（@mel_grimoire）を開く"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5.2"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/></svg><span>@mel_grimoire</span></a>
+            </div>
           </article>
         </div>
 
@@ -1066,12 +1125,37 @@
       <section class="section-block" id="media" aria-labelledby="media-heading">
         <h2 class="section-heading" id="media-heading"><span class="en">MEDIA</span><span class="jp">ミュージックビデオ</span></h2>
         <ul class="media-list">
+          <li>
+            <a class="mv-link" href="https://www.youtube.com/watch?v=bxZyY6AH2fQ" target="_blank" rel="noopener noreferrer" aria-label="『ぼくとタルパ』のフルMVをYouTubeで観る"><svg class="yt-icon" width="24" height="17" viewBox="0 0 24 17" aria-hidden="true" focusable="false"><rect width="24" height="17" rx="4" fill="#a33327"/><path d="M9.8 5.1 15.6 8.5 9.8 11.9Z" fill="#f2ede8"/></svg><p class="mv-title">ぼくとタルパ</p><span class="mv-tag">FULL MV</span></a>
+            <p class="mv-note yt">公式YouTubeチャンネルにてフルMV公開中</p>
+          </li>
+          <li>
+            <a class="mv-link" href="https://www.youtube.com/watch?v=df5PDHw69V4" target="_blank" rel="noopener noreferrer" aria-label="『ネバーエンド』のフルMVをYouTubeで観る"><svg class="yt-icon" width="24" height="17" viewBox="0 0 24 17" aria-hidden="true" focusable="false"><rect width="24" height="17" rx="4" fill="#a33327"/><path d="M9.8 5.1 15.6 8.5 9.8 11.9Z" fill="#f2ede8"/></svg><p class="mv-title">ネバーエンド</p><span class="mv-tag">FULL MV</span></a>
+            <p class="mv-note yt">公式YouTubeチャンネルにてフルMV公開中</p>
+          </li>
+          <li>
+            <a class="mv-link" href="https://www.youtube.com/watch?v=wRiHNts4GOQ" target="_blank" rel="noopener noreferrer" aria-label="『マイムマイム』のフルMVをYouTubeで観る"><svg class="yt-icon" width="24" height="17" viewBox="0 0 24 17" aria-hidden="true" focusable="false"><rect width="24" height="17" rx="4" fill="#a33327"/><path d="M9.8 5.1 15.6 8.5 9.8 11.9Z" fill="#f2ede8"/></svg><p class="mv-title">マイムマイム</p><span class="mv-tag">FULL MV</span></a>
+            <p class="mv-note yt">公式YouTubeチャンネルにてフルMV公開中</p>
+          </li>
+          <li>
+            <a class="mv-link" href="https://www.youtube.com/watch?v=M6HyqPSgtSs" target="_blank" rel="noopener noreferrer" aria-label="『フラブジャスナハト』のフルMVをYouTubeで観る"><svg class="yt-icon" width="24" height="17" viewBox="0 0 24 17" aria-hidden="true" focusable="false"><rect width="24" height="17" rx="4" fill="#a33327"/><path d="M9.8 5.1 15.6 8.5 9.8 11.9Z" fill="#f2ede8"/></svg><p class="mv-title">フラブジャスナハト</p><span class="mv-tag">FULL MV</span></a>
+            <p class="mv-note yt">公式YouTubeチャンネルにてフルMV公開中</p>
+          </li>
+          <li>
+            <a class="mv-link" href="https://www.youtube.com/watch?v=l_2h_kqsdEI" target="_blank" rel="noopener noreferrer" aria-label="『ウラノメトリア』のMV SPOT＆全曲試聴をYouTubeで観る"><svg class="yt-icon" width="24" height="17" viewBox="0 0 24 17" aria-hidden="true" focusable="false"><rect width="24" height="17" rx="4" fill="#a33327"/><path d="M9.8 5.1 15.6 8.5 9.8 11.9Z" fill="#f2ede8"/></svg><p class="mv-title">ウラノメトリア</p><span class="mv-tag">MV SPOT</span></a>
+            <p class="mv-note yt">MV SPOT＆全曲試聴をYouTubeで公開中／フルMVは5thシングル『ウラノメトリア』カストルVer.（LHCG-1005）DVD収録</p>
+          </li>
+          <li>
+            <a class="mv-link" href="https://www.youtube.com/watch?v=c_t3AdOsjnI" target="_blank" rel="noopener noreferrer" aria-label="『つきのかけら』のMV SPOTをYouTubeで観る"><svg class="yt-icon" width="24" height="17" viewBox="0 0 24 17" aria-hidden="true" focusable="false"><rect width="24" height="17" rx="4" fill="#a33327"/><path d="M9.8 5.1 15.6 8.5 9.8 11.9Z" fill="#f2ede8"/></svg><p class="mv-title">つきのかけら</p><span class="mv-tag">MV SPOT</span></a>
+            <p class="mv-note yt">MV SPOTをYouTubeで公開中／フルMVは3rdミニアルバム『ノベルファンタジア』初回限定盤（LHCG-1010）DVD収録</p>
+          </li>
           <li><p class="mv-title">いらないもの</p><p class="mv-note">1stアルバム『グリモワール』タルパVer.（LHCG-1003）DVD収録</p></li>
           <li><p class="mv-title">ゆめのまほろば</p><p class="mv-note">1stアルバム『グリモワール』げんそうVer.（LHCG-1004）DVD収録</p></li>
-          <li><p class="mv-title">ウラノメトリア</p><p class="mv-note">5thシングル『ウラノメトリア』カストルVer.（LHCG-1005）DVD収録</p></li>
           <li><p class="mv-title">グルーミィグルーミー</p><p class="mv-note">2ndミニアルバム『プシュコマキア』初回限定盤（LHCG-1008）DVD収録</p></li>
-          <li><p class="mv-title">つきのかけら</p><p class="mv-note">3rdミニアルバム『ノベルファンタジア』初回限定盤（LHCG-1010）DVD収録</p></li>
         </ul>
+        <p class="media-channel">
+          <a href="https://www.youtube.com/@%E3%82%B0%E3%83%AA%E3%83%A2%E3%82%A2" target="_blank" rel="noopener noreferrer" aria-label="公式YouTubeチャンネル「グリモア」を開く"><svg class="yt-icon" width="28" height="20" viewBox="0 0 24 17" aria-hidden="true" focusable="false"><rect width="24" height="17" rx="4" fill="#a33327"/><path d="M9.8 5.1 15.6 8.5 9.8 11.9Z" fill="#f2ede8"/></svg>公式YouTubeチャンネル「グリモア」<span class="ch-arrow" aria-hidden="true">→</span></a>
+        </p>
       </section>
       </div>
 
