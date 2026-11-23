@@ -633,7 +633,7 @@
         color: #9a9a9a;
         margin: 9px 0;
       }
-      /* BIO先頭のメンバー一覧（旧公式モバイル版BIO体裁：名前のみを縦に並べ、タップで個人ページへ） */
+      /* BIOのメンバー一覧（プロフィール文の下：名前のみを縦に並べ、タップで個人ページへ） */
       .bio-member-nav { margin: 10px 0 46px; text-align: center; }
       .bio-member-nav .bio-member-list {
         list-style: none;
@@ -653,17 +653,6 @@
       }
       .bio-member-nav .bio-member-list a:hover { color: #ffffff; text-decoration: underline; text-underline-offset: 5px; }
       .bio-member-nav .bio-member-list a:focus-visible { outline: 2px solid var(--head); outline-offset: 2px; color: #ffffff; }
-      .bio-intro .bio-official { margin: 14px 0 0; }
-      .bio-intro .bio-official .sns-link {
-        display: inline-flex; align-items: center; gap: 7px;
-        color: var(--ink-dim); text-decoration: none;
-        font-size: 13.5px; letter-spacing: .05em;
-        padding: 6px 2px; min-height: 2.25rem;
-      }
-      .bio-intro .bio-official .sns-link svg { display: block; flex: 0 0 auto; }
-      .bio-intro .bio-official .sns-link:hover { color: #e8e8e8; }
-      .bio-intro .bio-official .sns-link:focus-visible { outline: 2px solid var(--head); outline-offset: 2px; color: #e8e8e8; }
-
       /* 基本情報テーブル */
       table.info-table {
         width: 100%; border-collapse: collapse; font-size: 14.5px;
@@ -1187,16 +1176,6 @@
       </nav>
 
       <div class="tab-panel" id="panel-artist" data-panel="artist" role="tabpanel" aria-labelledby="tab-bio" hidden>
-        <nav class="bio-member-nav" aria-label="メンバー一覧">
-          <ul class="bio-member-list">
-            <li><a href="#bio-rynk">RyNK<span class="bm-role">[ ぼく ]</span></a></li>
-            <li><a href="#bio-kie">Kie<span class="bm-role">[ おおかみさん ]</span></a></li>
-            <li><a href="#bio-lune">Lune<span class="bm-role">[ ひつじさん ]</span></a></li>
-            <li><a href="#bio-mel">Mel<span class="bm-role">[ うさぎさん ]</span></a></li>
-            <li><a href="#bio-amu">Amu<span class="bm-role">[ ふくろうさん ]</span></a></li>
-          </ul>
-        </nav>
-
         <div class="bio-intro">
           <p class="bio-logo">GRIMOIRE</p>
           <p class="bio-tagline">Let us eat the fruits of fate.</p>
@@ -1209,10 +1188,17 @@
             <p>－これは「ぼく」だけのおはなし－</p>
             <p>－きみは「ぼく」のゆめをみる－</p>
           </div>
-          <p class="bio-official">
-            <a class="sns-link" href="https://x.com/grim_oire" target="_blank" rel="noopener noreferrer" aria-label="GRIMOIRE公式X（@grim_oire）を開く"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z"/></svg><span>公式X @grim_oire</span></a>
-          </p>
         </div>
+
+        <nav class="bio-member-nav" aria-label="メンバー一覧">
+          <ul class="bio-member-list">
+            <li><a href="#bio-rynk">RyNK<span class="bm-role">[ ぼく ]</span></a></li>
+            <li><a href="#bio-kie">Kie<span class="bm-role">[ おおかみさん ]</span></a></li>
+            <li><a href="#bio-lune">Lune<span class="bm-role">[ ひつじさん ]</span></a></li>
+            <li><a href="#bio-mel">Mel<span class="bm-role">[ うさぎさん ]</span></a></li>
+            <li><a href="#bio-amu">Amu<span class="bm-role">[ ふくろうさん ]</span></a></li>
+          </ul>
+        </nav>
 
       <section class="section-block" id="profile" aria-labelledby="profile-heading">
         <h2 class="section-heading" id="profile-heading"><span class="en">PROFILE</span><span class="jp">プロフィール</span></h2>
