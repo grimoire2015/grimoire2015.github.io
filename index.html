@@ -1251,11 +1251,201 @@
         body.niwakame .rain-layer { display: none; }
         .rain-toggle { transition: none; }
       }
+
+      /* ===== ニワカアメモード：公式HP（2015年）再現テーマ =====
+         白地・#333333・MS Pゴシック系・点線 #CCCCCC。通常モードのルールには触れず、
+         body.niwakame 配下と .nk-* 専用ブロックだけで再現する。
+         ヘッダー写真は後日入稿のため、写真なしの空きスロット（.nk-header-photo）を用意する */
+      body.niwakame {
+        --bg: #ffffff;
+        --ink: #333333;
+        --ink-dim: #555555;
+        --ink-faint: #888888;
+        --head: #333333;
+        --head-bright: #333333;
+        --deep: #f0f0f0;
+        --dot: #cccccc;
+        --font-serif: "MS PGothic", "MS Pゴシック", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
+        --font-sans: "MS PGothic", "MS Pゴシック", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
+        --font-hand: "MS PGothic", "MS Pゴシック", Arial, "Hiragino Kaku Gothic ProN", sans-serif;
+        background: #ffffff;
+        color: #333333;
+        font-size: 13px;
+        line-height: 1.7;
+      }
+      body.niwakame .rain-layer { display: none; }
+      body.niwakame nav.tab-nav { display: none; }
+      body.niwakame .star-band { display: none; }
+      body.niwakame .rain-toggle { color: #dddddd; opacity: .85; filter: none; }
+      body.niwakame .rain-toggle:hover { color: #ffffff; }
+
+      /* --- NK専用ブロックの出し分け --- */
+      .nk-only, .nk-site-head, .nk-foot { display: none; }
+      body.niwakame .nk-only { display: block; }
+      body.niwakame .nk-site-head { display: block; }
+      body.niwakame .nk-foot { display: block; }
+
+      /* --- ヘッダー：写真スロット（空き枠）＋黒地グローバルナビ --- */
+      .nk-header-photo {
+        aspect-ratio: 920 / 300;
+        background: #f7f7f7;
+        border: 1px solid #cccccc;
+        border-bottom: none;
+      }
+      body.niwakame .nk-gnav {
+        display: grid; grid-template-columns: repeat(8, 1fr);
+        background: #000000;
+        margin: 0 0 34px;
+      }
+      .nk-gnav button {
+        appearance: none; background: transparent; border: none;
+        border-right: 1px solid #333333;
+        color: #ffffff; cursor: pointer;
+        font-family: var(--font-sans); font-size: 11.5px; letter-spacing: .1em;
+        height: 50px; min-height: 50px; padding: 0 2px; text-align: center;
+      }
+      .nk-gnav button:last-child { border-right: none; }
+      .nk-gnav button:hover { background: #222222; }
+      .nk-gnav button.is-active { background: #333333; }
+      .nk-gnav button:focus-visible { outline: 2px solid #ffffff; outline-offset: -2px; }
+      @media (max-width: 640px) {
+        body.niwakame .nk-gnav { grid-template-columns: repeat(4, 1fr); }
+        .nk-gnav button { height: 44px; min-height: 44px; font-size: 11px; }
+      }
+
+      /* --- NK共通パーツ --- */
+      .nk-h {
+        background: #333333; color: #ffffff;
+        font-size: 13px; font-weight: 400; letter-spacing: .22em;
+        margin: 0 0 12px; padding: 7px 12px;
+      }
+      .nk-date { font-variant-numeric: tabular-nums; white-space: nowrap; margin-right: 12px; }
+      .nk-more { text-align: right; margin: 10px 0 0; font-size: 12.5px; }
+      .nk-more a, .nk-box a, .nk-news-body a, .nk-bio a, .nk-headline a { color: #333333; }
+      .nk-empty { font-size: 13px; margin: 16px 0; }
+
+      /* --- HOME：2カラム（左 HEADLINE NEWS／右サイドボックス） --- */
+      body.niwakame .masthead { display: none; }
+      body.niwakame .nk-home { display: grid; grid-template-columns: 1fr 290px; gap: 0 30px; align-items: start; }
+      @media (max-width: 760px) { body.niwakame .nk-home { grid-template-columns: 1fr; gap: 26px 0; } }
+      ul.nk-headline { list-style: none; margin: 0; padding: 0; }
+      ul.nk-headline li { border-bottom: 1px dotted #cccccc; padding: 8px 2px; font-size: 13px; }
+      body.niwakame ul.nk-headline a { text-decoration: none; display: block; min-height: 2.25rem; }
+      ul.nk-headline a:hover { text-decoration: underline; text-underline-offset: 3px; }
+      .nk-box { border: 1px solid #333333; margin: 0 0 22px; padding: 0 0 12px; }
+      .nk-box .nk-h { margin-bottom: 10px; }
+      .nk-box p { margin: 6px 12px; }
+      .nk-box .nk-more { margin-right: 12px; }
+      .nk-music { font-size: 15px; letter-spacing: .14em; }
+      dl.nk-live-dl { margin: 0 12px; }
+      body.niwakame dl.nk-live-dl .nk-row { display: flex; gap: 10px; padding: 5px 0; border-bottom: 1px dotted #cccccc; }
+      dl.nk-live-dl dt { flex: 0 0 52px; color: #666666; font-size: 11.5px; letter-spacing: .12em; padding-top: 2px; }
+      dl.nk-live-dl dd { margin: 0; }
+
+      /* --- NEWS：11件（見出し＋本文を開いて読む） --- */
+      body.niwakame #news ul.news-list,
+      body.niwakame #nkNewsEmpty,
+      body.niwakame #nkHomeNewsEmpty,
+      body.niwakame #nkNewsDetailEmpty { display: none !important; }
+      .nk-news-item { border-bottom: 1px dotted #cccccc; padding: 4px 2px; }
+      body.niwakame .nk-news-item summary {
+        cursor: pointer; list-style: none;
+        display: flex; gap: 4px; align-items: baseline;
+        padding: 8px 0; min-height: 2.25rem; font-size: 13.5px;
+      }
+      .nk-news-item summary::-webkit-details-marker { display: none; }
+      .nk-news-item summary:hover { text-decoration: underline; text-underline-offset: 3px; }
+      .nk-news-body { padding: 2px 0 14px; font-size: 13px; }
+      .nk-news-body p { margin: 8px 0; overflow-wrap: anywhere; }
+
+      /* --- SCHEDULE --- */
+      body.niwakame #panel-live .about,
+      body.niwakame #panel-live .live-section,
+      body.niwakame #panel-live #refRoot { display: none; }
+      .nk-sched { border-bottom: 1px dotted #cccccc; padding: 14px 2px 16px; }
+      body.niwakame .nk-sched .nk-row { display: flex; gap: 12px; padding: 3px 0; }
+      .nk-sched .nk-label { flex: 0 0 58px; color: #666666; font-size: 11.5px; letter-spacing: .14em; padding-top: 2px; }
+      .nk-sched .nk-val { flex: 1 1 auto; }
+      .nk-sched .nk-title { font-size: 14.5px; }
+      body.niwakame .nk-src { display: inline-block; margin-left: 10px; font-size: 11px; color: #888888; letter-spacing: .08em; }
+
+      /* --- BIOGRAPHY --- */
+      body.niwakame #panel-artist .bio-intro,
+      body.niwakame #panel-artist .bio-member-nav,
+      body.niwakame #panel-artist #profile,
+      body.niwakame #panel-artist .bio-stats { display: none; }
+      .nk-bio-name { font-size: 22px; letter-spacing: .3em; margin: 18px 0 2px; }
+      ul.nk-members { list-style: none; margin: 18px 0; padding: 0; }
+      ul.nk-members li { border-bottom: 1px dotted #cccccc; padding: 9px 2px; font-size: 14px; }
+      body.niwakame ul.nk-members .nk-part { display: inline-block; min-width: 44px; color: #666666; }
+      ul.nk-members .nk-tw { font-size: 12px; margin-left: 12px; }
+
+      /* --- DISCOGRAPHY：公式の空表示＋楽曲一覧の加筆 --- */
+      body.niwakame #discography .table-scroll { display: none; }
+      body.niwakame #discography h3.sub-head:nth-of-type(1),
+      body.niwakame #discography h3.sub-head:nth-of-type(2),
+      body.niwakame #discography h3.sub-head:nth-of-type(3) { display: none; }
+
+      /* --- MEDIA / GOODS / CONTACT --- */
+      body.niwakame #media .media-nk .mv-note { padding-left: 36px; }
+      body.niwakame #goods .nk-note { color: #333333; font-size: 13px; letter-spacing: 0; }
+      body.niwakame #contact .contact-box { display: none; }
+      table.nk-form-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+      table.nk-form-table th, table.nk-form-table td { border: 1px solid #cccccc; padding: 10px 12px; text-align: left; vertical-align: top; }
+      table.nk-form-table th { width: 34%; background: #f5f5f5; font-weight: 400; }
+      table.nk-form-table .req { color: #cc0000; font-size: 11.5px; margin-left: 4px; }
+      table.nk-form-table input, table.nk-form-table textarea {
+        width: 100%; border: 1px solid #bbbbbb; background: #ffffff;
+        font: inherit; padding: 6px 8px; min-height: 2.25rem;
+      }
+      table.nk-form-table textarea { min-height: 7rem; resize: none; }
+      .nk-form-btn { text-align: center; margin: 18px 0 4px; }
+      .nk-form-btn button {
+        background: #333333; color: #ffffff; border: none;
+        padding: 8px 42px; font: inherit; letter-spacing: .2em; text-indent: .2em;
+        opacity: .55; cursor: not-allowed;
+      }
+
+      /* --- フッター（公式HP再現：#333333・白文字） --- */
+      body.niwakame footer.colophon {
+        background: #333333; color: #ffffff;
+        margin: 48px -20px -72px; padding: 22px 20px 40px;
+        text-align: center;
+      }
+      @media (max-width: 640px) {
+        body.niwakame footer.colophon { margin: 40px -14px -56px; padding: 20px 14px 40px; }
+      }
+      body.niwakame footer.colophon > p { display: none; }
+      body.niwakame .nk-foot-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px 4px; margin: 0 0 14px; }
+      .nk-foot-nav button {
+        appearance: none; background: transparent; border: none; cursor: pointer;
+        color: #ffffff; font-family: var(--font-sans); font-size: 11.5px; letter-spacing: .12em;
+        padding: 6px 8px; min-height: 2.25rem;
+      }
+      .nk-foot-nav button:hover { text-decoration: underline; text-underline-offset: 3px; }
+      .nk-foot .nk-copy { color: #ffffff; font-size: 11.5px; margin: 0; }
     </style>
   </head>
   <body>
     <div class="rain-layer" id="rainLayer" aria-hidden="true"></div>
     <div class="wrap">
+
+      <!-- ニワカアメモード専用ヘッダー（公式HP再現・通常モードでは非表示）
+           .nk-header-photo はヘッダー写真スロット：写真は後日入稿されるため、現時点では空き枠のみ。
+           写真が届いたらこの枠内に <img> を差し込む -->
+      <div class="nk-site-head">
+        <div class="nk-header-photo" id="nkHeaderPhotoSlot"></div>
+        <nav class="nk-gnav" aria-label="ニワカアメ グローバルナビ">
+          <button type="button" data-nk-route="home">HOME</button>
+          <button type="button" data-nk-route="news">NEWS</button>
+          <button type="button" data-nk-route="live">SCHEDULE</button>
+          <button type="button" data-nk-route="bio">BIOGRAPHY</button>
+          <button type="button" data-nk-route="disco">DISCOGRAPHY</button>
+          <button type="button" data-nk-route="media">MEDIA</button>
+          <button type="button" data-nk-route="goods">GOODS</button>
+          <button type="button" data-nk-route="blog">BLOG</button>
+        </nav>
+      </div>
 
       <div class="tab-panel" id="panel-home" data-panel="home" role="tabpanel" aria-labelledby="tab-home">
       <header class="masthead">
@@ -1306,6 +1496,42 @@
           </aside>
         </div>
       </header>
+
+      <!-- ニワカアメモード HOME（公式HP再現）：左 HEADLINE NEWS 最新5件／右 MUSIC・NEXT LIVE・MOBILE -->
+      <div class="nk-only nk-home">
+        <div class="nk-home-main">
+          <h2 class="nk-h">HEADLINE NEWS</h2>
+          <ul class="nk-headline">
+            <li><a href="#news"><span class="nk-date">2015.02.26</span>ライブ追加情報</a></li>
+            <li><a href="#news"><span class="nk-date">2015.02.21</span>ライブ追加情報</a></li>
+            <li><a href="#news"><span class="nk-date">2015.02.17</span>ニワカヘドバンムービー</a></li>
+            <li><a href="#news"><span class="nk-date">2015.02.12</span>ライブ追加情報</a></li>
+            <li><a href="#news"><span class="nk-date">2015.02.12</span>アー写＆視聴ムービー公開</a></li>
+          </ul>
+          <p class="nk-more"><a href="#news">&gt;&gt; 一覧を見る</a></p>
+        </div>
+        <div class="nk-home-side">
+          <section class="nk-box" aria-label="MUSIC">
+            <h2 class="nk-h">MUSIC</h2>
+            <p class="nk-music">age</p>
+          </section>
+          <section class="nk-box" aria-label="NEXT LIVE">
+            <h2 class="nk-h">NEXT LIVE</h2>
+            <dl class="nk-live-dl">
+              <div class="nk-row"><dt>TITLE</dt><dd>百花繚乱Vol.3</dd></div>
+              <div class="nk-row"><dt>DATE</dt><dd>2015.03.13[Fri]</dd></div>
+              <div class="nk-row"><dt>VENUE</dt><dd>池袋CYBER</dd></div>
+              <div class="nk-row"><dt>TIME</dt><dd>開場 / 15:30 開演 / 16:00</dd></div>
+              <div class="nk-row"><dt>TICKET</dt><dd>前売¥3,500 / 当日¥4,000</dd></div>
+            </dl>
+            <p class="nk-more"><a href="#live">&gt;&gt; 詳細を見る</a></p>
+          </section>
+          <section class="nk-box" aria-label="MOBILE">
+            <h2 class="nk-h">MOBILE</h2>
+            <p>上記QRコードより携帯サイトをご覧になれます。</p>
+          </section>
+        </div>
+      </div>
       </div>
 
       <nav class="tab-nav" aria-label="セクション切り替え">
@@ -1322,6 +1548,20 @@
       </nav>
 
       <div class="tab-panel" id="panel-artist" data-panel="artist" role="tabpanel" aria-labelledby="tab-bio" hidden>
+        <!-- ニワカアメモード BIOGRAPHY（公式HP原文） -->
+        <div class="nk-only nk-bio">
+          <h2 class="nk-h">BIOGRAPHY</h2>
+          <p class="nk-bio-name">ニワカアメ</p>
+          <p>期間限定活動。</p>
+          <ul class="nk-members">
+            <li><span class="nk-part">Vo.</span>（公式HPでは名前が空白でした）</li>
+            <li><span class="nk-part">Gt.</span>ツキヒ<a class="nk-tw" href="https://twitter.com/guitar_tsukihi" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            <li><span class="nk-part">Gt.</span>アウム<a class="nk-tw" href="https://twitter.com/guitar_aumu" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            <li><span class="nk-part">Ba.</span>タキル<a class="nk-tw" href="https://twitter.com/bass_takiru" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+            <li><span class="nk-part">Dr.</span>リョウ<a class="nk-tw" href="https://twitter.com/perokunka_ryo" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+          </ul>
+          <p>公式Twitter <a href="https://twitter.com/niwaka_rainext" target="_blank" rel="noopener noreferrer">@niwaka_rainext</a></p>
+        </div>
         <div class="bio-intro">
           <p class="bio-logo">GRIMOIRE</p>
           <p class="bio-tagline">Let us eat the fruits of fate.</p>
@@ -1478,6 +1718,84 @@
           <li><a class="news-link" href="#news-20150626"><span class="n-date">2015.06.26</span><span class="n-body">おでかけ。</span></a></li>
         </ul>
         <p class="nk-note" id="nkNewsEmpty">ニワカアメのおしらせはまだありません</p>
+
+        <!-- ニワカアメモード NEWS（公式HP掲載の全11件・原文ママ） -->
+        <div class="nk-only nk-news">
+          <details class="nk-news-item">
+            <summary><span class="nk-date">2015.02.26</span>ライブ追加情報</summary>
+            <div class="nk-news-body">
+              <p>2015.03.30[Mon] Birth Shinjuku</p>
+              <p>チケット予約 <a href="http://www.niwakaame.com/schedule/35717" target="_blank" rel="noopener noreferrer">http://www.niwakaame.com/schedule/35717</a></p>
+            </div>
+          </details>
+          <details class="nk-news-item">
+            <summary><span class="nk-date">2015.02.21</span>ライブ追加情報</summary>
+            <div class="nk-news-body">
+              <p>2015.04.13[Mon] 池袋EDGE</p>
+              <p>チケット予約 <a href="http://www.niwakaame.com/schedule/35575" target="_blank" rel="noopener noreferrer">http://www.niwakaame.com/schedule/35575</a></p>
+            </div>
+          </details>
+          <details class="nk-news-item">
+            <summary><span class="nk-date">2015.02.17</span>ニワカヘドバンムービー</summary>
+            <div class="nk-news-body">
+              <p><a href="http://youtu.be/erx0dBcnY7E" target="_blank" rel="noopener noreferrer">&gt;&gt;動画を見る</a></p>
+            </div>
+          </details>
+          <details class="nk-news-item">
+            <summary><span class="nk-date">2015.02.12</span>ライブ追加情報</summary>
+            <div class="nk-news-body">
+              <p>2015.06.11[Thu] Birth shinjuku</p>
+              <p>チケット予約 <a href="http://www.niwakaame.com/schedule/35210/" target="_blank" rel="noopener noreferrer">http://www.niwakaame.com/schedule/35210/</a></p>
+            </div>
+          </details>
+          <details class="nk-news-item">
+            <summary><span class="nk-date">2015.02.12</span>アー写＆視聴ムービー公開</summary>
+            <div class="nk-news-body">
+              <p>「age」視聴ムービー <a href="http://youtu.be/RJkWjmoWFu0" target="_blank" rel="noopener noreferrer">&gt;&gt;動画を見る</a></p>
+            </div>
+          </details>
+          <details class="nk-news-item">
+            <summary><span class="nk-date">2015.02.02</span>ライブ追加情報</summary>
+            <div class="nk-news-body">
+              <p>2015.04.15[Wed] Birth Shinjuku</p>
+              <p>チケット予約 <a href="http://www.niwakaame.com/schedule/34873" target="_blank" rel="noopener noreferrer">http://www.niwakaame.com/schedule/34873</a></p>
+            </div>
+          </details>
+          <details class="nk-news-item">
+            <summary><span class="nk-date">2015.01.29</span>ライブ追加情報</summary>
+            <div class="nk-news-body">
+              <p>2015.03.18[Wed] Birth Shinjuku</p>
+              <p>チケット予約 <a href="http://www.niwakaame.com/schedule/34743" target="_blank" rel="noopener noreferrer">http://www.niwakaame.com/schedule/34743</a></p>
+            </div>
+          </details>
+          <details class="nk-news-item">
+            <summary><span class="nk-date">2015.01.21</span>ライブ追加情報</summary>
+            <div class="nk-news-body">
+              <p>2015.03.13[Fri] 池袋CYBER</p>
+              <p>チケット予約 <a href="http://www.niwakaame.com/schedule/34490/" target="_blank" rel="noopener noreferrer">http://www.niwakaame.com/schedule/34490/</a></p>
+            </div>
+          </details>
+          <details class="nk-news-item">
+            <summary><span class="nk-date">2015.01.14</span>2/11 Birth Sinjuku公演の物販についてのお知らせ</summary>
+            <div class="nk-news-body">
+              <p>2/11 Birth Shinjuku公演の物販についてのお知らせです。チェキ1枚500円 20枚購入でメンバーとツーショット撮影特典 撮影可能メンバー ツキヒ、アウム、タキル、リョウ 20枚セット予約でニワカアメ限定サイン入りアー写プレゼント ご予約フォーム niwakarainext@gmail.com までメールでのご予約も可能です。件名に『2/11チェキ予約』とご記入の上、お名前、枚数、ご希望メンバー、をお送りください。※ご予約は2/9までとさせていただきます。</p>
+            </div>
+          </details>
+          <details class="nk-news-item">
+            <summary><span class="nk-date">2015.01.11</span>予約完了メールに関するお詫びとお願い</summary>
+            <div class="nk-news-body">
+              <p>予約完了メールに関するお詫びとお願い 2015.02.11 [Wed] 池袋EDGE公演におきましてチケット予約完了メールが届かないというトラブルが発生しておりましたが現在は復旧し、正常にご予約頂けます。予約メールが届いていないお客様は大変お手数ですが、niwakarainext@gmail.com までメールにてご連絡ください。よろしくお願い致します。</p>
+              <p>Posted: 2015.01.11</p>
+            </div>
+          </details>
+          <details class="nk-news-item">
+            <summary><span class="nk-date">2015.01.05</span>ニワカアメ始動。</summary>
+            <div class="nk-news-body">
+              <p>ニワカアメ始動。 始動ライブ。 2015.02.11 [Wed] Birth Shinjuku チケット予約 <a href="http://www.niwakaame.com/schedule/33887" target="_blank" rel="noopener noreferrer">http://www.niwakaame.com/schedule/33887</a></p>
+              <p>Posted: 2015.01.05</p>
+            </div>
+          </details>
+        </div>
       </section>
       </div>
 
@@ -1593,6 +1911,7 @@
       <div class="tab-panel" id="panel-discography" data-panel="discography" role="tabpanel" aria-labelledby="tab-disco" hidden>
       <section class="section-block" id="discography" aria-labelledby="discography-heading">
         <h2 class="section-heading" id="discography-heading"><span class="en">DISCOGRAPHY</span><span class="jp">ディスコグラフィ</span></h2>
+        <p class="nk-only nk-empty">現在DISCOGRAPHY情報はありません。</p>
 
         <h3 class="sub-head">シングル<span class="en-sub">SINGLE</span></h3>
         <div class="table-scroll">
@@ -1789,6 +2108,96 @@
         </div>
       </details>
 
+      <!-- ニワカアメモード SCHEDULE：公式HP掲載6件（公式表記）＋当サイト編纂の全公演を同じ形式で加筆 -->
+      <div class="nk-only nk-schedule">
+        <h2 class="nk-h">SCHEDULE</h2>
+        <article class="nk-sched">
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">始動ライブ<span class="nk-src">当サイト編纂</span></span></div>
+          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.02.11[Wed]</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">Birth Shinjuku</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val"></span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val"></span></div>
+        </article>
+        <article class="nk-sched">
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">（不明）<span class="nk-src">当サイト編纂</span></span></div>
+          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.02.20[Fri]</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">Birth Shinjuku</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val"></span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val"></span></div>
+        </article>
+        <article class="nk-sched">
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">百花繚乱Vol.3<span class="nk-src">公式HP掲載</span></span></div>
+          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.03.13[Fri]</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">池袋CYBER</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">開場15:30 開演16:00</span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">前売¥3,500 当日¥4,000</span></div>
+        </article>
+        <article class="nk-sched">
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">MIST presents<span class="nk-src">公式HP掲載</span></span></div>
+          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.03.18[Wed]</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">Birth Shinjuku</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">16:30/17:00</span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">¥3,000/¥3,500</span></div>
+        </article>
+        <article class="nk-sched">
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">クラッシュ・ザ・ルール<span class="nk-src">公式HP掲載</span></span></div>
+          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.03.30[Mon]</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">Birth Shinjuku</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">16:30/17:00</span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">¥3,000/¥3,500</span></div>
+          <div class="nk-row"><span class="nk-label">ACT</span><span class="nk-val">ZAKLIA / SHIVA / CLØWD / グリーヴァ / MIST / ニワカアメ</span></div>
+        </article>
+        <article class="nk-sched">
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">池袋EDGE presents<span class="nk-src">公式HP掲載</span></span></div>
+          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.04.13[Mon]</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">池袋EDGE</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">16:30/17:00</span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">¥3,000/¥3,500</span></div>
+        </article>
+        <article class="nk-sched">
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">Birth Shinjuku presents<span class="nk-src">公式HP掲載</span></span></div>
+          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.04.15[Wed]</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">Birth Shinjuku</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">16:30/17:00</span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">¥3,000/¥3,500</span></div>
+        </article>
+        <article class="nk-sched">
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">（不明）<span class="nk-src">当サイト編纂</span></span></div>
+          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.05.11[Mon]</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">HOLIDAY SHINJUKU</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val"></span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val"></span></div>
+        </article>
+        <article class="nk-sched">
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">（不明）<span class="nk-src">当サイト編纂</span></span></div>
+          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.05.21[Thu]</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">HOLIDAY SHINJUKU</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val"></span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val"></span></div>
+        </article>
+        <article class="nk-sched">
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">池袋EDGE presents<span class="nk-src">公式HP掲載</span></span></div>
+          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.06.11[Thu]</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">Birth shinjuku</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">16:30/17:00</span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">¥3,000/¥3,500</span></div>
+        </article>
+        <article class="nk-sched">
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">（不明）<span class="nk-src">当サイト編纂</span></span></div>
+          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.06.24[Wed]</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">HOLIDAY SHINJUKU</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val"></span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val"></span></div>
+        </article>
+        <article class="nk-sched">
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">（不明）<span class="nk-src">当サイト編纂</span></span></div>
+          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2021.11.03[Wed]</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">四谷HoneyBurst</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val"></span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val"></span></div>
+        </article>
+      </div>
+
       <section class="live-section" id="live" aria-labelledby="live-heading">
         <h2 class="section-heading" id="live-heading"><span class="en">LIVE</span><span class="jp">ライブ履歴</span></h2>
         <nav class="year-nav" id="yearNav" aria-label="年別ジャンプ"></nav>
@@ -1837,8 +2246,12 @@
         <div class="media-nk">
           <ul class="media-list">
             <li>
-              <a class="mv-link" href="https://www.youtube.com/watch?v=RJkWjmoWFu0" target="_blank" rel="noopener noreferrer" aria-label="『ニワカアメ age』をYouTubeで観る"><svg class="yt-icon" width="24" height="17" viewBox="0 0 24 17" aria-hidden="true" focusable="false"><rect width="24" height="17" rx="4" fill="#a33327"/><path d="M9.8 5.1 15.6 8.5 9.8 11.9Z" fill="#f2ede8"/></svg><p class="mv-title">ニワカアメ age</p></a>
-              <p class="mv-note yt">ニワカアメ公式YouTubeチャンネルにて公開中（2015年投稿）</p>
+              <a class="mv-link" href="http://youtu.be/erx0dBcnY7E" target="_blank" rel="noopener noreferrer" aria-label="LIVE『ニワカヘドバン』をYouTubeで観る"><svg class="yt-icon" width="24" height="17" viewBox="0 0 24 17" aria-hidden="true" focusable="false"><rect width="24" height="17" rx="4" fill="#a33327"/><path d="M9.8 5.1 15.6 8.5 9.8 11.9Z" fill="#f2ede8"/></svg><p class="mv-title">ニワカヘドバン</p><span class="mv-tag">LIVE</span></a>
+              <p class="mv-note yt">&gt;&gt;動画を見る</p>
+            </li>
+            <li>
+              <a class="mv-link" href="http://youtu.be/RJkWjmoWFu0" target="_blank" rel="noopener noreferrer" aria-label="PV『ニワカアメ / age』をYouTubeで観る"><svg class="yt-icon" width="24" height="17" viewBox="0 0 24 17" aria-hidden="true" focusable="false"><rect width="24" height="17" rx="4" fill="#a33327"/><path d="M9.8 5.1 15.6 8.5 9.8 11.9Z" fill="#f2ede8"/></svg><p class="mv-title">ニワカアメ / age</p><span class="mv-tag">PV</span></a>
+              <p class="mv-note yt">&gt;&gt;動画を見る</p>
             </li>
           </ul>
           <p class="media-channel">
@@ -1851,7 +2264,7 @@
       <div class="tab-panel" id="panel-goods" data-panel="goods" role="tabpanel" aria-labelledby="tab-goods" hidden>
       <section class="section-block" id="goods" aria-labelledby="goods-heading">
         <h2 class="section-heading" id="goods-heading"><span class="en">GOODS</span><span class="jp">グッズ</span></h2>
-        <p class="nk-note nk-note-auto">ニワカアメのグッズはまだありません</p>
+        <p class="nk-note nk-note-auto">現在GOODS情報はありません。</p>
 
         <h3 class="sub-head">OFFICIAL GOODS<span class="en-sub">公式グッズ</span></h3>
         <figure class="goods-figure narrow">
@@ -1914,6 +2327,43 @@
           <p class="contact-name">れいれい</p>
           <p class="contact-x"><a href="https://x.com/unlock_000" target="_blank" rel="noopener noreferrer">@unlock_000</a></p>
         </div>
+
+        <!-- ニワカアメモード CONTACT（公式HPのフォーム項目の再現・送信はできない表示のみ） -->
+        <div class="nk-only nk-contact">
+          <table class="nk-form-table">
+            <tbody>
+              <tr><th scope="row">お名前<span class="req">(必須)</span></th><td><input type="text" disabled aria-label="お名前" /></td></tr>
+              <tr><th scope="row">フリガナ<span class="req">(必須)</span></th><td><input type="text" disabled aria-label="フリガナ" /></td></tr>
+              <tr><th scope="row">メールアドレス<span class="req">(必須)</span></th><td><input type="text" disabled aria-label="メールアドレス" /></td></tr>
+              <tr><th scope="row">件名</th><td><input type="text" disabled aria-label="件名" /></td></tr>
+              <tr><th scope="row">お問い合わせ内容<span class="req">(必須)</span></th><td><textarea disabled aria-label="お問い合わせ内容"></textarea></td></tr>
+            </tbody>
+          </table>
+          <p class="nk-form-btn"><button type="button" disabled>確認</button></p>
+        </div>
+      </section>
+      </div>
+
+      <!-- ニワカアメモード専用パネル：BLOG（公式HPではメイン欄はHEADLINE NEWSと同じ表示） -->
+      <div class="tab-panel" id="panel-blog" data-panel="blog" role="tabpanel" aria-labelledby="tab-media" hidden>
+      <section class="section-block" id="blog" aria-label="BLOG">
+        <h2 class="nk-h">BLOG</h2>
+        <ul class="nk-headline">
+          <li><a href="#news"><span class="nk-date">2015.02.26</span>ライブ追加情報</a></li>
+          <li><a href="#news"><span class="nk-date">2015.02.21</span>ライブ追加情報</a></li>
+          <li><a href="#news"><span class="nk-date">2015.02.17</span>ニワカヘドバンムービー</a></li>
+          <li><a href="#news"><span class="nk-date">2015.02.12</span>ライブ追加情報</a></li>
+          <li><a href="#news"><span class="nk-date">2015.02.12</span>アー写＆視聴ムービー公開</a></li>
+        </ul>
+        <p class="nk-more"><a href="#news">&gt;&gt; 一覧を見る</a></p>
+      </section>
+      </div>
+
+      <!-- ニワカアメモード専用パネル：LINK（公式HPの空表示） -->
+      <div class="tab-panel" id="panel-link" data-panel="link" role="tabpanel" aria-labelledby="tab-media" hidden>
+      <section class="section-block" id="link" aria-label="LINK">
+        <h2 class="nk-h">LINK</h2>
+        <p class="nk-empty">現在LINK情報はありません。</p>
       </section>
       </div>
 
@@ -1952,6 +2402,22 @@
         <p><a class="foot-link" id="toTop" href="#">▲上へ戻る</a></p>
         <p><a class="foot-link" id="footHome" href="#">HOME</a></p>
         <p class="copy">Copyright © GIRIMOIRE. All Rights Reserved.</p>
+        <!-- ニワカアメモード フッター（公式HP再現） -->
+        <div class="nk-foot">
+          <nav class="nk-foot-nav" aria-label="ニワカアメ フッターナビ">
+            <button type="button" data-nk-route="home">HOME</button>
+            <button type="button" data-nk-route="news">NEWS</button>
+            <button type="button" data-nk-route="live">SCHEDULE</button>
+            <button type="button" data-nk-route="bio">BIOGRAPHY</button>
+            <button type="button" data-nk-route="disco">DISCOGRAPHY</button>
+            <button type="button" data-nk-route="media">MEDIA</button>
+            <button type="button" data-nk-route="goods">GOODS</button>
+            <button type="button" data-nk-route="blog">BLOG</button>
+            <button type="button" data-nk-route="link">LINK</button>
+            <button type="button" data-nk-route="contact">CONTACT</button>
+          </nav>
+          <p class="nk-copy">Copyright © ニワカアメ. All Rights Reserved.</p>
+        </div>
         <button type="button" class="rain-toggle" id="rainToggle" aria-label="ニワカアメモード" aria-pressed="false"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.6c3.1 4 5.9 7.8 5.9 11a5.9 5.9 0 1 1-11.8 0c0-3.2 2.8-7 5.9-11z"/></svg></button>
       </footer>
 
@@ -2739,7 +3205,9 @@
           disco: "panel-discography",
           media: "panel-media",
           goods: "panel-goods",
-          contact: "panel-contact"
+          contact: "panel-contact",
+          blog: "panel-blog",
+          link: "panel-link"
         };
         /* 旧ハッシュ（#discography／#panel-xxxx 等）の互換 */
         var ALIASES = {
@@ -2751,7 +3219,8 @@
         var PANEL_NAV = {
           "panel-home": "home", "panel-news": "news", "panel-news-detail": "news", "panel-member-detail": "bio", "panel-live": "live",
           "panel-artist": "bio", "panel-discography": "disco",
-          "panel-media": "media", "panel-goods": "goods", "panel-contact": "contact"
+          "panel-media": "media", "panel-goods": "goods", "panel-contact": "contact",
+          "panel-blog": "blog", "panel-link": "link"
         };
         var btns = Array.prototype.slice.call(document.querySelectorAll(".tab-btn"));
         var panels = Array.prototype.slice.call(document.querySelectorAll(".tab-panel"));
@@ -2963,7 +3432,7 @@
           var on = document.body.classList.toggle("niwakame");
           btn.setAttribute("aria-pressed", on ? "true" : "false");
           if (on) buildDrops();
-          document.title = on ? "ニワカアメ ライブ履歴" : titleOff;
+          document.title = on ? "ニワカアメ OFFICIAL WEB SITE" : titleOff;
           swaps.forEach(function (s) {
             if (s.el) s.el.textContent = on ? s.on : s.off;
           });
@@ -2976,6 +3445,46 @@
         window.grimoireMode = function () {
           return document.body.classList.contains("niwakame");
         };
+      })();
+    </script>
+    <script>
+      /* ニワカアメモード専用ナビ（公式HP再現のグローバルナビ／フッターナビ）
+         ボタンは既存のハッシュルーティングへ接続するだけ。通常モードでは非表示で、
+         モードOFF時にBLOG／LINKパネルに居た場合はHOMEへ戻す */
+      (function () {
+        var btns = Array.prototype.slice.call(document.querySelectorAll("[data-nk-route]"));
+        if (!btns.length) return;
+        function currentRoute() {
+          var raw = location.hash.replace(/^#/, "");
+          return raw || "home";
+        }
+        function syncActive() {
+          var r = currentRoute();
+          btns.forEach(function (b) {
+            if (b.closest(".nk-gnav")) {
+              b.classList.toggle("is-active", b.getAttribute("data-nk-route") === r);
+            }
+          });
+        }
+        btns.forEach(function (b) {
+          b.addEventListener("click", function () {
+            var route = b.getAttribute("data-nk-route");
+            if (location.hash === "#" + route) {
+              window.dispatchEvent(new HashChangeEvent("hashchange"));
+            } else {
+              location.hash = route;
+            }
+          });
+        });
+        window.addEventListener("hashchange", syncActive);
+        document.addEventListener("grimoire:modechange", function (e) {
+          if (!e.detail || !e.detail.niwakame) {
+            var r = currentRoute();
+            if (r === "blog" || r === "link") location.hash = "home";
+          }
+          syncActive();
+        });
+        syncActive();
       })();
     </script>
   </body>
