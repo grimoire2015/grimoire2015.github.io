@@ -1213,12 +1213,12 @@
         display: inline-flex; align-items: center; justify-content: center;
         width: 2.75rem; min-height: 2.75rem; padding: 0;
         background: transparent; border: none; cursor: pointer;
-        color: #7d93ab; opacity: .85;
+        color: #7d93ab; opacity: .25;
         transition: color .4s ease, opacity .4s ease, filter .4s ease;
       }
       .rain-toggle:hover { opacity: 1; color: #a8c2da; }
       .rain-toggle:focus-visible { outline: 2px solid var(--head); outline-offset: 2px; opacity: 1; }
-      .rain-toggle svg { display: block; }
+      .rain-toggle svg { display: block; width: 12px; height: 12px; }
 
       body.niwakame {
         --bg: #0c1219;
@@ -1365,7 +1365,7 @@
       body.niwakame .rain-layer { display: none; }
       body.niwakame nav.tab-nav { display: none; }
       body.niwakame .star-band { display: none; }
-      body.niwakame .rain-toggle { color: #dddddd; opacity: .85; filter: none; }
+      body.niwakame .rain-toggle { color: #dddddd; opacity: .3; filter: none; }
       body.niwakame .rain-toggle:hover { color: #ffffff; }
 
       /* --- NK専用ブロックの出し分け --- */
