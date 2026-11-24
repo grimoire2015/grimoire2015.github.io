@@ -1105,9 +1105,99 @@
         table.disco td.d-tracks { padding-top: 6px; }
         table.disco td.d-note { font-size: 13px; padding-top: 6px; }
       }
+
+      /* ---------- 隠しギミック：ニワカアメモード ----------
+         フッター隅の小さな雨マーク（.rain-toggle）を押すと body に .niwakame が付き、
+         配色とブランド表記がニワカアメ仕様に切り替わる。通常モードの見た目は変えない */
+      footer.colophon { position: relative; }
+      .rain-toggle {
+        position: absolute; right: 0; bottom: 0;
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 2.25rem; min-height: 2.25rem; padding: 0;
+        background: transparent; border: none; cursor: pointer;
+        color: #2c2c2c; opacity: .55;
+        transition: color .4s ease, opacity .4s ease, filter .4s ease;
+      }
+      .rain-toggle:hover { opacity: .9; color: #57708c; }
+      .rain-toggle:focus-visible { outline: 2px solid var(--head); outline-offset: 2px; opacity: 1; }
+      .rain-toggle svg { display: block; }
+
+      body.niwakame {
+        --bg: #0c1219;
+        --ink: #aebbc7;
+        --ink-dim: #8797a7;
+        --ink-faint: #5d6d7d;
+        --head: #6d8cae;
+        --head-bright: #aac7e3;
+        --deep: #14202d;
+        --dot: #27333f;
+      }
+      body.niwakame nav.tab-nav { background: var(--bg); }
+      body.niwakame .rain-toggle {
+        color: #8fc1e9; opacity: 1;
+        filter: drop-shadow(0 0 6px rgba(140, 190, 235, .75));
+      }
+      /* ヒーローのスライドショー写真へ雨の寒色フィルター（画像ファイル自体は変更しない） */
+      body.niwakame .hero-slides img.hero-slide {
+        filter: saturate(.5) brightness(.92) contrast(1.03);
+        transition: opacity 1s ease, filter .8s ease;
+      }
+      body.niwakame .hero-slides::after {
+        content: ""; position: absolute; inset: 0;
+        background: rgba(52, 78, 110, .22);
+        pointer-events: none;
+      }
+      /* 赤みのあるアクセント類を青灰へ寄せる */
+      body.niwakame ul.home-news-list li:hover,
+      body.niwakame table.lives tbody tr:hover,
+      body.niwakame table.disco tbody tr:hover,
+      body.niwakame ul.news-list li:hover { background: rgba(120, 155, 190, .08); }
+      body.niwakame .count-badge { background: rgba(24, 42, 60, .5); }
+      body.niwakame .type-tag.oneman { color: #a9c6de; background: rgba(24, 42, 60, .5); }
+      body.niwakame .type-tag.instore { border-color: #4d6076; color: #9db4c8; background: rgba(24, 42, 60, .3); }
+      body.niwakame .official-note { color: #a9c6de; background: rgba(24, 42, 60, .5); }
+      body.niwakame .self-note { color: #c3d9ec; border-color: #7d9dbd; background: rgba(120, 155, 190, .16); }
+      body.niwakame .alias-note { color: #9db4c8; border-color: #4d6076; background: rgba(24, 42, 60, .3); }
+      body.niwakame .instore-note { color: #8fb0cc; }
+      body.niwakame details.setlist summary,
+      body.niwakame details.news-more > summary { color: #a9c6de; }
+      body.niwakame details.setlist .encore-line,
+      body.niwakame .sched-detail .encore-line { color: #a9c6de; }
+      body.niwakame tr.placeholder-row td.event { color: #a9c6de; }
+      body.niwakame .bio-member-nav .bio-member-list a .bm-role { color: #8fb0cc; }
+      body.niwakame .member-card .mc-animal { color: #8fb0cc; }
+      body.niwakame .member-card .mc-part { color: #a9c6de; background: rgba(24, 42, 60, .5); }
+      body.niwakame .member-photo { background: #0a1118; }
+      @media (max-width: 640px) {
+        body.niwakame table.lives td.date { color: #a9c6de; }
+        body.niwakame table.disco td.d-date { color: #8fb0cc; }
+      }
+      /* そっと降る雨（読みやすさを損なわない薄さ。動きを減らす設定では出さない） */
+      .rain-layer {
+        position: fixed; inset: 0; z-index: 90;
+        overflow: hidden; pointer-events: none;
+        display: none;
+      }
+      body.niwakame .rain-layer { display: block; }
+      .rain-drop {
+        position: absolute; top: -14%;
+        width: 1px;
+        background: linear-gradient(to bottom, rgba(168, 198, 226, 0), rgba(168, 198, 226, .8));
+        animation-name: rain-fall; animation-timing-function: linear; animation-iteration-count: infinite;
+        will-change: transform;
+      }
+      @keyframes rain-fall {
+        0% { transform: translate3d(0, 0, 0) rotate(9deg); }
+        100% { transform: translate3d(-7vh, 118vh, 0) rotate(9deg); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        body.niwakame .rain-layer { display: none; }
+        .rain-toggle { transition: none; }
+      }
     </style>
   </head>
   <body>
+    <div class="rain-layer" id="rainLayer" aria-hidden="true"></div>
     <div class="wrap">
 
       <div class="tab-panel" id="panel-home" data-panel="home" role="tabpanel" aria-labelledby="tab-home">
@@ -1782,6 +1872,7 @@
         <p><a class="foot-link" id="toTop" href="#">▲上へ戻る</a></p>
         <p><a class="foot-link" id="footHome" href="#">HOME</a></p>
         <p class="copy">Copyright © GIRIMOIRE. All Rights Reserved.</p>
+        <button type="button" class="rain-toggle" id="rainToggle" aria-label="ニワカアメモード" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.6c3.1 4 5.9 7.8 5.9 11a5.9 5.9 0 1 1-11.8 0c0-3.2 2.8-7 5.9-11z"/></svg></button>
       </footer>
 
     </div>
@@ -2685,6 +2776,50 @@
           btn.addEventListener("click", function () {
             var tab = document.getElementById(btn.getAttribute("data-goto-tab"));
             if (tab) tab.click();
+          });
+        });
+      })();
+    </script>
+    <script>
+      /* 隠しギミック「ニワカアメモード」
+         フッター隅の雨マークを押すと body.niwakame を付け外しし、配色・ヒーローの
+         フィルター・ブランド表記（タイトル／見出し／BIOロゴ／フッター表記）を切り替える。
+         切り替えるのはサイト側の見た目と名義だけで、LIVE本表やNEWS本文などの事実データは触らない。
+         状態は保持しない（リロードで通常モードに戻る）。タブ移動はページ内遷移のためモードは維持される */
+      (function () {
+        var btn = document.getElementById("rainToggle");
+        if (!btn) return;
+        var layer = document.getElementById("rainLayer");
+        var dropsBuilt = false;
+        function buildDrops() {
+          if (!layer || dropsBuilt) return;
+          dropsBuilt = true;
+          var html = "";
+          for (var i = 0; i < 30; i++) {
+            var left = (Math.random() * 100).toFixed(2);
+            var dur = (0.9 + Math.random() * 0.9).toFixed(2);
+            var delay = (-Math.random() * 2).toFixed(2);
+            var h = Math.round(42 + Math.random() * 52);
+            var op = (0.10 + Math.random() * 0.16).toFixed(2);
+            html += '<span class="rain-drop" style="left:' + left + "%;height:" + h + "px;opacity:" + op + ";animation-duration:" + dur + "s;animation-delay:" + delay + 's"></span>';
+          }
+          layer.innerHTML = html;
+        }
+        var swaps = [
+          { el: document.querySelector("h1.visually-hidden"), on: "ニワカアメ ライブ履歴" },
+          { el: document.querySelector(".bio-intro .bio-logo"), on: "ニワカアメ" },
+          { el: document.querySelector(".bio-intro .bio-title"), on: "ニワカアメ" },
+          { el: document.querySelector("footer.colophon .copy"), on: "Copyright © ニワカアメ. All Rights Reserved." }
+        ];
+        swaps.forEach(function (s) { if (s.el) s.off = s.el.textContent; });
+        var titleOff = document.title;
+        btn.addEventListener("click", function () {
+          var on = document.body.classList.toggle("niwakame");
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+          if (on) buildDrops();
+          document.title = on ? "ニワカアメ ライブ履歴" : titleOff;
+          swaps.forEach(function (s) {
+            if (s.el) s.el.textContent = on ? s.on : s.off;
           });
         });
       })();
