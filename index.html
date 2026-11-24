@@ -827,6 +827,16 @@
       }
       ul.song-list .song-name { color: #c9c9c9; }
       ul.song-list .song-src { color: var(--ink-faint); font-size: 12.5px; text-align: right; white-space: nowrap; }
+      /* ニワカアメ専用曲（timeless color／age／レベルゼロ）：通常モードの楽曲一覧（58曲）には出さず、
+         ニワカアメモードの楽曲一覧でのみ「にわかあめ」と並べて表示する */
+      ul.song-list li.nk-song { display: none; }
+      body.niwakame ul.song-list li.nk-song { display: flex; }
+      /* ニワカアメ公演詳細ページ内のセトリ：アンコール行（通常モードのDETAIL内セトリと同じ体裁） */
+      .nk-sched .setlist-encore { margin: 4px 0 2px; font-size: 13px; }
+      .nk-sched .setlist-encore .encore-label {
+        font-size: 11.5px; letter-spacing: .14em; white-space: nowrap;
+        border: 1px solid currentColor; padding: 0 7px; margin-right: 8px;
+      }
       /* 楽曲一覧：曲名タップで詳細パネル（収録情報＋歌詞リンク）を開く */
       ul.song-list li:has(.song-btn) { padding: 0; }
       .song-btn {
@@ -2690,6 +2700,9 @@
           <li><span class="song-name">トリックホリック</span><span class="song-src">トリックホリック</span></li>
           <li><span class="song-name">トロイメライ</span><span class="song-src">クインテット</span></li>
           <li><span class="song-name">にわかあめ</span><span class="song-src">にわかあめ</span></li>
+          <li class="nk-song"><span class="song-name">timeless color</span><span class="song-src">ニワカアメ</span></li>
+          <li class="nk-song"><span class="song-name">age</span><span class="song-src">ニワカアメ</span></li>
+          <li class="nk-song"><span class="song-name">レベルゼロ</span><span class="song-src">ニワカアメ</span></li>
           <li><span class="song-name">ねじれインサイド</span><span class="song-src">グリモワール</span></li>
           <li><span class="song-name">ネバーエンド</span><span class="song-src">ワールドエンドトゥリー</span></li>
           <li><span class="song-name">ハロー&amp;グッバイ</span><span class="song-src">ウラノメトリア ポルックスVer.</span></li>
@@ -2753,7 +2766,7 @@
           <li><a class="nk-sched-link" href="#live-nk-20150415"><span class="nk-date">2015.04.15[Wed]</span>HOLIDAY SHINJUKU</a></li>
           <li><a class="nk-sched-link" href="#live-nk-20150511"><span class="nk-date">2015.05.11[Mon]</span>HOLIDAY SHINJUKU</a></li>
           <li><a class="nk-sched-link" href="#live-nk-20150521"><span class="nk-date">2015.05.21[Thu]</span>HOLIDAY SHINJUKU</a></li>
-          <li><a class="nk-sched-link" href="#live-nk-20150611"><span class="nk-date">2015.06.11[Thu]</span>Birth shinjuku</a></li>
+          <li><a class="nk-sched-link" href="#live-nk-20150611"><span class="nk-date">2015.06.11[Thu]</span>HOLIDAY SHINJUKU</a></li>
           <li><a class="nk-sched-link" href="#live-nk-20150624"><span class="nk-date">2015.06.24[Wed]</span>HOLIDAY SHINJUKU</a></li>
           <li><a class="nk-sched-link" href="#live-nk-20211103"><span class="nk-date">2021.11.03[Wed]</span>四谷HoneyBurst</a></li>
         </ul>
@@ -2843,19 +2856,21 @@
           <p class="nk-live-back"><a href="#live">&gt;&gt; 一覧に戻る</a></p>
         </article>
         <article class="live-detail-article nk-sched" data-live-slug="nk-20150521" hidden>
-          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">（不明）</span></div>
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">CROWN×CROWN presents「reflection of desire GOLD 〜新宿絶対幽閉区域〜 vol.69」</span></div>
           <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.05.21[Thu]</span></div>
           <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">HOLIDAY SHINJUKU</span></div>
-          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val"></span></div>
-          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val"></span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">開場15:00 開演15:30</span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">前売¥3,500 当日¥4,000（Drink¥600別）</span></div>
+          <div class="nk-row"><span class="nk-label">ACT</span><span class="nk-val">SCAPEGOAT / Blitz / NUMBER（セッション） / UNDER FALL JUSTICE / VRZEL / D'efend Chroma / ニワカアメ / Project-No.iD / MamaReacter / MissRainy / メルヴェル</span></div>
           <p class="nk-live-back"><a href="#live">&gt;&gt; 一覧に戻る</a></p>
         </article>
         <article class="live-detail-article nk-sched" data-live-slug="nk-20150611" hidden>
-          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">池袋EDGE presents</span></div>
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">メルヴェル3ヶ月連続主催ガーデニング「シクレモルフィ P.05」〜アマモリノ庭園〜</span></div>
           <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.06.11[Thu]</span></div>
-          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">Birth shinjuku</span></div>
-          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">16:30/17:00</span></div>
-          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">¥3,000/¥3,500</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">HOLIDAY SHINJUKU</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">開場15:00 開演15:20</span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">前売¥3,300 当日¥3,800（ドリンク代別）</span></div>
+          <div class="nk-row"><span class="nk-label">ACT</span><span class="nk-val">メルヴェル / Xaoce / ギャロ / ニワカアメ / VivienneBloodColor / Lig / f.e.s / レインディア / Lydiar</span></div>
           <p class="nk-live-back"><a href="#live">&gt;&gt; 一覧に戻る</a></p>
         </article>
         <article class="live-detail-article nk-sched" data-live-slug="nk-20150624" hidden>
@@ -2867,11 +2882,12 @@
           <p class="nk-live-back"><a href="#live">&gt;&gt; 一覧に戻る</a></p>
         </article>
         <article class="live-detail-article nk-sched" data-live-slug="nk-20211103" hidden>
-          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">（不明）</span></div>
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">ニワカアメ</span></div>
           <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2021.11.03[Wed]</span></div>
           <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">四谷HoneyBurst</span></div>
-          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val"></span></div>
-          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val"></span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">OPEN 18:30 / START 19:00</span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">入場無料（ファンクラブ会員限定）</span></div>
+          <div class="nk-row"><span class="nk-label">SETLIST</span><span class="nk-val"><ol class="detail-setlist"><li>timeless color</li><li>にわかあめ</li><li>エデンのそこ</li><li>MC</li><li>age</li><li>ゼロとくろ</li><li>mAsk</li><li>グルーミィグルーミー</li><li>MC</li><li>シャンバラ</li><li>グラのしょくたく</li><li>シンせかい</li></ol><p class="setlist-encore"><span class="encore-label">アンコール</span>ブラッディマイパレード／よわむしクエスト</p><p class="setlist-encore"><span class="encore-label">アンコール2</span>age</p></span></div>
           <p class="nk-live-back"><a href="#live">&gt;&gt; 一覧に戻る</a></p>
         </article>
       </div>
@@ -3138,7 +3154,7 @@
         self: true の行は本人の参加記録（ツイフィール）で実施を確認できたエントリ。
         single: true の行は単一ソースのみで確認できたエントリ。
         どの印もない行は、複数の公開情報で一致が確認できたエントリ。
-        with がある行は共演者が公演名の下に表示される（withPartial: true の行は全出演者が判明していないため「共演（一部）：」と表示される）。info がある行は INFO 欄にその文言が表示される。setlist（曲名の配列）がある行は「セットリスト」として展開表示され、encore（配列）はアンコールとして併記（encoreLabel がある場合はそのラベルで表示）、setlistNote はセトリ末尾の注記として表示される。partial がある行は部分セトリとして表示される。
+        with がある行は共演者が公演名の下に表示される（withPartial: true の行は全出演者が判明していないため「共演（一部）：」と表示される）。info がある行は INFO 欄にその文言が表示される。setlist（曲名の配列）がある行は「セットリスト」として展開表示され、encore（配列）はアンコールとして併記（encoreLabel がある場合はそのラベルで表示）、encore2（配列）はアンコール2として併記（encore2Label がある場合はそのラベルで表示）、setlistNote はセトリ末尾の注記として表示される。partial がある行は部分セトリとして表示される。
         event が空文字の行は「（不明）」と表示される。
         instore: true の行はインストアイベント（種別欄に「インストア」と表示され、ライブ本数の集計からは除き、インストア込みの全件数にのみ数える）。
         niwakame: true の行はニワカアメ名義の公演（行に「ニワカアメ名義」と表示される）。
@@ -3148,11 +3164,12 @@
       */
       var LIVE_DATA = {
         2015: [
-          { date: "2015-07-09", venue: "池袋EDGE", event: "NEW AGE Vol.11", type: "対バン・イベント", self: true, gensou: true, excludeCount: true, note: "GRIMOIRE始動前（2015-08-23より前）に前身名義「げんそうシンドローム」で出演した公演。始動前の関連公演として本表の件数には含めていません", with: "【TRiANGLE▼SONiX】 / DiCE / SALIVAN / Artemis / PIGLOW in GLOOMY / DEEP RAVE", time: "開場 16:30 / 開演 17:00", ticket: "当日¥4,300（1ドリンク込）" },
+          { date: "2015-07-09", venue: "池袋EDGE", event: "NEW AGE Vol.11", type: "対バン・イベント", self: true, gensou: true, excludeCount: true, note: "GRIMOIRE始動前（2015-08-23より前）に前身名義「げんそうシンドローム」で出演した公演。始動前の関連公演として本表の件数には含めていません", with: "【TRIANGLE▼SONiX】 / DiCE / SALIVAN / Artemis / PIGLOW in GLOOMY / DEEP RAVE 他", time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,300" },
+          { date: "2015-07-27", venue: "HOLIDAY SHINJUKU", event: "CROWN×CROWN presents「reflection of desire GOLD 〜新宿絶対幽閉区域〜 vol.75」", type: "対バン・イベント", self: true, gensou: true, excludeCount: true, note: "GRIMOIRE始動前（2015-08-23より前）に前身名義「げんそうシンドローム」で出演した公演。始動前の関連公演として本表の件数には含めていません", with: "DADAROMA / FakeFixion / EGOIST / Krad. / THE VELVET / DAMY / Dead Children / BLESSCODE / メルヴェル / ゆきねセッション", time: "開場 15:00 / 開演 15:30", ticket: "前売¥3,500" },
           { date: "2015-08-23", venue: "新宿RUIDO K4", event: "おひろめえんそうかい 〜はじまりエンドロール〜", type: "ワンマン（始動ライブ）", setlist: ["ひとりトピア", "にわかあめ", "ブラッディマイパレード", "からくりパルム", "ゼロとくろ", "「シン」せかい", "アルギュロスのはね", "エデンのそこ", "よわむしクエスト", "げんそうシンドローム"], time: "開場 未定 / 開演 未定", ticket: "前売¥3,000/当日¥3,500" },
           { date: "2015-08-28", venue: "新宿RUIDO K4", event: "bell＋ presents 「Break Rush~vol.8~」", type: "不明", self: true, with: "My Fairytale / 弾丸 NO LIMIT / DADAROMA / VAN9ISH / SALIVAN / VAASTU / いろはにほへと", setlist: ["にわかあめ", "ブラッディマイパレード", "ゼロとくろ", "エデンのそこ"], time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,000+D/当日¥3,500+D（D代¥600）" },
-          { date: "2015-09-11", venue: "新宿RUIDO K4", event: "bell＋ presents 「Break Rush~vol.9~」", type: "不明", x: true, with: "ALIVE / ぞんび / 弾丸NO LIMIT / Lydiar / アンフィル / SALIVAN / TRiANGLE▼SONiX / Purple Stone", setlist: ["にわかあめ", "「シン」せかい", "げんそうシンドローム", "エデンのそこ"], time: "開場 15:30 / 開演 16:00", ticket: "前売¥3,000/当日¥3,500" },
-          { date: "2015-09-16", venue: "池袋EDGE", event: "rivabook presents 「Neo STARGATE」", type: "不明", x: true, with: "LAGNA / inc.RIBON / アポロ計画 / きらぎら / lig / PIGLOW in GLOOMY", setlist: ["からくりパルム", "「シン」せかい", "げんそうシンドローム", "ゼロとくろ"], time: "開場 16:30 / 開演 17:00", ticket: "前売¥3,100/当日¥3,600" },
+          { date: "2015-09-11", venue: "新宿RUIDO K4", event: "bell＋ presents 「Break Rush~vol.9~」", type: "不明", x: true, with: "ALIVE / ぞんび / 弾丸NO LIMIT / Lydiar / アンフィル / SALIVAN / 【TRIANGLE▼SONiX】 / Purple Stone", setlist: ["にわかあめ", "「シン」せかい", "げんそうシンドローム", "エデンのそこ"], time: "開場 15:30 / 開演 16:00", ticket: "前売¥3,000/当日¥3,500" },
+          { date: "2015-09-16", venue: "池袋EDGE", event: "rivabook presents 「Neo STARGATE」", type: "不明", x: true, with: "LAGNA / RoA / アポロ計画 / PIGLOW in GLOOMY / inc. RIBON / きらぎら / Lig", setlist: ["からくりパルム", "「シン」せかい", "げんそうシンドローム", "ゼロとくろ"], time: "開場 16:30 / 開演 17:00", ticket: "前売¥3,100/当日¥3,600" },
           { date: "2015-10-08", venue: "池袋EDGE", event: "", type: "不明", x: true, self: true, with: "ヴァリル / 弾丸 NO LIMIT / VAASTU / ザアザア / yazzmad / Develop One's Faculties", time: "開場 16:30 / 開演 17:00", ticket: "前売¥3,100/当日¥3,600" },
           { date: "2015-10-30", venue: "池袋EDGE", event: "rivabook presents 「ハロウィンぱーりーナイト」", type: "イベント", x: true, with: "CLØWD / Develop One's Faculties / トランスノート / DiCE / ソニックデスモンキー / VERY BERRY", setlist: ["からくりパルム", "「シン」せかい", "げんそうシンドローム", "ゼロとくろ"], time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,300/当日¥3,800" },
           { date: "2015-10-06", venue: "池袋EDGE", event: "BlitZ解散主催TOUR『全国のみんなに会いに行きます』", type: "対バン・イベント", self: true, with: "Blitz / アヴァンチック / Awake / Azero / メルヴェル", setlist: ["ブラッディマイパレード", "「シン」せかい", "げんそうシンドローム", "ゼロとくろ"], time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,500/当日¥4,000" },
@@ -3514,7 +3531,7 @@
           { date: "2021-08-09", venue: "池袋EDGE", event: "SCAPEGOAT presents 2MAN『山羊の14日間戦争』", type: "ツーマン", x: true, with: "SCAPEGOAT" , setlist: ["すいそうのうみ", "ねじれインサイド", "ホワイティユアパレード", "いらないもの", "ネバーエンド", "いちぶんのいち", "グルーミィグルーミー", "「シン」せかい", "パルプディストーション", "ブラッディマイパレード", "ゼロとくろ", "つきのかけら"] , time: "開場 17:00 / 開演 17:30" , ticket: "当日¥5,600（1ドリンク込）" },
           { date: "2021-08-21", venue: "渋谷SPACE ODD", event: "5×6周年ワンマン「ゆめのまほろば～そのご～」", type: "ワンマン", x: true , setlist: ["ホワイティユアパレード", "せいたんデビル", "からくりパルム", "じひとじひと", "げんそうシンドローム", "シャンバラ", "ねじれインサイド", "プラスチックシアター", "アヴァリティアリティ", "マイムマイム", "ウラノメトリア", "つきのかけら", "いちぶんのいち", "パルプディストーション", "グルーミィグルーミー", "「シン」せかい", "ゼロとくろ", "ゆめのまほろば", "ピンキー", "よわむしクエスト", "トロイメライ"] },
           { date: "2021-10-24", venue: "池袋RED-Zone", event: "Luneバースデー「こーでねーと」", type: "ワンマン系", x: true },
-          { date: "2021-11-03", venue: "四谷HoneyBurst", event: "", type: "不明", self: true, niwakame: true , setlist: ["timeless color", "にわかあめ", "エデンのそこ", "MC", "Age", "ゼロとくろ", "mAsk", "グルーミィグルーミー", "MC", "シャンバラ", "グラのしょくたく", "「シン」せかい"] , encore: ["ブラッディマイパレード", "よわむしクエスト", "Age"] },
+          { date: "2021-11-03", venue: "四谷HoneyBurst", event: "ニワカアメ", type: "不明", self: true, niwakame: true, time: "OPEN 18:30 / START 19:00", ticket: "入場無料（ファンクラブ会員限定）" , setlist: ["timeless color", "にわかあめ", "エデンのそこ", "MC", "age", "ゼロとくろ", "mAsk", "グルーミィグルーミー", "MC", "シャンバラ", "グラのしょくたく", "シンせかい"] , encore: ["ブラッディマイパレード", "よわむしクエスト"] , encore2: ["age"] },
           { date: "2021-11-06", venue: "新宿LiveFreak", event: "学童倶楽部", type: "ツーマン", x: true , setlist: ["すいそうのうみ", "ホワイティユアパレード", "ねじれインサイド", "クライクライネ", "ぼくとタルパ", "いらないもの", "ネバーエンド", "mAsk", "せいたんデビル", "LOST SEASONS", "ピンキー", "タロットゲーム"] , with: "ベル" , time: "開場 17:00 / 開演 17:30" , ticket: "前売¥3,900/当日¥4,400（D代別）" },
           { date: "2021-07-14", venue: "新宿HOLIDAY SHINJUKU", event: "cubrick presents『二転三転』vol.04", type: "不明", x: true , setlist: ["シャンバラ", "クライクライネ", "にわかあめ", "ばけもの", "ピンキー"] , with: "ミスイ / SARIGIA / マチルダ / nurié / DE / CLIO / KAKUMAY" , time: "開場 16:00 / 開演 16:30" , ticket: "前売¥3,700/当日¥4,200（D別）" },
           { date: "2021-07-23", venue: "渋谷Milkyway", event: "ACME Live 2021「ACME×GRIMOIRE 2マンLIVE」", type: "ツーマン", single: true, with: "ACME" , setlist: ["ばけもの", "ホワイティユアパレード", "ぼくとタルパ", "せいたんデビル", "うきよはなび", "フラブジャスナハト", "シャンバラ", "タロットゲーム", "グラのしょくたく"] },
@@ -3561,8 +3578,8 @@
           { date: "2015-04-13", venue: "池袋EDGE", event: "アンフィル両A面1stシングル発売記念二ヶ月連続主催「#やるせないアンフィル。」", act: "ニワカアメ（メンバー関連ユニット）", self: true, time: "開場 16:00 / 開演 16:30", ticket: "当日¥4,500（1ドリンク込）", with: "アンフィル / アヴァンチック / ニワカアメ / TRiANGLE▼SONiX / マーブルヘッド / Qualius-クオリアス- / Ecthelion-エクセリオン-" },
           { date: "2015-04-15", venue: "HOLIDAY SHINJUKU", event: "CROWN×CROWN presents「reflection of desire GOLD 〜新宿絶対幽閉区域〜 vol.64」", act: "ニワカアメ（メンバー関連ユニット）", self: true, time: "開場 15:00 / 開演 15:30", ticket: "前売¥3,500 / 当日¥4,000（ドリンク代別）", with: "REAlies / セッション⇔NUMBER / エスカピズム / G.A.I.A / ザアザア / ニワカアメ / PEAK HOLD / VivienneBloodcolor / PELSONA / メルヴェル / Limited「E=」" },
           { date: "2015-05-11", venue: "HOLIDAY SHINJUKU", event: "ニワカアメとして出演", act: "ニワカアメ（メンバー関連ユニット）", self: true },
-          { date: "2015-05-21", venue: "HOLIDAY SHINJUKU", event: "ニワカアメとして出演", act: "ニワカアメ（メンバー関連ユニット）", self: true },
-          { date: "2015-06-11", venue: "HOLIDAY SHINJUKU", event: "ニワカアメとして出演", act: "ニワカアメ（メンバー関連ユニット）", self: true },
+          { date: "2015-05-21", venue: "HOLIDAY SHINJUKU", event: "CROWN×CROWN presents「reflection of desire GOLD 〜新宿絶対幽閉区域〜 vol.69」", act: "ニワカアメ（メンバー関連ユニット）", self: true, time: "開場 15:00 / 開演 15:30", ticket: "前売¥3,500 / 当日¥4,000（Drink¥600別）", with: "SCAPEGOAT / Blitz / NUMBER（セッション） / UNDER FALL JUSTICE / VRZEL / D'efend Chroma / ニワカアメ / Project-No.iD / MamaReacter / MissRainy / メルヴェル" },
+          { date: "2015-06-11", venue: "HOLIDAY SHINJUKU", event: "メルヴェル3ヶ月連続主催ガーデニング「シクレモルフィ P.05」〜アマモリノ庭園〜", act: "ニワカアメ（メンバー関連ユニット）", self: true, time: "開場 15:00 / 開演 15:20", ticket: "前売¥3,300 / 当日¥3,800（ドリンク代別）", with: "メルヴェル / Xaoce / ギャロ / ニワカアメ / VivienneBloodColor / Lig / f.e.s / レインディア / Lydiar" },
           { date: "2015-06-24", venue: "HOLIDAY SHINJUKU", event: "ニワカアメとして出演", act: "ニワカアメ（メンバー関連ユニット）", self: true },
           { date: "2019-03-21", venue: "東高円寺二万電圧", event: "（二部制、ドラマー会イベント）", act: "Mel のみ" },
           { date: "2019-09-21", venue: "大阪 ライブスペース音", event: "yuya presents RyNK バースデーツアー「流離」1部", act: "RyNK（opening guest）", official: true },
@@ -3730,6 +3747,9 @@
                 html += '<ol class="detail-setlist">' + r.setlist.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ol>";
                 if (r.encore) {
                   html += '<p class="encore-line"><span class="encore-label">' + esc(r.encoreLabel || "アンコール") + "</span>" + r.encore.map(esc).join("／") + "</p>";
+                }
+                if (r.encore2) {
+                  html += '<p class="encore-line"><span class="encore-label">' + esc(r.encore2Label || "アンコール2") + "</span>" + r.encore2.map(esc).join("／") + "</p>";
                 }
                 if (r.setlistNote) {
                   html += '<p class="setlist-note">' + esc(r.setlistNote) + "</p>";
@@ -4182,8 +4202,11 @@
             var cur = document.querySelector(".news-detail-article:not([hidden])");
             detailNote.classList.toggle("show", on && !!cur && cur.classList.contains("nk-hide"));
           }
-          /* DISCOGRAPHY：作品一覧は絞らず、楽曲一覧だけ「にわかあめ」に絞る（件数行は全曲前提のため隠す） */
-          filterGroup(document.querySelectorAll("ul.song-list li"), null, on);
+          /* DISCOGRAPHY：作品一覧は絞らず、楽曲一覧だけニワカアメの4曲（「にわかあめ」＋ニワカアメ専用曲3曲＝.nk-song）に絞る（件数行は全曲前提のため隠す） */
+          Array.prototype.forEach.call(document.querySelectorAll("ul.song-list li"), function (el) {
+            var keep = el.classList.contains("nk-song") || NK_TEXT_RE.test(el.textContent || "");
+            el.classList.toggle("nk-hide", on && !keep);
+          });
           var songCount = document.querySelector(".song-count-line");
           if (songCount) songCount.classList.toggle("nk-hide", on);
           /* LIVEページは描画側のフィルタで再描画する */
