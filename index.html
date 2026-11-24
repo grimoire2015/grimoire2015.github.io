@@ -1190,7 +1190,8 @@
       body.niwakame .home-blocks { grid-template-columns: 1fr; }
       /* LIVE：「このページについて」はGRIMOIRE全体の解説なのでモード中は隠す */
       body.niwakame #panel-live .about { display: none; }
-      /* MEDIA／GOODS：ニワカアメの該当がないため、モード中は一覧を隠して空表示のみ */
+      /* MEDIA：モード中はGRIMOIREの一覧を隠し、ニワカアメ専用ブロック（.media-nk）だけ出す。
+         GOODS：ニワカアメの該当がないため、モード中は一覧を隠して空表示のみ */
       body.niwakame #media .media-list,
       body.niwakame #media .media-channel,
       body.niwakame #goods .sub-head,
@@ -1198,6 +1199,11 @@
       body.niwakame #goods .goods-table,
       body.niwakame #goods .goods-note,
       body.niwakame #goods .sub-box { display: none; }
+      /* MEDIAのニワカアメ専用ブロック：通常モードでは出さず、モード中だけ表示する */
+      .media-nk { display: none; }
+      body.niwakame #media .media-nk { display: block; }
+      body.niwakame #media .media-nk .media-list { display: block; }
+      body.niwakame #media .media-nk .media-channel { display: block; }
       /* 赤みのあるアクセント類を青灰へ寄せる */
       body.niwakame ul.home-news-list li:hover,
       body.niwakame table.lives tbody tr:hover,
@@ -1825,10 +1831,20 @@
           <li><p class="mv-title">ゆめのまほろば</p><p class="mv-note">1stアルバム『グリモワール』げんそうVer.（LHCG-1004）DVD収録</p></li>
           <li><p class="mv-title">グルーミィグルーミー</p><p class="mv-note">2ndミニアルバム『プシュコマキア』初回限定盤（LHCG-1008）DVD収録</p></li>
         </ul>
-        <p class="nk-note nk-note-auto">ニワカアメのメディアはまだありません</p>
         <p class="media-channel">
           <a href="https://www.youtube.com/@%E3%82%B0%E3%83%AA%E3%83%A2%E3%82%A2" target="_blank" rel="noopener noreferrer" aria-label="公式YouTubeチャンネル「グリモア」を開く"><svg class="yt-icon" width="28" height="20" viewBox="0 0 24 17" aria-hidden="true" focusable="false"><rect width="24" height="17" rx="4" fill="#a33327"/><path d="M9.8 5.1 15.6 8.5 9.8 11.9Z" fill="#f2ede8"/></svg>公式YouTubeチャンネル「グリモア」<span class="ch-arrow" aria-hidden="true">→</span></a>
         </p>
+        <div class="media-nk">
+          <ul class="media-list">
+            <li>
+              <a class="mv-link" href="https://www.youtube.com/watch?v=RJkWjmoWFu0" target="_blank" rel="noopener noreferrer" aria-label="『ニワカアメ age』をYouTubeで観る"><svg class="yt-icon" width="24" height="17" viewBox="0 0 24 17" aria-hidden="true" focusable="false"><rect width="24" height="17" rx="4" fill="#a33327"/><path d="M9.8 5.1 15.6 8.5 9.8 11.9Z" fill="#f2ede8"/></svg><p class="mv-title">ニワカアメ age</p></a>
+              <p class="mv-note yt">ニワカアメ公式YouTubeチャンネルにて公開中（2015年投稿）</p>
+            </li>
+          </ul>
+          <p class="media-channel">
+            <a href="https://www.youtube.com/@niwaka6235" target="_blank" rel="noopener noreferrer" aria-label="ニワカアメ公式YouTubeチャンネル「niwaka」を開く"><svg class="yt-icon" width="28" height="20" viewBox="0 0 24 17" aria-hidden="true" focusable="false"><rect width="24" height="17" rx="4" fill="#a33327"/><path d="M9.8 5.1 15.6 8.5 9.8 11.9Z" fill="#f2ede8"/></svg>公式YouTubeチャンネル「niwaka」<span class="ch-arrow" aria-hidden="true">→</span></a>
+          </p>
+        </div>
       </section>
       </div>
 
