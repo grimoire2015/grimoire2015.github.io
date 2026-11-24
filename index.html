@@ -359,38 +359,8 @@
       .type-tag.oneman { border-color: var(--head); color: #d3a3a3; background: rgba(51, 0, 0, .4); }
       .type-tag.event { border-color: #565656; color: #b5b5b5; background: rgba(255, 255, 255, .03); }
       .type-tag.instore { border-color: #6e5656; color: #c2a3a3; background: rgba(51, 0, 0, .25); }
-      .single-note {
-        display: inline-block; margin-left: 8px;
-        font-size: 11.5px; letter-spacing: .08em;
-        color: var(--ink-faint); white-space: nowrap;
-      }
-      .official-note {
-        display: inline-block; margin-left: 8px;
-        font-size: 11px; letter-spacing: .14em;
-        color: #d3a3a3;
-        border: 1px solid var(--head);
-        background: rgba(51, 0, 0, .4);
-        padding: 0 7px; white-space: nowrap;
-        vertical-align: 1px;
-      }
-      .x-note {
-        display: inline-block; margin-left: 8px;
-        font-size: 11px; letter-spacing: .14em;
-        color: #bdbdbd;
-        border: 1px solid #666666;
-        background: rgba(255, 255, 255, .04);
-        padding: 0 7px; white-space: nowrap;
-        vertical-align: 1px;
-      }
-      .self-note {
-        display: inline-block; margin-left: 8px;
-        font-size: 11px; letter-spacing: .14em;
-        color: #e0b7b7;
-        border: 1px solid #b57e7e;
-        background: rgba(153, 102, 102, .15);
-        padding: 0 7px; white-space: nowrap;
-        vertical-align: 1px;
-      }
+      /* 出典バッジ（公式確認／公式X確認／本人参加記録／※単一ソース）は表示しない。
+         official／x／self／single フラグは内部の照合記録としてデータ内にのみ保持する */
       .alias-note {
         display: inline-block; margin-left: 8px;
         font-size: 11px; letter-spacing: .14em;
@@ -399,11 +369,6 @@
         background: rgba(51, 0, 0, .25);
         padding: 0 7px; white-space: nowrap;
         vertical-align: 1px;
-      }
-      .corr-note {
-        display: block; margin-top: 4px;
-        font-size: 12px; letter-spacing: .04em; line-height: 1.6;
-        color: var(--ink-faint);
       }
       /* 共演者 */
       .with-line {
@@ -477,12 +442,7 @@
       .sched-value.sched-title { color: #999999; font-size: 15.5px; font-weight: 700; }
       .sched-value.sched-live { color: #999999; font-weight: 700; }
       /* タイトル内の注記バッジ・補足は太字にしない */
-      .sched-value.sched-title .official-note,
-      .sched-value.sched-title .x-note,
-      .sched-value.sched-title .self-note,
-      .sched-value.sched-title .alias-note,
-      .sched-value.sched-title .single-note,
-      .sched-value.sched-title .corr-note { font-weight: 400; }
+      .sched-value.sched-title .alias-note { font-weight: 400; }
       .sched-value .unknown { color: var(--ink-faint); }
       .detail-toggle {
         background: none; border: none; padding: 2px 0; cursor: pointer;
@@ -824,6 +784,52 @@
       }
       ul.song-list .song-name { color: #c9c9c9; }
       ul.song-list .song-src { color: var(--ink-faint); font-size: 12.5px; text-align: right; white-space: nowrap; }
+      /* 楽曲一覧：曲名タップで詳細パネル（収録情報＋歌詞リンク）を開く */
+      ul.song-list li:has(.song-btn) { padding: 0; }
+      .song-btn {
+        display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+        width: 100%; padding: 7px 2px;
+        background: none; border: none; font: inherit; color: inherit;
+        text-align: left; cursor: pointer;
+      }
+      .song-btn:hover .song-name, .song-btn:focus-visible .song-name { color: #ffffff; }
+      .song-btn:focus-visible { outline: 2px solid var(--head); outline-offset: 2px; }
+      .song-btn[aria-expanded="true"] .song-name { color: var(--head-bright); }
+      .song-detail {
+        margin: 18px 0 6px; padding: 16px 18px 18px;
+        border: 1px solid #3a3a3a; background: rgba(255, 255, 255, .03);
+      }
+      .song-detail[hidden] { display: none; }
+      .song-detail-head {
+        display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+      }
+      .song-detail-name {
+        margin: 0; font-family: var(--font-serif); font-weight: 400;
+        font-size: 18px; color: #dedede; letter-spacing: .08em;
+      }
+      .song-detail-close {
+        flex: 0 0 auto; background: none; border: 1px solid #4a4a4a;
+        color: var(--ink-dim); font: inherit; font-size: 12.5px; letter-spacing: .08em;
+        padding: 4px 12px; cursor: pointer;
+      }
+      .song-detail-close:hover, .song-detail-close:focus-visible { color: #ffffff; border-color: var(--head); }
+      .song-detail-close:focus-visible { outline: 2px solid var(--head); outline-offset: 2px; }
+      .sd-label { margin: 14px 0 4px; font-size: 12px; letter-spacing: .16em; color: var(--head-bright); }
+      ul.sd-list { list-style: none; margin: 0; padding: 0; }
+      ul.sd-list li {
+        padding: 6px 0; border-bottom: 1px dotted var(--dot);
+        font-size: 14px; color: #c9c9c9; line-height: 1.7;
+      }
+      ul.sd-list .sd-meta { display: block; font-size: 12.5px; color: var(--ink-faint); }
+      .sd-note { margin: 10px 0 0; font-size: 14px; color: #c9c9c9; line-height: 1.8; }
+      .sd-lyrics { display: flex; flex-wrap: wrap; gap: 10px; margin: 8px 0 0; }
+      .sd-lyrics a {
+        border: 1px solid #572b2b; color: #e3b1b1;
+        padding: 7px 14px; text-decoration: none;
+        font-size: 13.5px; letter-spacing: .06em;
+      }
+      .sd-lyrics a:hover, .sd-lyrics a:focus-visible { color: #ffffff; border-color: var(--head); }
+      .sd-lyrics a:focus-visible { outline: 2px solid var(--head); outline-offset: 2px; }
 
       /* ---------- NEWS ---------- */
       ul.news-list { list-style: none; margin: 0; padding: 0; }
@@ -1024,6 +1030,36 @@
         border: 1px solid #572b2b; padding: 3px 9px 2px; white-space: nowrap;
       }
       ul.media-list .mv-note.yt { padding-left: 36px; }
+      /* MEDIA：YouTube埋め込みの軽量ファサード（サムネイル＋再生ボタン。
+         タップで初めて公式埋め込みiframeに差し替わり、再生が始まる） */
+      .yt-facade {
+        position: relative; display: block;
+        aspect-ratio: 16 / 9; background: #000;
+        border: 1px solid #2c2c2c; margin: 2px 0 10px;
+      }
+      .yt-facade img {
+        display: block; width: 100%; height: 100%; object-fit: cover;
+        opacity: .92; transition: opacity .2s ease;
+      }
+      .yt-facade:hover img, .yt-facade:focus-visible img { opacity: 1; }
+      .yt-facade:focus-visible { outline: 2px solid var(--head); outline-offset: 3px; }
+      .yt-play {
+        position: absolute; inset: 0;
+        display: flex; align-items: center; justify-content: center;
+      }
+      .yt-play svg {
+        display: block;
+        filter: drop-shadow(0 2px 10px rgba(0, 0, 0, .55));
+        transition: transform .2s ease;
+      }
+      .yt-facade:hover .yt-play svg, .yt-facade:focus-visible .yt-play svg { transform: scale(1.07); }
+      .yt-frame-wrap {
+        position: relative; aspect-ratio: 16 / 9;
+        background: #000; margin: 2px 0 10px;
+      }
+      .yt-frame-wrap iframe {
+        position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+      }
       /* MEDIA：公式チャンネルへのリンク */
       .media-channel { margin: 28px 0 0; text-align: center; }
       .media-channel a {
@@ -1236,8 +1272,6 @@
       body.niwakame .count-badge { background: rgba(24, 42, 60, .5); }
       body.niwakame .type-tag.oneman { color: #a9c6de; background: rgba(24, 42, 60, .5); }
       body.niwakame .type-tag.instore { border-color: #4d6076; color: #9db4c8; background: rgba(24, 42, 60, .3); }
-      body.niwakame .official-note { color: #a9c6de; background: rgba(24, 42, 60, .5); }
-      body.niwakame .self-note { color: #c3d9ec; border-color: #7d9dbd; background: rgba(120, 155, 190, .16); }
       body.niwakame .alias-note { color: #9db4c8; border-color: #4d6076; background: rgba(24, 42, 60, .3); }
       body.niwakame .instore-note { color: #8fb0cc; }
       body.niwakame details.setlist summary,
@@ -2411,7 +2445,7 @@
         </div>
 
         <h3 class="sub-head">楽曲一覧<span class="en-sub">SONGS</span></h3>
-        <p class="song-count-line">音源化<b>56</b>曲・未音源化<b>1</b>曲、全<b>57</b>曲を五十音順に掲載しています。各曲に初出の収録作品を併記しています。</p>
+        <p class="song-count-line">音源化<b>56</b>曲・未音源化<b>1</b>曲、全<b>57</b>曲を五十音順に掲載しています。各曲に初出の収録作品を併記しています。曲名をタップすると、収録情報の詳細が開きます。</p>
         <ul class="song-list">
           <li><span class="song-name">［ ］</span><span class="song-src">グリモワール</span></li>
           <li><span class="song-name">あましずくとマクガフィン</span><span class="song-src">グリモワール</span></li>
@@ -2856,13 +2890,13 @@
         ─────────────────────────────
         1件 = { date: "YYYY-MM-DD", venue: "会場名", event: "イベント・公演名", type: "種別", single: true/false, official: true/false, x: true/false, self: true/false, note: "注記" }
         年ごとに配列へ追加していけば、見出しの件数・ナビ・表は自動で更新される。
-        official: true の行は公式サイト（gri-moire.com）の過去スケジュールを Wayback Machine で確認できたエントリ（行に「公式確認」と表示される）。
-        x: true の行は公式X（@grim_oire）の過去投稿の遡行で実施を確認できたエントリ（行に「公式X確認」と表示される）。
-        self: true の行は本人の参加記録（ツイフィール）で実施を確認できたエントリ（行に「本人参加記録」と表示される）。出典は重なることがあり、その場合はバッジが併記される。
-        single: true の行は単一ソースのみで確認できたエントリ（他の出典印がない場合のみ、行に「※単一ソース」と注記される）。
-        note がある行は、訂正・併記などの注記が公演名の下に表示される。
-        with がある行は共演者が公演名の下に表示される（withPartial: true の行は全出演者が判明していないため「共演（一部）：」と表示される）。setlist（曲名の配列）がある行は「セットリスト」として展開表示され、encore（配列）はアンコールとして併記（encoreLabel がある場合はそのラベルで表示）、setlistNote はセトリ末尾の注記として表示される。partial がある行は部分セトリ（本人の参加投稿より）として表示される。
+        【出典フラグは内部記録専用・表示禁止】official／x／self／single は照合・裏取りのための内部フラグで、サイト上には一切表示しない（バッジ・注記・件数内訳なども出さない）。データ内にのみ保持すること。
+        official: true の行は公式サイト（gri-moire.com）の過去スケジュールを Wayback Machine で確認できたエントリ。
+        x: true の行は公式X（@grim_oire）の過去投稿の遡行で実施を確認できたエントリ。
+        self: true の行は本人の参加記録（ツイフィール）で実施を確認できたエントリ。
+        single: true の行は単一ソースのみで確認できたエントリ。
         どの印もない行は、複数の公開情報で一致が確認できたエントリ。
+        with がある行は共演者が公演名の下に表示される（withPartial: true の行は全出演者が判明していないため「共演（一部）：」と表示される）。setlist（曲名の配列）がある行は「セットリスト」として展開表示され、encore（配列）はアンコールとして併記（encoreLabel がある場合はそのラベルで表示）、setlistNote はセトリ末尾の注記として表示される。partial がある行は部分セトリとして表示される。
         event が空文字の行は「（不明）」と表示される。
         instore: true の行はインストアイベント（種別欄に「インストア」と表示され、ライブ本数の集計からは除き、インストア込みの全件数にのみ数える）。
         niwakame: true の行はニワカアメ名義の公演（行に「ニワカアメ名義」と表示される）。
@@ -3496,11 +3530,10 @@
           "</tr></thead><tbody>";
         solo.forEach(function (r) {
           var f = fmtDate(r.date);
-          var badges = "";
           html += "<tr>";
           html += '<td class="date">' + esc(f.text) + '<span class="dow">（' + f.dow + "）</span></td>";
           html += '<td class="venue">' + esc(r.venue) + "</td>";
-          html += '<td class="event">' + (r.event ? esc(r.event) : '<span class="unknown">（不明）</span>') + badges + "</td>";
+          html += '<td class="event">' + (r.event ? esc(r.event) : '<span class="unknown">（不明）</span>') + "</td>";
           html += '<td class="act">' + esc(r.act) + "</td>";
           html += "</tr>";
         });
@@ -3981,6 +4014,211 @@
           btn.addEventListener("click", function () {
             window.scrollTo({ top: 0, behavior: "smooth" });
           });
+        });
+      })();
+    </script>
+    <script>
+      /* MEDIA（通常モード）：YouTube埋め込みの軽量ファサード。
+         一覧の各リンク行の前にサムネイル＋再生ボタンを置き、タップされた時点で初めて
+         YouTube公式の埋め込みiframeを生成して差し替える（初期表示ではiframeを読み込まない）。
+         ニワカアメモード専用ブロック（.media-nk）には触らない */
+      (function () {
+        var list = document.querySelector("#media > ul.media-list");
+        if (!list) return;
+        var PLAY_SVG = '<svg width="68" height="48" viewBox="0 0 68 48" aria-hidden="true" focusable="false"><rect width="68" height="48" rx="12" fill="#a33327"/><path d="M27 15.5 44 24 27 32.5Z" fill="#f2ede8"/></svg>';
+        Array.prototype.forEach.call(list.querySelectorAll("a.mv-link"), function (link) {
+          var m = /[?&]v=([\w-]{6,})/.exec(link.getAttribute("href") || "");
+          if (!m) return;
+          var id = m[1];
+          var titleEl = link.querySelector(".mv-title");
+          var title = titleEl ? titleEl.textContent.trim() : "";
+          var facade = document.createElement("a");
+          facade.className = "yt-facade";
+          facade.href = link.href;
+          facade.target = "_blank";
+          facade.rel = "noopener noreferrer";
+          facade.setAttribute("data-yt-id", id);
+          facade.setAttribute("aria-label", "『" + title + "』の動画をこのページで再生する");
+          facade.innerHTML =
+            '<img src="assets/yt/' + id + '.jpg" alt="" width="1280" height="720" loading="lazy" />' +
+            '<span class="yt-play" aria-hidden="true">' + PLAY_SVG + "</span>";
+          link.parentNode.insertBefore(facade, link);
+          facade.addEventListener("click", function (e) {
+            e.preventDefault();
+            var wrap = document.createElement("div");
+            wrap.className = "yt-frame-wrap";
+            var iframe = document.createElement("iframe");
+            iframe.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0";
+            iframe.title = title + "（YouTube埋め込みプレイヤー）";
+            iframe.setAttribute("allow", "accelerometer; autoplay; encrypted-media; picture-in-picture");
+            iframe.setAttribute("allowfullscreen", "");
+            wrap.appendChild(iframe);
+            facade.parentNode.replaceChild(wrap, facade);
+          });
+        });
+      })();
+    </script>
+    <script>
+      /* DISCOGRAPHY 楽曲一覧：曲名タップで詳細パネルを開く。
+         収録情報はページ内の作品表（table.disco）のトラックリストから組み立てる
+         （作品名・トラック番号・発売日・品番はいずれも表に載っている既存情報）。
+         歌詞リンクは正規歌詞サイトにページがある6曲のみ、パネル内に併記する */
+      (function () {
+        var list = document.querySelector("ul.song-list");
+        if (!list) return;
+
+        var LYRICS = {
+          "ぼくとタルパ": [
+            { site: "Cifra Club", url: "https://www.cifraclub.com.br/grimoire/boku-to-tulpa/" },
+            { site: "Letras", url: "https://www.letras.com/grimoire/boku-to-tulpa/" }
+          ],
+          "げんそうシンドローム": [
+            { site: "Cifra Club", url: "https://www.cifraclub.com.br/grimoire/gensou-syndrome/letra/" },
+            { site: "Letras", url: "https://www.letras.com/grimoire/gensou-syndrome/" }
+          ],
+          "ひとりトピア": [
+            { site: "Cifra Club", url: "https://www.cifraclub.com.br/grimoire/hitori-topia/letra/" },
+            { site: "Letras", url: "https://www.letras.com/grimoire/hitori-topia/" }
+          ],
+          "マイムマイム": [
+            { site: "Cifra Club", url: "https://www.cifraclub.com.br/grimoire/mime-mime/letra/" },
+            { site: "Letras", url: "https://www.letras.com/grimoire/mime-mime/" }
+          ],
+          "ネバーエンド": [
+            { site: "Cifra Club", url: "https://www.cifraclub.com.br/grimoire/never-end/letra/" },
+            { site: "Letras", url: "https://www.letras.com/grimoire/never-end/" }
+          ],
+          "ゼロとくろ": [
+            { site: "Cifra Club", url: "https://www.cifraclub.com.br/grimoire/zero-to-kuro/letra/" },
+            { site: "Letras", url: "https://www.letras.com/grimoire/zero-to-kuro/" }
+          ]
+        };
+
+        function esc(s) {
+          return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+        }
+        function norm(s) { return (s || "").replace(/\s+/g, " ").trim(); }
+
+        /* 作品表を走査して「曲名 → 収録情報の配列」の索引を作る */
+        var index = {};
+        function addAppearance(song, rel) {
+          if (!song) return;
+          (index[song] = index[song] || []).push(rel);
+        }
+        Array.prototype.forEach.call(document.querySelectorAll("table.disco tbody tr"), function (row) {
+          var titleEl = row.querySelector(".d-title");
+          var dateEl = row.querySelector(".d-date");
+          var noteEl = row.querySelector(".d-note");
+          var tracksEl = row.querySelector(".d-tracks");
+          if (!titleEl || !tracksEl) return;
+          var verEl = titleEl.querySelector(".d-ver");
+          var base = titleEl.childNodes.length ? titleEl.childNodes[0].textContent : titleEl.textContent;
+          var release = norm(base) + (verEl ? " " + norm(verEl.textContent) : "");
+          var date = norm(dateEl ? dateEl.textContent : "").replace(/\s*RELEASE\s*$/, "");
+          var catalog = norm(noteEl ? noteEl.textContent : "");
+          var tracks = Array.prototype.map.call(tracksEl.querySelectorAll("ol.track-list li"), function (li) {
+            return norm(li.textContent);
+          });
+          var noteText = Array.prototype.map.call(tracksEl.querySelectorAll(".track-note"), function (p) {
+            return norm(p.textContent);
+          }).join(" ");
+          /* トラックリストが表記ゆれ注記のみの行（別Ver.など）は、直前の行の収録曲を引き継ぐ */
+          var prev = row.previousElementSibling;
+          var prevTracks = (prev && prev._resolvedTracks) ? prev._resolvedTracks : [];
+          if (tracks.length === 0 && prevTracks.length) {
+            var same = /上記(\d+)曲/.exec(noteText);
+            if (same) tracks = prevTracks.slice(0, Number(same[1]));
+          }
+          var swap = /同一だが(\d+)曲目が「(.+?)」/.exec(noteText);
+          if (swap && prevTracks.length) {
+            tracks = prevTracks.slice();
+            tracks[Number(swap[1]) - 1] = swap[2];
+          }
+          var extra = /＋\s*(\d+)\.(.+?)（/.exec(noteText);
+          if (extra) tracks[Number(extra[1]) - 1] = extra[2];
+          row._resolvedTracks = tracks;
+          tracks.forEach(function (song, i) {
+            if (song) addAppearance(song, { release: release, date: date, catalog: catalog, track: i + 1 });
+          });
+        });
+        Object.keys(index).forEach(function (song) {
+          index[song].sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; });
+        });
+
+        /* 詳細パネル（曲一覧の直後に1つだけ置き、タップされた曲の内容に差し替える） */
+        var panel = document.createElement("div");
+        panel.className = "song-detail";
+        panel.id = "songDetail";
+        panel.hidden = true;
+        panel.setAttribute("role", "region");
+        panel.setAttribute("aria-label", "曲の詳細");
+        panel.innerHTML =
+          '<div class="song-detail-head"><h4 class="song-detail-name"></h4>' +
+          '<button type="button" class="song-detail-close">閉じる</button></div>' +
+          '<div class="song-detail-body"></div>';
+        list.parentNode.insertBefore(panel, list.nextSibling);
+        var nameEl = panel.querySelector(".song-detail-name");
+        var bodyEl = panel.querySelector(".song-detail-body");
+        var openBtn = null;
+
+        function closePanel() {
+          panel.hidden = true;
+          if (openBtn) openBtn.setAttribute("aria-expanded", "false");
+          openBtn = null;
+        }
+        panel.querySelector(".song-detail-close").addEventListener("click", closePanel);
+        document.addEventListener("grimoire:modechange", closePanel);
+
+        function openPanel(btn, name, src) {
+          if (openBtn === btn && !panel.hidden) { closePanel(); return; }
+          if (openBtn) openBtn.setAttribute("aria-expanded", "false");
+          openBtn = btn;
+          btn.setAttribute("aria-expanded", "true");
+          nameEl.textContent = name;
+          var html = "";
+          var apps = index[name];
+          html += '<p class="sd-label">収録情報</p>';
+          if (apps && apps.length) {
+            html += '<ul class="sd-list">';
+            apps.forEach(function (a) {
+              html += "<li>『" + esc(a.release) + "』 Track " + a.track +
+                '<span class="sd-meta">' + esc(a.date) + " RELEASE" +
+                (a.catalog ? "／" + esc(a.catalog) : "") + "</span></li>";
+            });
+            html += "</ul>";
+          } else if (src === "未音源化") {
+            html += '<p class="sd-note">未音源化（音源未収録）</p>';
+          } else if (src) {
+            html += '<p class="sd-note">『' + esc(src) + "』に収録</p>";
+          }
+          var lyrics = LYRICS[name];
+          if (lyrics) {
+            html += '<p class="sd-label">歌詞</p><p class="sd-lyrics">';
+            lyrics.forEach(function (l) {
+              html += '<a href="' + esc(l.url) + '" target="_blank" rel="noopener noreferrer">歌詞を見る（' + esc(l.site) + "）</a>";
+            });
+            html += "</p>";
+          }
+          bodyEl.innerHTML = html;
+          panel.hidden = false;
+          panel.scrollIntoView({ block: "nearest", behavior: "smooth" });
+        }
+
+        /* 各曲の行をボタン化する（行のテキストは変えないので、ニワカアメモードの絞り込みは従来どおり効く） */
+        Array.prototype.forEach.call(list.querySelectorAll("li"), function (li) {
+          var nameSpan = li.querySelector(".song-name");
+          var srcSpan = li.querySelector(".song-src");
+          if (!nameSpan) return;
+          var name = norm(nameSpan.textContent);
+          var src = srcSpan ? norm(srcSpan.textContent) : "";
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "song-btn";
+          btn.setAttribute("aria-expanded", "false");
+          btn.setAttribute("aria-controls", "songDetail");
+          while (li.firstChild) btn.appendChild(li.firstChild);
+          li.appendChild(btn);
+          btn.addEventListener("click", function () { openPanel(btn, name, src); });
         });
       })();
     </script>
