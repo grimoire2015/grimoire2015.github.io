@@ -1402,10 +1402,28 @@
       body.niwakame .nk-news-article .news-detail-title + .nk-news-body { margin-top: 1em; }
       body.niwakame .nk-news-article .nk-news-body { padding-bottom: 0; color: #333333; }
 
-      /* --- SCHEDULE --- */
+      /* --- SCHEDULE：一覧は日付＋タイトルだけの行。タップで公演詳細ページ（#live-nk-…）へ遷移する（NEWSと同じ方式） --- */
       body.niwakame #panel-live .about,
       body.niwakame #panel-live .live-section,
       body.niwakame #panel-live #refRoot { display: none; }
+      ul.nk-sched-list { list-style: none; margin: 0; padding: 0; }
+      ul.nk-sched-list li { border-bottom: 1px dotted #cccccc; padding: 4px 2px; }
+      body.niwakame a.nk-sched-link {
+        display: flex; gap: 4px; align-items: baseline;
+        padding: 8px 0; min-height: 2.25rem; font-size: 13.5px;
+        color: #333333; text-decoration: none;
+      }
+      body.niwakame a.nk-sched-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+      body.niwakame a.nk-sched-link:focus-visible { outline: 2px solid #333333; outline-offset: 2px; }
+      /* 公演詳細ページ（#live-nk-xxxxxxxx） */
+      .live-detail-article[hidden] { display: none; }
+      body.niwakame .nk-live-back { margin: 20px 0 0; font-size: 13.5px; }
+      body.niwakame .nk-live-back a {
+        display: inline-block; min-height: 2.25rem; line-height: 2.25rem; padding: 0 4px;
+        color: #333333; text-decoration: none;
+      }
+      body.niwakame .nk-live-back a:hover { text-decoration: underline; text-underline-offset: 3px; }
+      body.niwakame .nk-live-back a:focus-visible { outline: 2px solid #333333; outline-offset: 2px; }
       .nk-sched { border-bottom: 1px dotted #cccccc; padding: 14px 2px 16px; }
       body.niwakame .nk-sched .nk-row { display: flex; gap: 12px; padding: 3px 0; }
       .nk-sched .nk-label { flex: 0 0 58px; color: #666666; font-size: 11.5px; letter-spacing: .14em; padding-top: 2px; }
@@ -1609,6 +1627,24 @@
           font: inherit; color: #333333; padding: 1.2vw 0; min-height: 0;
         }
 
+        /* SCHEDULE一覧：NEWS一覧と同じく日付＋タイトルの行を点線で区切る */
+        body.niwakame ul.nk-sched-list li { padding: 0; }
+        body.niwakame a.nk-sched-link {
+          flex-wrap: wrap; gap: 1vw 3vw;
+          font-size: 3.75vw; padding: 2.4vw 0.6vw; min-height: 0;
+          overflow-wrap: anywhere;
+        }
+        body.niwakame a.nk-sched-link .nk-date { margin-right: 0; }
+        /* SCHEDULE詳細ページの「>> 一覧に戻る」：NEWS記事ページの導線と同じく右寄せ・点線区切り */
+        body.niwakame .nk-live-back {
+          text-align: right; font-size: 3.75vw;
+          border-top: 1px dotted #cccccc;
+          margin: 2.2vw 0 0; padding: 1.2vw 0.6vw;
+        }
+        body.niwakame .nk-live-back a {
+          display: inline-block; padding: 1.2vw 0; min-height: 0; line-height: inherit;
+        }
+
         /* SCHEDULE：ラベル＋値の行は値側を縮められるようにし、横はみ出しを防ぐ */
         body.niwakame .nk-sched { font-size: 3.75vw; padding: 3.5vw 0.6vw 4vw; }
         body.niwakame .nk-sched .nk-row { padding: .8vw 0; gap: 3.5vw; }
@@ -1674,7 +1710,8 @@
         body.niwakame .nk-only,
         body.niwakame .nk-box,
         body.niwakame .nk-sched,
-        body.niwakame ul.nk-news-list { max-width: 100%; }
+        body.niwakame ul.nk-news-list,
+        body.niwakame ul.nk-sched-list { max-width: 100%; }
         body.niwakame .nk-only img { max-width: 100%; height: auto; }
       }
     </style>
@@ -2460,100 +2497,25 @@
         </div>
       </details>
 
-      <!-- ニワカアメモード SCHEDULE：公式HP掲載6件（公式表記）＋当サイト編纂の全公演を同じ形式で加筆 -->
+      <!-- ニワカアメモード SCHEDULE：一覧は日付＋タイトルだけの行（会場・時間・料金・共演は出さない）。
+           各公演をタップすると詳細ページ（#live-nk-xxxxxxxx）へ遷移する（NEWSと同じハッシュ遷移方式）。
+           詳細ページ本体は panel-live の直後にある panel-live-detail 内に置く -->
       <div class="nk-only nk-schedule">
         <h2 class="nk-h">SCHEDULE</h2>
-        <article class="nk-sched">
-          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">avax Entertainment presents 1,500円イベント「地表楼閣」</span></div>
-          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.02.11[Wed]</span></div>
-          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">Birth Shinjuku</span></div>
-          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">開場14:00 開演14:30</span></div>
-          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">前売¥1,500（ドリンク代別）</span></div>
-          <div class="nk-row"><span class="nk-label">ACT</span><span class="nk-val">S.D.Sセッション / RoA / コブラ部隊 / EVASION / グレイスペイジ / project《P》 / the Dice / どーん！セッション / ニワカアメ / ヴェイカーセッション / ペロペロキャンディー / シークレット</span></div>
-        </article>
-        <article class="nk-sched">
-          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">蜷局vol.2</span></div>
-          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.02.20[Fri]</span></div>
-          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">Birth Shinjuku</span></div>
-          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">開場17:00 開演17:30</span></div>
-          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">前売¥2,900 当日¥3,400（ドリンク代別）</span></div>
-          <div class="nk-row"><span class="nk-label">ACT</span><span class="nk-val">痕セッション / ニワカアメ / 4LETTER WORDS / luck in</span></div>
-        </article>
-        <article class="nk-sched">
-          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">百花繚乱Vol.3</span></div>
-          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.03.13[Fri]</span></div>
-          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">池袋CYBER</span></div>
-          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">開場15:30 開演16:00</span></div>
-          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">前売¥3,500 当日¥4,000（ドリンク代別）</span></div>
-          <div class="nk-row"><span class="nk-label">ACT</span><span class="nk-val">ニワカアメ / メルヴェル / RagEnd / ヴァニキル / DiCE / Project-No.ID / the VaistRigger / VivienneBloodcolor / とりあえず小悪魔同盟</span></div>
-        </article>
-        <article class="nk-sched">
-          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">CROWN×CROWN presents「reflection of desire GOLD 〜新宿絶対幽閉区域〜 vol.62」</span></div>
-          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.03.18[Wed]</span></div>
-          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">Birth Shinjuku</span></div>
-          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">開場15:00 開演15:30</span></div>
-          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">前売¥3,500 当日¥4,000（ドリンク代別）</span></div>
-          <div class="nk-row"><span class="nk-label">ACT</span><span class="nk-val">CLØWD / セッション⇔NUMBER / WeeD / Xaoce / クロノギア / ニワカアメ / PLUS MAGIC / Fixer / PELSONA / メルヴェル / Limited「E=」</span></div>
-        </article>
-        <article class="nk-sched">
-          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">silverfest2015 前月祭</span></div>
-          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.03.30[Mon]</span></div>
-          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">Birth Shinjuku</span></div>
-          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">開場13:00 開演13:30</span></div>
-          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">前売¥3,500 当日¥4,000（ドリンク代別）</span></div>
-          <div class="nk-row"><span class="nk-label">ACT</span><span class="nk-val">Cuartvys / ActLess / Madrage / VRZEL / suck of life / J Soul Brothers / 烙印 / Libertaセッション / ニワカアメ / KENTOセッション / プーさんと愉快な四人 / ザ・V系っぽいセッション / Liptonセッション / 形のいいTシャツ / EVASION</span></div>
-        </article>
-        <article class="nk-sched">
-          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">アンフィル両A面1stシングル発売記念二ヶ月連続主催「#やるせないアンフィル。」</span></div>
-          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.04.13[Mon]</span></div>
-          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">池袋EDGE</span></div>
-          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">開場16:00 開演16:30</span></div>
-          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">当日¥4,500（1ドリンク込）</span></div>
-          <div class="nk-row"><span class="nk-label">ACT</span><span class="nk-val">アンフィル / アヴァンチック / ニワカアメ / TRiANGLE▼SONiX / マーブルヘッド / Qualius-クオリアス- / Ecthelion-エクセリオン-</span></div>
-        </article>
-        <article class="nk-sched">
-          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">CROWN×CROWN presents「reflection of desire GOLD 〜新宿絶対幽閉区域〜 vol.64」</span></div>
-          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.04.15[Wed]</span></div>
-          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">HOLIDAY SHINJUKU</span></div>
-          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">開場15:00 開演15:30</span></div>
-          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">前売¥3,500 当日¥4,000（ドリンク代別）</span></div>
-          <div class="nk-row"><span class="nk-label">ACT</span><span class="nk-val">REAlies / セッション⇔NUMBER / エスカピズム / G.A.I.A / ザアザア / ニワカアメ / PEAK HOLD / VivienneBloodcolor / PELSONA / メルヴェル / Limited「E=」</span></div>
-        </article>
-        <article class="nk-sched">
-          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">（不明）</span></div>
-          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.05.11[Mon]</span></div>
-          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">HOLIDAY SHINJUKU</span></div>
-          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val"></span></div>
-          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val"></span></div>
-        </article>
-        <article class="nk-sched">
-          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">（不明）</span></div>
-          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.05.21[Thu]</span></div>
-          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">HOLIDAY SHINJUKU</span></div>
-          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val"></span></div>
-          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val"></span></div>
-        </article>
-        <article class="nk-sched">
-          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">池袋EDGE presents</span></div>
-          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.06.11[Thu]</span></div>
-          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">Birth shinjuku</span></div>
-          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">16:30/17:00</span></div>
-          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">¥3,000/¥3,500</span></div>
-        </article>
-        <article class="nk-sched">
-          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">ニワカアメ主催「- After the rain -」</span></div>
-          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.06.24[Wed]</span></div>
-          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">HOLIDAY SHINJUKU</span></div>
-          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">15:30/16:00</span></div>
-          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">¥3,000/¥3,500</span></div>
-        </article>
-        <article class="nk-sched">
-          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">（不明）</span></div>
-          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2021.11.03[Wed]</span></div>
-          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">四谷HoneyBurst</span></div>
-          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val"></span></div>
-          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val"></span></div>
-        </article>
+        <ul class="nk-sched-list">
+          <li><a class="nk-sched-link" href="#live-nk-20150211"><span class="nk-date">2015.02.11[Wed]</span>avax Entertainment presents 1,500円イベント「地表楼閣」</a></li>
+          <li><a class="nk-sched-link" href="#live-nk-20150220"><span class="nk-date">2015.02.20[Fri]</span>蜷局vol.2</a></li>
+          <li><a class="nk-sched-link" href="#live-nk-20150313"><span class="nk-date">2015.03.13[Fri]</span>百花繚乱Vol.3</a></li>
+          <li><a class="nk-sched-link" href="#live-nk-20150318"><span class="nk-date">2015.03.18[Wed]</span>CROWN×CROWN presents「reflection of desire GOLD 〜新宿絶対幽閉区域〜 vol.62」</a></li>
+          <li><a class="nk-sched-link" href="#live-nk-20150330"><span class="nk-date">2015.03.30[Mon]</span>silverfest2015 前月祭</a></li>
+          <li><a class="nk-sched-link" href="#live-nk-20150413"><span class="nk-date">2015.04.13[Mon]</span>アンフィル両A面1stシングル発売記念二ヶ月連続主催「#やるせないアンフィル。」</a></li>
+          <li><a class="nk-sched-link" href="#live-nk-20150415"><span class="nk-date">2015.04.15[Wed]</span>CROWN×CROWN presents「reflection of desire GOLD 〜新宿絶対幽閉区域〜 vol.64」</a></li>
+          <li><a class="nk-sched-link" href="#live-nk-20150511"><span class="nk-date">2015.05.11[Mon]</span>（不明）</a></li>
+          <li><a class="nk-sched-link" href="#live-nk-20150521"><span class="nk-date">2015.05.21[Thu]</span>（不明）</a></li>
+          <li><a class="nk-sched-link" href="#live-nk-20150611"><span class="nk-date">2015.06.11[Thu]</span>池袋EDGE presents</a></li>
+          <li><a class="nk-sched-link" href="#live-nk-20150624"><span class="nk-date">2015.06.24[Wed]</span>ニワカアメ主催「- After the rain -」</a></li>
+          <li><a class="nk-sched-link" href="#live-nk-20211103"><span class="nk-date">2021.11.03[Wed]</span>（不明）</a></li>
+        </ul>
       </div>
 
       <section class="live-section" id="live" aria-labelledby="live-heading">
@@ -2564,6 +2526,113 @@
       </section>
 
       <div id="refRoot"></div>
+      </div>
+
+      <!-- ニワカアメモード SCHEDULE詳細ページ（#live-nk-xxxxxxxx・ニワカアメモード中だけ開ける） -->
+      <div class="tab-panel" id="panel-live-detail" data-panel="live-detail" role="tabpanel" aria-labelledby="tab-live" hidden>
+        <article class="live-detail-article nk-sched" data-live-slug="nk-20150211" hidden>
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">avax Entertainment presents 1,500円イベント「地表楼閣」</span></div>
+          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.02.11[Wed]</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">Birth Shinjuku</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">開場14:00 開演14:30</span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">前売¥1,500（ドリンク代別）</span></div>
+          <div class="nk-row"><span class="nk-label">ACT</span><span class="nk-val">S.D.Sセッション / RoA / コブラ部隊 / EVASION / グレイスペイジ / project《P》 / the Dice / どーん！セッション / ニワカアメ / ヴェイカーセッション / ペロペロキャンディー / シークレット</span></div>
+          <p class="nk-live-back"><a href="#live">&gt;&gt; 一覧に戻る</a></p>
+        </article>
+        <article class="live-detail-article nk-sched" data-live-slug="nk-20150220" hidden>
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">蜷局vol.2</span></div>
+          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.02.20[Fri]</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">Birth Shinjuku</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">開場17:00 開演17:30</span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">前売¥2,900 当日¥3,400（ドリンク代別）</span></div>
+          <div class="nk-row"><span class="nk-label">ACT</span><span class="nk-val">痕セッション / ニワカアメ / 4LETTER WORDS / luck in</span></div>
+          <p class="nk-live-back"><a href="#live">&gt;&gt; 一覧に戻る</a></p>
+        </article>
+        <article class="live-detail-article nk-sched" data-live-slug="nk-20150313" hidden>
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">百花繚乱Vol.3</span></div>
+          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.03.13[Fri]</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">池袋CYBER</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">開場15:30 開演16:00</span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">前売¥3,500 当日¥4,000（ドリンク代別）</span></div>
+          <div class="nk-row"><span class="nk-label">ACT</span><span class="nk-val">ニワカアメ / メルヴェル / RagEnd / ヴァニキル / DiCE / Project-No.ID / the VaistRigger / VivienneBloodcolor / とりあえず小悪魔同盟</span></div>
+          <p class="nk-live-back"><a href="#live">&gt;&gt; 一覧に戻る</a></p>
+        </article>
+        <article class="live-detail-article nk-sched" data-live-slug="nk-20150318" hidden>
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">CROWN×CROWN presents「reflection of desire GOLD 〜新宿絶対幽閉区域〜 vol.62」</span></div>
+          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.03.18[Wed]</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">Birth Shinjuku</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">開場15:00 開演15:30</span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">前売¥3,500 当日¥4,000（ドリンク代別）</span></div>
+          <div class="nk-row"><span class="nk-label">ACT</span><span class="nk-val">CLØWD / セッション⇔NUMBER / WeeD / Xaoce / クロノギア / ニワカアメ / PLUS MAGIC / Fixer / PELSONA / メルヴェル / Limited「E=」</span></div>
+          <p class="nk-live-back"><a href="#live">&gt;&gt; 一覧に戻る</a></p>
+        </article>
+        <article class="live-detail-article nk-sched" data-live-slug="nk-20150330" hidden>
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">silverfest2015 前月祭</span></div>
+          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.03.30[Mon]</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">Birth Shinjuku</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">開場13:00 開演13:30</span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">前売¥3,500 当日¥4,000（ドリンク代別）</span></div>
+          <div class="nk-row"><span class="nk-label">ACT</span><span class="nk-val">Cuartvys / ActLess / Madrage / VRZEL / suck of life / J Soul Brothers / 烙印 / Libertaセッション / ニワカアメ / KENTOセッション / プーさんと愉快な四人 / ザ・V系っぽいセッション / Liptonセッション / 形のいいTシャツ / EVASION</span></div>
+          <p class="nk-live-back"><a href="#live">&gt;&gt; 一覧に戻る</a></p>
+        </article>
+        <article class="live-detail-article nk-sched" data-live-slug="nk-20150413" hidden>
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">アンフィル両A面1stシングル発売記念二ヶ月連続主催「#やるせないアンフィル。」</span></div>
+          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.04.13[Mon]</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">池袋EDGE</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">開場16:00 開演16:30</span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">当日¥4,500（1ドリンク込）</span></div>
+          <div class="nk-row"><span class="nk-label">ACT</span><span class="nk-val">アンフィル / アヴァンチック / ニワカアメ / TRiANGLE▼SONiX / マーブルヘッド / Qualius-クオリアス- / Ecthelion-エクセリオン-</span></div>
+          <p class="nk-live-back"><a href="#live">&gt;&gt; 一覧に戻る</a></p>
+        </article>
+        <article class="live-detail-article nk-sched" data-live-slug="nk-20150415" hidden>
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">CROWN×CROWN presents「reflection of desire GOLD 〜新宿絶対幽閉区域〜 vol.64」</span></div>
+          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.04.15[Wed]</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">HOLIDAY SHINJUKU</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">開場15:00 開演15:30</span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">前売¥3,500 当日¥4,000（ドリンク代別）</span></div>
+          <div class="nk-row"><span class="nk-label">ACT</span><span class="nk-val">REAlies / セッション⇔NUMBER / エスカピズム / G.A.I.A / ザアザア / ニワカアメ / PEAK HOLD / VivienneBloodcolor / PELSONA / メルヴェル / Limited「E=」</span></div>
+          <p class="nk-live-back"><a href="#live">&gt;&gt; 一覧に戻る</a></p>
+        </article>
+        <article class="live-detail-article nk-sched" data-live-slug="nk-20150511" hidden>
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">（不明）</span></div>
+          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.05.11[Mon]</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">HOLIDAY SHINJUKU</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val"></span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val"></span></div>
+          <p class="nk-live-back"><a href="#live">&gt;&gt; 一覧に戻る</a></p>
+        </article>
+        <article class="live-detail-article nk-sched" data-live-slug="nk-20150521" hidden>
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">（不明）</span></div>
+          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.05.21[Thu]</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">HOLIDAY SHINJUKU</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val"></span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val"></span></div>
+          <p class="nk-live-back"><a href="#live">&gt;&gt; 一覧に戻る</a></p>
+        </article>
+        <article class="live-detail-article nk-sched" data-live-slug="nk-20150611" hidden>
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">池袋EDGE presents</span></div>
+          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.06.11[Thu]</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">Birth shinjuku</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">16:30/17:00</span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">¥3,000/¥3,500</span></div>
+          <p class="nk-live-back"><a href="#live">&gt;&gt; 一覧に戻る</a></p>
+        </article>
+        <article class="live-detail-article nk-sched" data-live-slug="nk-20150624" hidden>
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">ニワカアメ主催「- After the rain -」</span></div>
+          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.06.24[Wed]</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">HOLIDAY SHINJUKU</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">15:30/16:00</span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">¥3,000/¥3,500</span></div>
+          <p class="nk-live-back"><a href="#live">&gt;&gt; 一覧に戻る</a></p>
+        </article>
+        <article class="live-detail-article nk-sched" data-live-slug="nk-20211103" hidden>
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">（不明）</span></div>
+          <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2021.11.03[Wed]</span></div>
+          <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">四谷HoneyBurst</span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val"></span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val"></span></div>
+          <p class="nk-live-back"><a href="#live">&gt;&gt; 一覧に戻る</a></p>
+        </article>
       </div>
 
       <div class="tab-panel" id="panel-media" data-panel="media" role="tabpanel" aria-labelledby="tab-media" hidden>
@@ -3563,7 +3632,7 @@
           "discography": "disco", "artist": "bio"
         };
         var PANEL_NAV = {
-          "panel-home": "home", "panel-news": "news", "panel-news-detail": "news", "panel-member-detail": "bio", "panel-live": "live",
+          "panel-home": "home", "panel-news": "news", "panel-news-detail": "news", "panel-member-detail": "bio", "panel-live": "live", "panel-live-detail": "live",
           "panel-artist": "bio", "panel-discography": "disco",
           "panel-media": "media", "panel-goods": "goods", "panel-contact": "contact",
           "panel-blog": "blog", "panel-link": "link"
@@ -3605,6 +3674,22 @@
           scrollTop();
           return true;
         }
+        /* ニワカアメ SCHEDULE詳細（#live-nk-20150211 等）：詳細パネルを表示し、該当公演だけを見せる。
+           NEWS記事ページと同じ仕組み。ニワカアメモード中だけ開き、通常モードでは一覧へ戻す */
+        function showLiveDetail(slug) {
+          var articles = document.querySelectorAll(".live-detail-article");
+          var found = false;
+          Array.prototype.forEach.call(articles, function (a) {
+            var on = a.getAttribute("data-live-slug") === slug;
+            a.hidden = !on;
+            if (on) found = true;
+          });
+          if (!found) return false;
+          if (!document.body.classList.contains("niwakame")) return false;
+          showPanel("panel-live-detail");
+          scrollTop();
+          return true;
+        }
         /* メンバー個人ページ（#bio-rynk 等）：詳細パネルを表示し、該当メンバーだけを見せる */
         function showMemberDetail(slug) {
           var articles = document.querySelectorAll(".member-detail-article");
@@ -3626,6 +3711,10 @@
           if (raw.indexOf("news-") === 0) {
             if (showNewsDetail(raw.slice(5))) return;
             showPanel(ROUTES.news); scrollTop(); return;
+          }
+          if (raw.indexOf("live-nk-") === 0) {
+            if (showLiveDetail(raw.slice(5))) return;
+            showPanel(ROUTES.live); scrollTop(); return;
           }
           if (raw.indexOf("bio-") === 0 || raw.indexOf("member-") === 0) {
             var mslug = raw.indexOf("bio-") === 0 ? raw.slice(4) : raw.slice(7);
@@ -3816,6 +3905,8 @@
           applyNkFilter(on);
           /* NK記事ページを開いたまま通常モードへ戻した場合は、NEWS一覧へ戻す */
           if (!on && location.hash.indexOf("#news-nk-") === 0) location.hash = "news";
+          /* NK公演詳細ページを開いたまま通常モードへ戻した場合は、LIVE一覧へ戻す */
+          if (!on && location.hash.indexOf("#live-nk-") === 0) location.hash = "live";
           /* 【拡張メモ】モード切替の通知。将来モード時の見た目全体を作り替える際は、
              このイベント（detail.niwakame = ON/OFF）を購読すれば、トグル本体に触らずに
              追加の差し替え処理を差し込める。現在のモード状態は window.grimoireMode() でも取得できる */
@@ -3835,8 +3926,9 @@
         if (!btns.length) return;
         function currentRoute() {
           var raw = location.hash.replace(/^#/, "");
-          /* NK記事ページ（#news-nk-…）はNEWS扱いにする */
+          /* NK記事ページ（#news-nk-…）はNEWS扱い、NK公演詳細（#live-nk-…）はSCHEDULE（live）扱いにする */
           if (raw.indexOf("news-") === 0) return "news";
+          if (raw.indexOf("live-") === 0) return "live";
           return raw || "home";
         }
         function syncActive() {
