@@ -1517,8 +1517,11 @@
         body.niwakame .section-heading .en::before { content: "▼"; margin-right: 9px; font-size: .82em; }
         body.niwakame .section-heading .jp { display: none; }
 
-        /* HOME：2カラムを1カラムに積み替え（HEADLINE NEWS → MUSIC → NEXT LIVE → MOBILE の順） */
-        body.niwakame .nk-home { display: flex; flex-direction: column; gap: 28px; }
+        /* HOME：2カラムを1カラムに積み替え（HEADLINE NEWS → MUSIC → NEXT LIVE → MOBILE の順）
+           ※PC版グリッドの align-items:start が残ると縦積みフレックスで各カラムが
+             内容幅に縮んでしまうため、stretch で横幅いっぱいに揃える */
+        body.niwakame .nk-home { display: flex; flex-direction: column; gap: 28px; align-items: stretch; }
+        body.niwakame .nk-home-main, body.niwakame .nk-home-side { width: 100%; min-width: 0; }
         body.niwakame .nk-home-side { display: flex; flex-direction: column; }
         body.niwakame .nk-home-side .nk-box:last-child { margin-bottom: 0; }
         body.niwakame ul.nk-headline li { font-size: 15px; padding: 11px 2px; }
@@ -1715,11 +1718,11 @@
           <section class="nk-box" aria-label="NEXT LIVE">
             <h2 class="nk-h">NEXT LIVE</h2>
             <dl class="nk-live-dl">
-              <div class="nk-row"><dt>TITLE</dt><dd>百花繚乱Vol.3</dd></div>
-              <div class="nk-row"><dt>DATE</dt><dd>2015.03.13[Fri]</dd></div>
-              <div class="nk-row"><dt>VENUE</dt><dd>池袋CYBER</dd></div>
-              <div class="nk-row"><dt>TIME</dt><dd>開場 / 15:30 開演 / 16:00</dd></div>
-              <div class="nk-row"><dt>TICKET</dt><dd>前売¥3,500 / 当日¥4,000</dd></div>
+              <div class="nk-row"><dt>TITLE</dt><dd>ニワカアメ主催「- After the rain -」</dd></div>
+              <div class="nk-row"><dt>DATE</dt><dd>2015.06.24[Wed]</dd></div>
+              <div class="nk-row"><dt>VENUE</dt><dd>HOLIDAY SHINJUKU</dd></div>
+              <div class="nk-row"><dt>TIME</dt><dd>OPEN 15:30 / START 16:00</dd></div>
+              <div class="nk-row"><dt>TICKET</dt><dd>前売¥3,000 / 当日¥3,500（D代¥600別）</dd></div>
             </dl>
             <p class="nk-more"><a href="#live">&gt;&gt; 詳細を見る</a></p>
           </section>
@@ -2462,11 +2465,11 @@
           <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">¥3,000/¥3,500</span></div>
         </article>
         <article class="nk-sched">
-          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">（不明）<span class="nk-src">当サイト編纂</span></span></div>
+          <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">ニワカアメ主催「- After the rain -」<span class="nk-src">当サイト編纂</span></span></div>
           <div class="nk-row"><span class="nk-label">DATE</span><span class="nk-val">2015.06.24[Wed]</span></div>
           <div class="nk-row"><span class="nk-label">VENUE</span><span class="nk-val">HOLIDAY SHINJUKU</span></div>
-          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val"></span></div>
-          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val"></span></div>
+          <div class="nk-row"><span class="nk-label">TIME</span><span class="nk-val">15:30/16:00</span></div>
+          <div class="nk-row"><span class="nk-label">TICKET</span><span class="nk-val">¥3,000/¥3,500</span></div>
         </article>
         <article class="nk-sched">
           <div class="nk-row"><span class="nk-label">TITLE</span><span class="nk-val nk-title">（不明）<span class="nk-src">当サイト編纂</span></span></div>
