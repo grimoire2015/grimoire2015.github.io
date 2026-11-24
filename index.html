@@ -1492,9 +1492,11 @@
       .nk-sched { border-bottom: 1px dotted #cccccc; padding: 14px 2px 16px; }
       body.niwakame .nk-sched .nk-row { display: flex; gap: 12px; padding: 3px 0; }
       /* SCHEDULE詳細：各項目（TITLE／DATE／VENUE／TIME／TICKET／ACT）の間に
-         シンプルな黒い実線の区切りを入れる（ニワカアメモードのみ・通常モードには影響しない）。
+         グレーの点線の区切りを入れる（元のニワカアメ公式HPのドット線区切りの雰囲気。
+         白背景でも区切りとして認識できる濃さのグレー #999999 を使用）。
+         ニワカアメモードのみ・通常モードには影響しない。
          最後の項目行の下には線を引かない（「一覧に戻る」との間は従来どおり） */
-      body.niwakame .nk-sched .nk-row { border-bottom: 1px solid #000000; padding: 7px 0; }
+      body.niwakame .nk-sched .nk-row { border-bottom: 1px dotted #999999; padding: 7px 0; }
       body.niwakame .nk-sched .nk-row:last-of-type { border-bottom: none; }
       .nk-sched .nk-label { flex: 0 0 58px; color: #666666; font-size: 11.5px; letter-spacing: .14em; padding-top: 2px; }
       .nk-sched .nk-val { flex: 1 1 auto; }
