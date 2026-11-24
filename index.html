@@ -1402,7 +1402,7 @@
       body.niwakame .nk-news-article .news-detail-title + .nk-news-body { margin-top: 1em; }
       body.niwakame .nk-news-article .nk-news-body { padding-bottom: 0; color: #333333; }
 
-      /* --- SCHEDULE：一覧は日付＋タイトルだけの行。タップで公演詳細ページ（#live-nk-…）へ遷移する（NEWSと同じ方式） --- */
+      /* --- SCHEDULE：一覧は日付＋会場名だけの行。タップで公演詳細ページ（#live-nk-…）へ遷移する（NEWSと同じ方式） --- */
       body.niwakame #panel-live .about,
       body.niwakame #panel-live .live-section,
       body.niwakame #panel-live #refRoot { display: none; }
@@ -1627,7 +1627,7 @@
           font: inherit; color: #333333; padding: 1.2vw 0; min-height: 0;
         }
 
-        /* SCHEDULE一覧：NEWS一覧と同じく日付＋タイトルの行を点線で区切る */
+        /* SCHEDULE一覧：日付＋会場名の行を点線で区切る */
         body.niwakame ul.nk-sched-list li { padding: 0; }
         body.niwakame a.nk-sched-link {
           flex-wrap: wrap; gap: 1vw 3vw;
@@ -2497,24 +2497,24 @@
         </div>
       </details>
 
-      <!-- ニワカアメモード SCHEDULE：一覧は日付＋タイトルだけの行（会場・時間・料金・共演は出さない）。
+      <!-- ニワカアメモード SCHEDULE：一覧は日付＋会場名だけの行（タイトル・時間・料金・共演は出さない）。
            各公演をタップすると詳細ページ（#live-nk-xxxxxxxx）へ遷移する（NEWSと同じハッシュ遷移方式）。
            詳細ページ本体は panel-live の直後にある panel-live-detail 内に置く -->
       <div class="nk-only nk-schedule">
         <h2 class="nk-h">SCHEDULE</h2>
         <ul class="nk-sched-list">
-          <li><a class="nk-sched-link" href="#live-nk-20150211"><span class="nk-date">2015.02.11[Wed]</span>avax Entertainment presents 1,500円イベント「地表楼閣」</a></li>
-          <li><a class="nk-sched-link" href="#live-nk-20150220"><span class="nk-date">2015.02.20[Fri]</span>蜷局vol.2</a></li>
-          <li><a class="nk-sched-link" href="#live-nk-20150313"><span class="nk-date">2015.03.13[Fri]</span>百花繚乱Vol.3</a></li>
-          <li><a class="nk-sched-link" href="#live-nk-20150318"><span class="nk-date">2015.03.18[Wed]</span>CROWN×CROWN presents「reflection of desire GOLD 〜新宿絶対幽閉区域〜 vol.62」</a></li>
-          <li><a class="nk-sched-link" href="#live-nk-20150330"><span class="nk-date">2015.03.30[Mon]</span>silverfest2015 前月祭</a></li>
-          <li><a class="nk-sched-link" href="#live-nk-20150413"><span class="nk-date">2015.04.13[Mon]</span>アンフィル両A面1stシングル発売記念二ヶ月連続主催「#やるせないアンフィル。」</a></li>
-          <li><a class="nk-sched-link" href="#live-nk-20150415"><span class="nk-date">2015.04.15[Wed]</span>CROWN×CROWN presents「reflection of desire GOLD 〜新宿絶対幽閉区域〜 vol.64」</a></li>
-          <li><a class="nk-sched-link" href="#live-nk-20150511"><span class="nk-date">2015.05.11[Mon]</span>（不明）</a></li>
-          <li><a class="nk-sched-link" href="#live-nk-20150521"><span class="nk-date">2015.05.21[Thu]</span>（不明）</a></li>
-          <li><a class="nk-sched-link" href="#live-nk-20150611"><span class="nk-date">2015.06.11[Thu]</span>池袋EDGE presents</a></li>
-          <li><a class="nk-sched-link" href="#live-nk-20150624"><span class="nk-date">2015.06.24[Wed]</span>ニワカアメ主催「- After the rain -」</a></li>
-          <li><a class="nk-sched-link" href="#live-nk-20211103"><span class="nk-date">2021.11.03[Wed]</span>（不明）</a></li>
+          <li><a class="nk-sched-link" href="#live-nk-20150211"><span class="nk-date">2015.02.11[Wed]</span>Birth Shinjuku</a></li>
+          <li><a class="nk-sched-link" href="#live-nk-20150220"><span class="nk-date">2015.02.20[Fri]</span>Birth Shinjuku</a></li>
+          <li><a class="nk-sched-link" href="#live-nk-20150313"><span class="nk-date">2015.03.13[Fri]</span>池袋CYBER</a></li>
+          <li><a class="nk-sched-link" href="#live-nk-20150318"><span class="nk-date">2015.03.18[Wed]</span>Birth Shinjuku</a></li>
+          <li><a class="nk-sched-link" href="#live-nk-20150330"><span class="nk-date">2015.03.30[Mon]</span>Birth Shinjuku</a></li>
+          <li><a class="nk-sched-link" href="#live-nk-20150413"><span class="nk-date">2015.04.13[Mon]</span>池袋EDGE</a></li>
+          <li><a class="nk-sched-link" href="#live-nk-20150415"><span class="nk-date">2015.04.15[Wed]</span>HOLIDAY SHINJUKU</a></li>
+          <li><a class="nk-sched-link" href="#live-nk-20150511"><span class="nk-date">2015.05.11[Mon]</span>HOLIDAY SHINJUKU</a></li>
+          <li><a class="nk-sched-link" href="#live-nk-20150521"><span class="nk-date">2015.05.21[Thu]</span>HOLIDAY SHINJUKU</a></li>
+          <li><a class="nk-sched-link" href="#live-nk-20150611"><span class="nk-date">2015.06.11[Thu]</span>Birth shinjuku</a></li>
+          <li><a class="nk-sched-link" href="#live-nk-20150624"><span class="nk-date">2015.06.24[Wed]</span>HOLIDAY SHINJUKU</a></li>
+          <li><a class="nk-sched-link" href="#live-nk-20211103"><span class="nk-date">2021.11.03[Wed]</span>四谷HoneyBurst</a></li>
         </ul>
       </div>
 
