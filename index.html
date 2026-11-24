@@ -1491,6 +1491,11 @@
       body.niwakame .nk-live-back a:focus-visible { outline: 2px solid #333333; outline-offset: 2px; }
       .nk-sched { border-bottom: 1px dotted #cccccc; padding: 14px 2px 16px; }
       body.niwakame .nk-sched .nk-row { display: flex; gap: 12px; padding: 3px 0; }
+      /* SCHEDULE詳細：各項目（TITLE／DATE／VENUE／TIME／TICKET／ACT）の間に
+         シンプルな黒い実線の区切りを入れる（ニワカアメモードのみ・通常モードには影響しない）。
+         最後の項目行の下には線を引かない（「一覧に戻る」との間は従来どおり） */
+      body.niwakame .nk-sched .nk-row { border-bottom: 1px solid #000000; padding: 7px 0; }
+      body.niwakame .nk-sched .nk-row:last-of-type { border-bottom: none; }
       .nk-sched .nk-label { flex: 0 0 58px; color: #666666; font-size: 11.5px; letter-spacing: .14em; padding-top: 2px; }
       .nk-sched .nk-val { flex: 1 1 auto; }
       .nk-sched .nk-title { font-size: 14.5px; }
@@ -2451,7 +2456,15 @@
           <p class="news-detail-date">2015.01.14</p>
           <h3 class="news-detail-title">2/11 Birth Sinjuku公演の物販についてのお知らせ</h3>
           <div class="nk-news-body">
-            <p>2/11 Birth Shinjuku公演の物販についてのお知らせです。チェキ1枚500円 20枚購入でメンバーとツーショット撮影特典 撮影可能メンバー ツキヒ、アウム、タキル、リョウ 20枚セット予約でニワカアメ限定サイン入りアー写プレゼント ご予約フォーム niwakarainext@gmail.com までメールでのご予約も可能です。件名に『2/11チェキ予約』とご記入の上、お名前、枚数、ご希望メンバー、をお送りください。※ご予約は2/9までとさせていただきます。</p>
+            <p>2/11 Birth Shinjuku公演の物販についてのお知らせです。</p>
+            <p>チェキ1枚500円</p>
+            <p>20枚購入でメンバーとツーショット撮影特典</p>
+            <p>撮影可能メンバー ツキヒ、アウム、タキル、リョウ</p>
+            <p>20枚セット予約でニワカアメ限定サイン入りアー写プレゼント</p>
+            <p>ご予約フォーム</p>
+            <p>niwakarainext@gmail.com までメールでのご予約も可能です。</p>
+            <p>件名に『2/11チェキ予約』とご記入の上、お名前、枚数、ご希望メンバー、をお送りください。</p>
+            <p>※ご予約は2/9までとさせていただきます。</p>
           </div>
           <div class="nk-sp-article-foot">
             <p class="nk-sp-posted">Posted : 2015.01.14</p>
@@ -2463,7 +2476,8 @@
           <p class="news-detail-date">2015.01.11</p>
           <h3 class="news-detail-title">予約完了メールに関するお詫びとお願い</h3>
           <div class="nk-news-body">
-            <p>予約完了メールに関するお詫びとお願い 2015.02.11 [Wed] 池袋EDGE公演におきましてチケット予約完了メールが届かないというトラブルが発生しておりましたが現在は復旧し、正常にご予約頂けます。予約メールが届いていないお客様は大変お手数ですが、niwakarainext@gmail.com までメールにてご連絡ください。よろしくお願い致します。</p>
+            <p>予約完了メールに関するお詫びとお願い</p>
+            <p>2015.02.11 [Wed] 池袋EDGE公演におきましてチケット予約完了メールが届かないというトラブルが発生しておりましたが現在は復旧し、正常にご予約頂けます。予約メールが届いていないお客様は大変お手数ですが、niwakarainext@gmail.com までメールにてご連絡ください。よろしくお願い致します。</p>
             <p>Posted: 2015.01.11</p>
           </div>
           <div class="nk-sp-article-foot">
@@ -2476,7 +2490,10 @@
           <p class="news-detail-date">2015.01.05</p>
           <h3 class="news-detail-title">ニワカアメ始動。</h3>
           <div class="nk-news-body">
-            <p>ニワカアメ始動。 始動ライブ。 2015.02.11 [Wed] Birth Shinjuku チケット予約 <a href="http://www.niwakaame.com/schedule/33887" target="_blank" rel="noopener noreferrer">http://www.niwakaame.com/schedule/33887</a></p>
+            <p>ニワカアメ始動。</p>
+            <p>始動ライブ。</p>
+            <p>2015.02.11 [Wed] Birth Shinjuku</p>
+            <p>チケット予約 <a href="http://www.niwakaame.com/schedule/33887" target="_blank" rel="noopener noreferrer">http://www.niwakaame.com/schedule/33887</a></p>
             <p>Posted: 2015.01.05</p>
           </div>
           <div class="nk-sp-article-foot">
