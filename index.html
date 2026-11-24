@@ -1342,21 +1342,28 @@
       dl.nk-live-dl dt { flex: 0 0 52px; color: #666666; font-size: 11.5px; letter-spacing: .12em; padding-top: 2px; }
       dl.nk-live-dl dd { margin: 0; }
 
-      /* --- NEWS：11件（見出し＋本文を開いて読む） --- */
+      /* --- NEWS：11件（一覧は日付＋見出しのみ。タップで記事ページへ遷移する） --- */
       body.niwakame #news ul.news-list,
       body.niwakame #nkNewsEmpty,
       body.niwakame #nkHomeNewsEmpty,
       body.niwakame #nkNewsDetailEmpty { display: none !important; }
-      .nk-news-item { border-bottom: 1px dotted #cccccc; padding: 4px 2px; }
-      body.niwakame .nk-news-item summary {
-        cursor: pointer; list-style: none;
+      ul.nk-news-list { list-style: none; margin: 0; padding: 0; }
+      ul.nk-news-list li { border-bottom: 1px dotted #cccccc; padding: 4px 2px; }
+      body.niwakame a.nk-news-link {
         display: flex; gap: 4px; align-items: baseline;
         padding: 8px 0; min-height: 2.25rem; font-size: 13.5px;
+        color: #333333; text-decoration: none;
       }
-      .nk-news-item summary::-webkit-details-marker { display: none; }
-      .nk-news-item summary:hover { text-decoration: underline; text-underline-offset: 3px; }
+      body.niwakame a.nk-news-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+      body.niwakame a.nk-news-link:focus-visible { outline: 2px solid #333333; outline-offset: 2px; }
       .nk-news-body { padding: 2px 0 14px; font-size: 13px; }
       .nk-news-body p { margin: 8px 0; overflow-wrap: anywhere; }
+      /* NK記事ページ（#news-nk-xxxxxxxx）：詳細パネル内でも公式HPの白地・#333で読ませる */
+      body.niwakame .nk-news-article { color: #333333; font-size: 13px; line-height: 1.7; }
+      body.niwakame .nk-news-article .news-detail-date { color: #333333; font-size: 13px; }
+      body.niwakame .nk-news-article .news-detail-title { color: #333333; font-size: 15px; }
+      body.niwakame .nk-news-article .news-detail-title + .nk-news-body { margin-top: 1em; }
+      body.niwakame .nk-news-article .nk-news-body { padding-bottom: 0; color: #333333; }
 
       /* --- SCHEDULE --- */
       body.niwakame #panel-live .about,
@@ -1477,13 +1484,16 @@
         body.niwakame dl.nk-live-dl dt { flex-basis: 58px; font-size: 12px; }
 
         /* NEWS：見出し行はタップ領域を確保し、日付と見出しが窮屈なら縦に折る */
-        body.niwakame .nk-news-item summary {
+        body.niwakame a.nk-news-link {
           flex-wrap: wrap; gap: 2px 4px;
           font-size: 15px; padding: 12px 0;
           overflow-wrap: anywhere;
         }
         body.niwakame .nk-news-body { font-size: 14.5px; line-height: 1.85; }
         body.niwakame .nk-news-body a { overflow-wrap: anywhere; }
+        body.niwakame .nk-news-article { font-size: 14.5px; line-height: 1.85; }
+        body.niwakame .nk-news-article .news-detail-date { font-size: 14.5px; }
+        body.niwakame .nk-news-article .news-detail-title { font-size: 16.5px; }
 
         /* SCHEDULE：ラベル＋値の行は値側を縮められるようにし、横はみ出しを防ぐ */
         body.niwakame .nk-sched { font-size: 15px; }
@@ -1533,7 +1543,7 @@
         body.niwakame .nk-only,
         body.niwakame .nk-box,
         body.niwakame .nk-sched,
-        body.niwakame .nk-news-item { max-width: 100%; }
+        body.niwakame ul.nk-news-list { max-width: 100%; }
         body.niwakame .nk-site-head img,
         body.niwakame .nk-only img { max-width: 100%; height: auto; }
       }
@@ -1667,7 +1677,7 @@
           <p class="nk-bio-name">ニワカアメ</p>
           <p>期間限定活動。</p>
           <ul class="nk-members">
-            <li><span class="nk-part">Vo.</span>（公式HPでは名前が空白でした）</li>
+            <li><span class="nk-part">Vo.</span></li>
             <li><span class="nk-part">Gt.</span>ツキヒ<a class="nk-tw" href="https://twitter.com/guitar_tsukihi" target="_blank" rel="noopener noreferrer">Twitter</a></li>
             <li><span class="nk-part">Gt.</span>アウム<a class="nk-tw" href="https://twitter.com/guitar_aumu" target="_blank" rel="noopener noreferrer">Twitter</a></li>
             <li><span class="nk-part">Ba.</span>タキル<a class="nk-tw" href="https://twitter.com/bass_takiru" target="_blank" rel="noopener noreferrer">Twitter</a></li>
@@ -1832,82 +1842,21 @@
         </ul>
         <p class="nk-note" id="nkNewsEmpty">ニワカアメのおしらせはまだありません</p>
 
-        <!-- ニワカアメモード NEWS（公式HP掲載の全11件・原文ママ） -->
+        <!-- ニワカアメモード NEWS一覧（公式HP掲載の全11件・日付＋見出しのみ。タップで記事ページへ遷移） -->
         <div class="nk-only nk-news">
-          <details class="nk-news-item">
-            <summary><span class="nk-date">2015.02.26</span>ライブ追加情報</summary>
-            <div class="nk-news-body">
-              <p>2015.03.30[Mon] Birth Shinjuku</p>
-              <p>チケット予約 <a href="http://www.niwakaame.com/schedule/35717" target="_blank" rel="noopener noreferrer">http://www.niwakaame.com/schedule/35717</a></p>
-            </div>
-          </details>
-          <details class="nk-news-item">
-            <summary><span class="nk-date">2015.02.21</span>ライブ追加情報</summary>
-            <div class="nk-news-body">
-              <p>2015.04.13[Mon] 池袋EDGE</p>
-              <p>チケット予約 <a href="http://www.niwakaame.com/schedule/35575" target="_blank" rel="noopener noreferrer">http://www.niwakaame.com/schedule/35575</a></p>
-            </div>
-          </details>
-          <details class="nk-news-item">
-            <summary><span class="nk-date">2015.02.17</span>ニワカヘドバンムービー</summary>
-            <div class="nk-news-body">
-              <p><a href="http://youtu.be/erx0dBcnY7E" target="_blank" rel="noopener noreferrer">&gt;&gt;動画を見る</a></p>
-            </div>
-          </details>
-          <details class="nk-news-item">
-            <summary><span class="nk-date">2015.02.12</span>ライブ追加情報</summary>
-            <div class="nk-news-body">
-              <p>2015.06.11[Thu] Birth shinjuku</p>
-              <p>チケット予約 <a href="http://www.niwakaame.com/schedule/35210/" target="_blank" rel="noopener noreferrer">http://www.niwakaame.com/schedule/35210/</a></p>
-            </div>
-          </details>
-          <details class="nk-news-item">
-            <summary><span class="nk-date">2015.02.12</span>アー写＆視聴ムービー公開</summary>
-            <div class="nk-news-body">
-              <p>「age」視聴ムービー <a href="http://youtu.be/RJkWjmoWFu0" target="_blank" rel="noopener noreferrer">&gt;&gt;動画を見る</a></p>
-            </div>
-          </details>
-          <details class="nk-news-item">
-            <summary><span class="nk-date">2015.02.02</span>ライブ追加情報</summary>
-            <div class="nk-news-body">
-              <p>2015.04.15[Wed] Birth Shinjuku</p>
-              <p>チケット予約 <a href="http://www.niwakaame.com/schedule/34873" target="_blank" rel="noopener noreferrer">http://www.niwakaame.com/schedule/34873</a></p>
-            </div>
-          </details>
-          <details class="nk-news-item">
-            <summary><span class="nk-date">2015.01.29</span>ライブ追加情報</summary>
-            <div class="nk-news-body">
-              <p>2015.03.18[Wed] Birth Shinjuku</p>
-              <p>チケット予約 <a href="http://www.niwakaame.com/schedule/34743" target="_blank" rel="noopener noreferrer">http://www.niwakaame.com/schedule/34743</a></p>
-            </div>
-          </details>
-          <details class="nk-news-item">
-            <summary><span class="nk-date">2015.01.21</span>ライブ追加情報</summary>
-            <div class="nk-news-body">
-              <p>2015.03.13[Fri] 池袋CYBER</p>
-              <p>チケット予約 <a href="http://www.niwakaame.com/schedule/34490/" target="_blank" rel="noopener noreferrer">http://www.niwakaame.com/schedule/34490/</a></p>
-            </div>
-          </details>
-          <details class="nk-news-item">
-            <summary><span class="nk-date">2015.01.14</span>2/11 Birth Sinjuku公演の物販についてのお知らせ</summary>
-            <div class="nk-news-body">
-              <p>2/11 Birth Shinjuku公演の物販についてのお知らせです。チェキ1枚500円 20枚購入でメンバーとツーショット撮影特典 撮影可能メンバー ツキヒ、アウム、タキル、リョウ 20枚セット予約でニワカアメ限定サイン入りアー写プレゼント ご予約フォーム niwakarainext@gmail.com までメールでのご予約も可能です。件名に『2/11チェキ予約』とご記入の上、お名前、枚数、ご希望メンバー、をお送りください。※ご予約は2/9までとさせていただきます。</p>
-            </div>
-          </details>
-          <details class="nk-news-item">
-            <summary><span class="nk-date">2015.01.11</span>予約完了メールに関するお詫びとお願い</summary>
-            <div class="nk-news-body">
-              <p>予約完了メールに関するお詫びとお願い 2015.02.11 [Wed] 池袋EDGE公演におきましてチケット予約完了メールが届かないというトラブルが発生しておりましたが現在は復旧し、正常にご予約頂けます。予約メールが届いていないお客様は大変お手数ですが、niwakarainext@gmail.com までメールにてご連絡ください。よろしくお願い致します。</p>
-              <p>Posted: 2015.01.11</p>
-            </div>
-          </details>
-          <details class="nk-news-item">
-            <summary><span class="nk-date">2015.01.05</span>ニワカアメ始動。</summary>
-            <div class="nk-news-body">
-              <p>ニワカアメ始動。 始動ライブ。 2015.02.11 [Wed] Birth Shinjuku チケット予約 <a href="http://www.niwakaame.com/schedule/33887" target="_blank" rel="noopener noreferrer">http://www.niwakaame.com/schedule/33887</a></p>
-              <p>Posted: 2015.01.05</p>
-            </div>
-          </details>
+          <ul class="nk-news-list">
+            <li><a class="nk-news-link" href="#news-nk-20150226"><span class="nk-date">2015.02.26</span>ライブ追加情報</a></li>
+            <li><a class="nk-news-link" href="#news-nk-20150221"><span class="nk-date">2015.02.21</span>ライブ追加情報</a></li>
+            <li><a class="nk-news-link" href="#news-nk-20150217"><span class="nk-date">2015.02.17</span>ニワカヘドバンムービー</a></li>
+            <li><a class="nk-news-link" href="#news-nk-20150212a"><span class="nk-date">2015.02.12</span>ライブ追加情報</a></li>
+            <li><a class="nk-news-link" href="#news-nk-20150212b"><span class="nk-date">2015.02.12</span>アー写＆視聴ムービー公開</a></li>
+            <li><a class="nk-news-link" href="#news-nk-20150202"><span class="nk-date">2015.02.02</span>ライブ追加情報</a></li>
+            <li><a class="nk-news-link" href="#news-nk-20150129"><span class="nk-date">2015.01.29</span>ライブ追加情報</a></li>
+            <li><a class="nk-news-link" href="#news-nk-20150121"><span class="nk-date">2015.01.21</span>ライブ追加情報</a></li>
+            <li><a class="nk-news-link" href="#news-nk-20150114"><span class="nk-date">2015.01.14</span>2/11 Birth Sinjuku公演の物販についてのお知らせ</a></li>
+            <li><a class="nk-news-link" href="#news-nk-20150111"><span class="nk-date">2015.01.11</span>予約完了メールに関するお詫びとお願い</a></li>
+            <li><a class="nk-news-link" href="#news-nk-20150105"><span class="nk-date">2015.01.05</span>ニワカアメ始動。</a></li>
+          </ul>
         </div>
       </section>
       </div>
@@ -2015,6 +1964,92 @@
           <p class="n-text">新宿アルタ<br />17:00～</p>
           <p class="n-text">19:00～</p>
           <p class="news-posted">Posted : 2015.06.26</p>
+        </article>
+        <!-- ニワカアメモード NEWS記事ページ（公式HP掲載の全11件・原文ママ。ニワカアメモード中だけ開ける） -->
+        <article class="news-detail-article nk-news-article" data-news-slug="nk-20150226" hidden>
+          <p class="news-detail-date">2015.02.26</p>
+          <h3 class="news-detail-title">ライブ追加情報</h3>
+          <div class="nk-news-body">
+            <p>2015.03.30[Mon] Birth Shinjuku</p>
+            <p>チケット予約 <a href="http://www.niwakaame.com/schedule/35717" target="_blank" rel="noopener noreferrer">http://www.niwakaame.com/schedule/35717</a></p>
+          </div>
+        </article>
+        <article class="news-detail-article nk-news-article" data-news-slug="nk-20150221" hidden>
+          <p class="news-detail-date">2015.02.21</p>
+          <h3 class="news-detail-title">ライブ追加情報</h3>
+          <div class="nk-news-body">
+            <p>2015.04.13[Mon] 池袋EDGE</p>
+            <p>チケット予約 <a href="http://www.niwakaame.com/schedule/35575" target="_blank" rel="noopener noreferrer">http://www.niwakaame.com/schedule/35575</a></p>
+          </div>
+        </article>
+        <article class="news-detail-article nk-news-article" data-news-slug="nk-20150217" hidden>
+          <p class="news-detail-date">2015.02.17</p>
+          <h3 class="news-detail-title">ニワカヘドバンムービー</h3>
+          <div class="nk-news-body">
+            <p><a href="http://youtu.be/erx0dBcnY7E" target="_blank" rel="noopener noreferrer">&gt;&gt;動画を見る</a></p>
+          </div>
+        </article>
+        <article class="news-detail-article nk-news-article" data-news-slug="nk-20150212a" hidden>
+          <p class="news-detail-date">2015.02.12</p>
+          <h3 class="news-detail-title">ライブ追加情報</h3>
+          <div class="nk-news-body">
+            <p>2015.06.11[Thu] Birth shinjuku</p>
+            <p>チケット予約 <a href="http://www.niwakaame.com/schedule/35210/" target="_blank" rel="noopener noreferrer">http://www.niwakaame.com/schedule/35210/</a></p>
+          </div>
+        </article>
+        <article class="news-detail-article nk-news-article" data-news-slug="nk-20150212b" hidden>
+          <p class="news-detail-date">2015.02.12</p>
+          <h3 class="news-detail-title">アー写＆視聴ムービー公開</h3>
+          <div class="nk-news-body">
+            <p>「age」視聴ムービー <a href="http://youtu.be/RJkWjmoWFu0" target="_blank" rel="noopener noreferrer">&gt;&gt;動画を見る</a></p>
+          </div>
+        </article>
+        <article class="news-detail-article nk-news-article" data-news-slug="nk-20150202" hidden>
+          <p class="news-detail-date">2015.02.02</p>
+          <h3 class="news-detail-title">ライブ追加情報</h3>
+          <div class="nk-news-body">
+            <p>2015.04.15[Wed] Birth Shinjuku</p>
+            <p>チケット予約 <a href="http://www.niwakaame.com/schedule/34873" target="_blank" rel="noopener noreferrer">http://www.niwakaame.com/schedule/34873</a></p>
+          </div>
+        </article>
+        <article class="news-detail-article nk-news-article" data-news-slug="nk-20150129" hidden>
+          <p class="news-detail-date">2015.01.29</p>
+          <h3 class="news-detail-title">ライブ追加情報</h3>
+          <div class="nk-news-body">
+            <p>2015.03.18[Wed] Birth Shinjuku</p>
+            <p>チケット予約 <a href="http://www.niwakaame.com/schedule/34743" target="_blank" rel="noopener noreferrer">http://www.niwakaame.com/schedule/34743</a></p>
+          </div>
+        </article>
+        <article class="news-detail-article nk-news-article" data-news-slug="nk-20150121" hidden>
+          <p class="news-detail-date">2015.01.21</p>
+          <h3 class="news-detail-title">ライブ追加情報</h3>
+          <div class="nk-news-body">
+            <p>2015.03.13[Fri] 池袋CYBER</p>
+            <p>チケット予約 <a href="http://www.niwakaame.com/schedule/34490/" target="_blank" rel="noopener noreferrer">http://www.niwakaame.com/schedule/34490/</a></p>
+          </div>
+        </article>
+        <article class="news-detail-article nk-news-article" data-news-slug="nk-20150114" hidden>
+          <p class="news-detail-date">2015.01.14</p>
+          <h3 class="news-detail-title">2/11 Birth Sinjuku公演の物販についてのお知らせ</h3>
+          <div class="nk-news-body">
+            <p>2/11 Birth Shinjuku公演の物販についてのお知らせです。チェキ1枚500円 20枚購入でメンバーとツーショット撮影特典 撮影可能メンバー ツキヒ、アウム、タキル、リョウ 20枚セット予約でニワカアメ限定サイン入りアー写プレゼント ご予約フォーム niwakarainext@gmail.com までメールでのご予約も可能です。件名に『2/11チェキ予約』とご記入の上、お名前、枚数、ご希望メンバー、をお送りください。※ご予約は2/9までとさせていただきます。</p>
+          </div>
+        </article>
+        <article class="news-detail-article nk-news-article" data-news-slug="nk-20150111" hidden>
+          <p class="news-detail-date">2015.01.11</p>
+          <h3 class="news-detail-title">予約完了メールに関するお詫びとお願い</h3>
+          <div class="nk-news-body">
+            <p>予約完了メールに関するお詫びとお願い 2015.02.11 [Wed] 池袋EDGE公演におきましてチケット予約完了メールが届かないというトラブルが発生しておりましたが現在は復旧し、正常にご予約頂けます。予約メールが届いていないお客様は大変お手数ですが、niwakarainext@gmail.com までメールにてご連絡ください。よろしくお願い致します。</p>
+            <p>Posted: 2015.01.11</p>
+          </div>
+        </article>
+        <article class="news-detail-article nk-news-article" data-news-slug="nk-20150105" hidden>
+          <p class="news-detail-date">2015.01.05</p>
+          <h3 class="news-detail-title">ニワカアメ始動。</h3>
+          <div class="nk-news-body">
+            <p>ニワカアメ始動。 始動ライブ。 2015.02.11 [Wed] Birth Shinjuku チケット予約 <a href="http://www.niwakaame.com/schedule/33887" target="_blank" rel="noopener noreferrer">http://www.niwakaame.com/schedule/33887</a></p>
+            <p>Posted: 2015.01.05</p>
+          </div>
         </article>
         <p class="nk-note" id="nkNewsDetailEmpty">ニワカアメモード中は、この記事は表示されません</p>
         <p class="news-back"><a href="#news"><span aria-hidden="true">← </span>おしらせ一覧へ戻る</a></p>
@@ -3359,12 +3394,15 @@
         function showNewsDetail(slug) {
           var articles = document.querySelectorAll(".news-detail-article");
           var found = false;
+          var isNkArticle = false;
           Array.prototype.forEach.call(articles, function (a) {
             var on = a.getAttribute("data-news-slug") === slug;
             a.hidden = !on;
-            if (on) found = true;
+            if (on) { found = true; isNkArticle = a.classList.contains("nk-news-article"); }
           });
           if (!found) return false;
+          /* ニワカアメ記事（#news-nk-…）はニワカアメモード中だけ開く。通常モードでは一覧へ戻す */
+          if (isNkArticle && !document.body.classList.contains("niwakame")) return false;
           showPanel("panel-news-detail");
           scrollTop();
           return true;
@@ -3527,7 +3565,8 @@
         function applyNkFilter(on) {
           filterGroup(document.querySelectorAll("ul.home-news-list li"), document.getElementById("nkHomeNewsEmpty"), on);
           filterGroup(document.querySelectorAll("ul.news-list li"), document.getElementById("nkNewsEmpty"), on);
-          filterGroup(document.querySelectorAll(".news-detail-article"), null, on);
+          /* NK記事（.nk-news-article）はニワカアメ自身の記事なので絞り込み対象から外す */
+          filterGroup(document.querySelectorAll(".news-detail-article:not(.nk-news-article)"), null, on);
           var detailNote = document.getElementById("nkNewsDetailEmpty");
           if (detailNote) {
             var cur = document.querySelector(".news-detail-article:not([hidden])");
@@ -3550,6 +3589,8 @@
             if (s.el) s.el.textContent = on ? s.on : s.off;
           });
           applyNkFilter(on);
+          /* NK記事ページを開いたまま通常モードへ戻した場合は、NEWS一覧へ戻す */
+          if (!on && location.hash.indexOf("#news-nk-") === 0) location.hash = "news";
           /* 【拡張メモ】モード切替の通知。将来モード時の見た目全体を作り替える際は、
              このイベント（detail.niwakame = ON/OFF）を購読すれば、トグル本体に触らずに
              追加の差し替え処理を差し込める。現在のモード状態は window.grimoireMode() でも取得できる */
@@ -3569,6 +3610,8 @@
         if (!btns.length) return;
         function currentRoute() {
           var raw = location.hash.replace(/^#/, "");
+          /* NK記事ページ（#news-nk-…）はNEWS扱いにする */
+          if (raw.indexOf("news-") === 0) return "news";
           return raw || "home";
         }
         function syncActive() {
