@@ -2587,27 +2587,30 @@
         event が空文字の行は「（不明）」と表示される。
         instore: true の行はインストアイベント（種別欄に「インストア」と表示され、ライブ本数の集計からは除き、インストア込みの全件数にのみ数える）。
         niwakame: true の行はニワカアメ名義の公演（行に「ニワカアメ名義」と表示される）。
+        gensou: true の行は始動前の前身名義「げんそうシンドローム」の公演（行に「げんそうシンドローム名義」と表示され、ACT欄は「げんそうシンドローム」になる）。日付が不明な行は date を空にし、dateLabel で日付欄の表示文言を指定する。
+        excludeCount: true の行は表示はするが本表の件数（年別件数・総本数）には数えない（始動前の関連公演など）。
         SOLO_DATA（メンバーソロ出演）・PENDING_DATA（要確認：告知のみ・実施未確認）は本表とは別の参考データで、合計件数には含めない。
       */
       var LIVE_DATA = {
         2015: [
+          { date: "2015-07-09", venue: "池袋EDGE", event: "NEW AGE Vol.11", type: "対バン・イベント", self: true, gensou: true, excludeCount: true, note: "GRIMOIRE始動前（2015-08-23より前）に前身名義「げんそうシンドローム」で出演した公演（本人提供の会場看板写真と本人の確認による）。日付は同写真のEXIF撮影日時（2015-07-09）から特定。始動前の関連公演として本表の件数には含めていません", with: "【TRiANGLE▼SONiX】 / DiCE / SALIVAN / Artemis / PIGLOW in GLOOMY / DEEP RAVE", time: "開場 16:30 / 開演 17:00", ticket: "当日¥4,300（1ドリンク込）" },
           { date: "2015-08-23", venue: "新宿RUIDO K4", event: "おひろめえんそうかい 〜はじまりエンドロール〜", type: "ワンマン（始動ライブ）", setlist: ["ひとりトピア", "にわかあめ", "ブラッディマイパレード", "からくりパルム", "ゼロとくろ", "「シン」せかい", "アルギュロスのはね", "エデンのそこ", "よわむしクエスト", "げんそうシンドローム"], time: "開場 未定 / 開演 未定", ticket: "前売¥3,000/当日¥3,500" },
-          { date: "2015-08-28", venue: "新宿RUIDO K4", event: "", type: "不明", self: true },
-          { date: "2015-09-11", venue: "新宿RUIDO K4", event: "bell＋ presents 「Break Rush~vol.9~」", type: "不明", x: true, with: "弾丸NO LIMIT / アンフィル / SALIVAN / Lydiar / ぞんび / Purple Stone", time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,000/当日¥3,500" },
-          { date: "2015-09-16", venue: "池袋EDGE", event: "rivabook presents 「Neo STARGATE」", type: "不明", x: true, with: "LAGNA / inc.RIBON / アポロ計画 / きらぎら / lig / PIGLOW in GLOOMY", time: "開場 16:30 / 開演 17:00", ticket: "前売¥3,100/当日¥3,600" },
+          { date: "2015-08-28", venue: "新宿RUIDO K4", event: "bell＋ presents 「Break Rush~vol.8~」", type: "不明", self: true, with: "My Fairytale / 弾丸 NO LIMIT / DADAROMA / VAN9ISH / SALIVAN / VAASTU / いろはにほへと", setlist: ["にわかあめ", "ブラッディマイパレード", "ゼロとくろ", "エデンのそこ"], time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,000+D/当日¥3,500+D（D代¥600）" },
+          { date: "2015-09-11", venue: "新宿RUIDO K4", event: "bell＋ presents 「Break Rush~vol.9~」", type: "不明", x: true, with: "ALIVE / ぞんび / 弾丸NO LIMIT / Lydiar / アンフィル / SALIVAN / TRiANGLE▼SONiX / Purple Stone", setlist: ["にわかあめ", "「シン」せかい", "げんそうシンドローム", "エデンのそこ"], time: "開場 15:30 / 開演 16:00", ticket: "前売¥3,000/当日¥3,500" },
+          { date: "2015-09-16", venue: "池袋EDGE", event: "rivabook presents 「Neo STARGATE」", type: "不明", x: true, with: "LAGNA / inc.RIBON / アポロ計画 / きらぎら / lig / PIGLOW in GLOOMY", setlist: ["からくりパルム", "「シン」せかい", "げんそうシンドローム", "ゼロとくろ"], time: "開場 16:30 / 開演 17:00", ticket: "前売¥3,100/当日¥3,600" },
           { date: "2015-10-08", venue: "池袋EDGE", event: "", type: "不明", x: true, self: true, note: "日付訂正：当初、公式Xの御礼投稿から10-09としていたが、本人の参加記録（ツイフィール）で10-08と確認できたため訂正", with: "ヴァリル / 弾丸 NO LIMIT / VAASTU / ザアザア / yazzmad / Develop One's Faculties", time: "開場 16:30 / 開演 17:00", ticket: "前売¥3,100/当日¥3,600" },
-          { date: "2015-10-30", venue: "池袋EDGE", event: "rivabook presents 「ハロウィンぱーりーナイト」", type: "イベント", x: true, with: "CLØWD / Develop One's Faculties / トランスノート / DiCE / ソニックデスモンキー / VERY BERRY", time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,300/当日¥3,800" },
-          { date: "2015-10-06", venue: "池袋EDGE", event: "BlitZ解散主催TOUR『全国のみんなに会いに行きます』", type: "対バン・イベント", self: true, with: "Blitz / アヴァンチック / Awake / Azero / メルヴェル", time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,500/当日¥4,000" },
-          { date: "2015-10-22", venue: "高田馬場AREA", event: "GOEMON RECORDS presents 「SCANDALOUS BLUE」", type: "不明", single: true, with: "ペンタゴン / SCAPEGOAT / ソニックデスモンキー / SALIVAN / トランスノート / RE / V", time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,500/当日¥4,000" },
-          { date: "2015-11-01", venue: "池袋BlackHole", event: "", type: "不明", self: true, with: "RoNo☆Cro / Neverland / Sick2 / 昨日までの今日に無ィ明日。 / ∞INFi2TY / SERIAL⇔NUMBER", time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,500/当日¥4,000" },
-          { date: "2015-11-09", venue: "新宿RUIDO K4", event: "「おべんきょうかい」", type: "ワンマン", single: true, setlist: ["ゼロとくろ", "ブラッディマイパレード", "アルギュロスのはね", "よわむしクエスト", "からくりパルム", "「シン」せかい", "げんそうシンドローム"], time: "開場 18:00 / 開演 18:30", ticket: "前売¥1,000/当日未定" },
+          { date: "2015-10-30", venue: "池袋EDGE", event: "rivabook presents 「ハロウィンぱーりーナイト」", type: "イベント", x: true, with: "CLØWD / Develop One's Faculties / トランスノート / DiCE / ソニックデスモンキー / VERY BERRY", setlist: ["からくりパルム", "「シン」せかい", "げんそうシンドローム", "ゼロとくろ"], time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,300/当日¥3,800" },
+          { date: "2015-10-06", venue: "池袋EDGE", event: "BlitZ解散主催TOUR『全国のみんなに会いに行きます』", type: "対バン・イベント", self: true, with: "Blitz / アヴァンチック / Awake / Azero / メルヴェル", setlist: ["ブラッディマイパレード", "「シン」せかい", "げんそうシンドローム", "ゼロとくろ"], time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,500/当日¥4,000" },
+          { date: "2015-10-22", venue: "高田馬場AREA", event: "GOEMON RECORDS presents 「SCANDALOUS BLUE」", type: "不明", single: true, with: "ペンタゴン / SCAPEGOAT / ソニックデスモンキー / SALIVAN / トランスノート / RE / V", setlist: ["ひとりトピア", "げんそうシンドローム", "ブラッディマイパレード", "ゼロとくろ", "エデンのそこ"], time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,500/当日¥4,000" },
+          { date: "2015-11-01", venue: "池袋BlackHole", event: "", type: "不明", self: true, with: "RoNo☆Cro / Neverland / Sick2 / 昨日までの今日に無ィ明日。 / ∞INFi2TY / SERIAL⇔NUMBER", setlist: ["アルギュロスのはね", "ブラッディマイパレード", "げんそうシンドローム", "ゼロとくろ"], time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,500/当日¥4,000" },
+          { date: "2015-11-09", venue: "新宿RUIDO K4", event: "「おべんきょうかい」", type: "ワンマン", single: true, note: "100人限定（本人提供の会場看板写真より）", setlist: ["ゼロとくろ", "ブラッディマイパレード", "アルギュロスのはね", "よわむしクエスト", "からくりパルム", "「シン」せかい", "げんそうシンドローム"], time: "開場 18:00 / 開演 18:30", ticket: "前売¥1,000+D/当日¥1,500+D" },
           { date: "2015-11-10", venue: "池袋EDGE", event: "", type: "不明", self: true, note: "公式Xでは会場未確認だったが、本人の参加記録（ツイフィール）で池袋EDGEと確定し実施確定", with: "ソニックデスモンキー / ぞんび / Awake / DiCE / 叙情四重奏「カノン」 / アネモネ / NANIKA NO HAJIMARI", time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,300/当日¥3,800" },
           { date: "2015-12-10", venue: "池袋EDGE", event: "rivabook presents 「December stakes」", type: "不明", self: true, with: "CLØWD / Develop One's Faculties / LiPS / the LOTUS / SALIVAN / ぞんび", time: "開場 16:30 / 開演 17:00", ticket: "前売¥3,100/当日¥3,600" },
           { date: "2015-12-18", venue: "新宿RUIDO K4", event: "", type: "不明", self: true, with: "DADAROMA / LONDBOY / 『危険分子』 / ♯ロストワールド / トランスノート / The Valentine.", time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,000/当日¥3,500" },
           { date: "2015-12-31", venue: "新宿RUIDO K4", event: "K4『R』 presents NO NOISE LIMITATION THE WORLD 15→16", type: "対バン・イベント", official: true, with: "ALIVE / アンフィル / CLØWD / シビレバシル / ぞんび / DADAROMA / 弾丸 NO LIMIT / Neverland / Nihilizm / ViV / LOUD GRAPE / RUVISH", time: "開場 12:00 / 開演 12:30", ticket: "前売¥3,500/当日¥4,000" },
           /* インストアイベント（旧・参考セクションから本表へ統合） */
-          { date: "2015-09-20", venue: "littleHEARTS.新宿店", event: "インストアイベント", type: "インストア", instore: true, self: true },
-          { date: "2015-09-20", venue: "ライカ東京", event: "インストアイベント", type: "インストア", instore: true, self: true }
+          { date: "2015-09-20", venue: "littleHEARTS.新宿店", event: "インストアイベント", type: "インストア", instore: true, self: true, time: "開場 17:45 / 開演 18:00" },
+          { date: "2015-09-20", venue: "ライカ東京", event: "インストアイベント", type: "インストア", instore: true, self: true, time: "開始 14:30" }
         ],
         2016: [
           { date: "2016-01-20", venue: "池袋EDGE", event: "rivabook presents 「January stakes」", type: "対バン・イベント", official: true, with: "CLØWD / Develop One's Faculties / エルム / Lig / SALIVAN / LiPS", time: "開場 16:30 / 開演 17:00", ticket: "前売¥3,100/当日¥3,600" },
@@ -3079,7 +3082,7 @@
         years.forEach(function (y) {
           var n = NK_FILTER
             ? LIVE_DATA[y].filter(function (r) { return !!r.niwakame; }).length
-            : LIVE_DATA[y].length;
+            : LIVE_DATA[y].filter(function (r) { return !r.excludeCount; }).length;
           if (NK_FILTER && n === 0) return;
           html += '<a href="#year-' + y + '"' + (n > 0 ? ' class="has-data"' : "") + ">" +
             y + '<span class="n">' + n + "件</span></a>";
@@ -3098,7 +3101,7 @@
             rows = rows.filter(function (r) { return !!r.niwakame; });
             if (rows.length === 0) return;
           }
-          var n = rows.length;
+          var n = rows.filter(function (r) { return !r.excludeCount; }).length;
           var isHiatus = !!HIATUS_YEARS[y];
 
           html += '<details class="year" id="year-' + y + '">';
@@ -3116,14 +3119,14 @@
           html += "</summary>";
           html += '<div class="year-body">';
 
-          if (n === 0) {
+          if (rows.length === 0) {
             html += '<p class="sched-empty">' +
               (isHiatus ? "活動休止期間のため公演なし" : "公演情報は確認でき次第、順次追加します") +
               "</p>";
           } else {
             rows.forEach(function (r) {
-              var f = fmtDate(r.date);
-              var actName = r.niwakame ? "ニワカアメ" : "GRIMOIRE";
+              var f = r.date ? fmtDate(r.date) : null;
+              var actName = r.gensou ? "げんそうシンドローム" : (r.niwakame ? "ニワカアメ" : "GRIMOIRE");
               var title = r.event
                 ? esc(r.event)
                 : '<span class="unknown">（不明）</span>';
@@ -3139,6 +3142,9 @@
               if (r.niwakame) {
                 title += '<span class="alias-note">ニワカアメ名義</span>';
               }
+              if (r.gensou) {
+                title += '<span class="alias-note">げんそうシンドローム名義</span>';
+              }
               if (!r.official && !r.x && !r.self && r.single) {
                 title += '<span class="single-note">※単一ソース</span>';
               }
@@ -3150,7 +3156,7 @@
               html += '<div class="sched-row"><div class="sched-label">TITLE</div>' +
                 '<div class="sched-value sched-title">' + title + "</div></div>";
               html += '<div class="sched-row"><div class="sched-label">LIVE</div>' +
-                '<div class="sched-value sched-live">' + esc(f.text) + " [" + f.dowEn + "] " + esc(r.venue) + "</div></div>";
+                '<div class="sched-value sched-live">' + (f ? esc(f.text) + " [" + f.dowEn + "] " : esc(r.dateLabel || "日付不明") + " ") + esc(r.venue) + "</div></div>";
               html += '<div class="sched-row"><div class="sched-label">ACT</div>' +
                 '<div class="sched-value">' + esc(actName) + "</div></div>";
               html += '<div class="sched-row"><div class="sched-label">TIME</div>' +
@@ -3286,7 +3292,7 @@
       var TOTAL_INSTORE = 0;
       YEARS.forEach(function (y) {
         LIVE_DATA[y].forEach(function (r) {
-          if (r.instore) TOTAL_INSTORE++; else TOTAL_LIVES++;
+          if (r.instore) TOTAL_INSTORE++; else if (!r.excludeCount) TOTAL_LIVES++;
         });
       });
       document.getElementById("totalCount").textContent = TOTAL_LIVES;
