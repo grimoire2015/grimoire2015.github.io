@@ -555,8 +555,8 @@
         display: flex; align-items: center; gap: 12px;
         min-height: 2.75rem; padding: 6px 2px;
         cursor: pointer; list-style: none;
-        font-family: var(--font-serif); font-weight: 400;
-        font-size: 14px; letter-spacing: .34em; color: #555555;
+        font-family: var(--font-sans); font-weight: 700;
+        font-size: 17px; letter-spacing: .3em; color: #555555;
       }
       summary.live-year::-webkit-details-marker { display: none; }
       summary.live-year:hover { color: #8a8a8a; }
@@ -1376,6 +1376,43 @@
         table.disco td.d-tracks { padding-top: 6px; }
         table.disco td.d-note { font-size: 13px; padding-top: 6px; }
       }
+
+      /* ---------- フォント統一（GRIMOIREモードのみ） ----------
+         LIVEタブの年見出し（summary.live-year：ゴシック体＋太字）に合わせ、
+         通常モードでは --font-serif の参照先をゴシック体スタックへ差し替える。
+         これにより、見出し・日付・件数・統計などセリフ体で表示されていた
+         数字がすべてゴシック体になる（本文はもともと body のゴシック体）。
+         ニワカアメモードは当時の再現が目的なので対象外：body.niwakame では
+         この差し替えは効かず、従来の表示のままになる */
+      body:not(.niwakame) {
+        --font-serif: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic Medium", "Yu Gothic", YuGothic, "Noto Sans JP", "Meiryo", sans-serif;
+      }
+      /* 見出し級の数字・目立つ日付・件数・統計は、年見出しと同じく太字に揃える */
+      body:not(.niwakame) .period b,
+      body:not(.niwakame) .total-sub b,
+      body:not(.niwakame) .song-count-line b { font-weight: 700; }
+      body:not(.niwakame) .total-count .tc-num { font-weight: 700; }
+      body:not(.niwakame) .home-next .next-date { font-weight: 700; }
+      body:not(.niwakame) ul.home-news-list .n-date,
+      body:not(.niwakame) ul.news-list .n-date,
+      body:not(.niwakame) ul.instore-list .i-date { font-weight: 700; }
+      body:not(.niwakame) nav.year-nav a { font-weight: 700; }
+      body:not(.niwakame) .year-head h2 { font-weight: 700; }
+      body:not(.niwakame) .count-badge,
+      body:not(.niwakame) .section-heading .count-note { font-weight: 700; }
+      body:not(.niwakame) .section-heading .en,
+      body:not(.niwakame) .sub-head { font-weight: 700; }
+      body:not(.niwakame) details.about summary { font-weight: 700; }
+      body:not(.niwakame) .bio-intro .bio-title { font-weight: 700; }
+      body:not(.niwakame) .bio-member-nav .bio-member-list a { font-weight: 700; }
+      body:not(.niwakame) .member-card .mc-name { font-weight: 700; }
+      body:not(.niwakame) .member-photo-count { font-weight: 700; }
+      body:not(.niwakame) table.lives td.date,
+      body:not(.niwakame) table.disco td.d-date { font-weight: 700; }
+      body:not(.niwakame) .song-detail-name { font-weight: 700; }
+      body:not(.niwakame) .mv-title { font-weight: 700; }
+      body:not(.niwakame) .contact-name { font-weight: 700; }
+      body:not(.niwakame) table.goods-table td.g-price { font-weight: 700; }
 
       /* ---------- 隠しギミック：ニワカアメモード ----------
          フッター隅の小さな雨マーク（.rain-toggle）を押すと body に .niwakame が付き、
