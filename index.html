@@ -1501,13 +1501,16 @@
       body:not(.niwakame) table.goods-table td.g-price { font-weight: 700; }
 
       /* ---------- 見出しフォントの差し戻し（GRIMOIREモードのみ） ----------
-         英字見出し（タブ名・セクション見出し・サブ見出し・メンバー名）は
+         英字見出し（セクション見出し・サブ見出し・メンバー名）は
          統一前のセリフ体（Shippori Mincho 系）の方が良いとの指示により、
          見出し要素だけ --font-serif 本来のセリフ体スタックへ戻す。
          あわせて、ゴシック統一で太字（700）に寄せた見出しの太さも
-         統一前の見出し仕様（400）へ戻す（タブ名・各タブのページ見出し・
+         統一前の見出し仕様（400）へ戻す（各タブのページ見出し・
          BIOのタイトル／コンセプト文・MEDIAのタイトル・CONTACTの名前・
          曲名見出し・メンバー名・about見出しが対象）。
+         ※タブボタン（ナビ）の文字は対象外：公式サイト（gri-moire.com）の
+         見た目どおり、細めのサンセリフ体・薄いグレーのままにする
+         （直後の専用ルールで明示する）。
          .en-sub は元の 500、.bio-logo は元の 700 のままにするため太さは触らない。
          本文・日付・件数などの数字は上のゴシック統一のまま、
          LIVEタブ年見出し（summary.live-year：ゴシック太字）も変更しない。
@@ -1515,7 +1518,6 @@
       body:not(.niwakame) {
         --font-head-serif: "Shippori Mincho", "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif;
       }
-      body:not(.niwakame) .tab-btn,
       body:not(.niwakame) .section-heading .en,
       body:not(.niwakame) .sub-head,
       body:not(.niwakame) .member-card .mc-name,
@@ -1529,6 +1531,15 @@
       body:not(.niwakame) details.about summary { font-family: var(--font-head-serif); font-weight: 400; }
       body:not(.niwakame) .sub-head .en-sub,
       body:not(.niwakame) .bio-intro .bio-logo { font-family: var(--font-head-serif); }
+
+      /* ---------- タブボタン（ナビ）のフォント：公式サイト準拠 ----------
+         HOME／NEWS／LIVE／BIO／DISCO／MEDIA／GOODS／CONTACT の文字は、
+         公式サイト（gri-moire.com）のスクリーンショットどおり
+         細めのサンセリフ体（ゴシック系）・薄いグレー・装飾なしにする。
+         セリフ体（明朝）にはしない。色・配置は基本ルール（.tab-btn）の
+         #8d8d8d／2段組みグリッドのまま変えず、ここではフォントだけを
+         明示して見出しセリフ差し戻しの影響を受けないようにする */
+      body:not(.niwakame) .tab-btn { font-family: var(--font-sans); font-weight: 400; }
 
       /* ---------- 隠しギミック：ニワカアメモード ----------
          フッター隅の小さな雨マーク（.rain-toggle）を押すと body に .niwakame が付き、
