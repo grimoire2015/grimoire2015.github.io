@@ -1164,6 +1164,32 @@
       .news-detail-article[data-news-slug="20151110"] .news-detail-title,
       .news-detail-article[data-news-slug="20151110"] .n-text { text-align: center; }
       .news-detail-article[data-news-slug="20151110"] .news-posted { text-align: right; }
+      /* 2015年の公式NEWS 4件（おひろめえんそうかい／8.23物販／0thシングル／おべんきょうかい）：
+         同時期の公式記事（2015.06.26／2015.11.10）と同じくタイトル・本文すべて中央寄せ（Posted行のみ右寄せ） */
+      .news-detail-article[data-news-slug="20150624"],
+      .news-detail-article[data-news-slug="20150815"],
+      .news-detail-article[data-news-slug="20150824"],
+      .news-detail-article[data-news-slug="20150928"] { text-align: center; }
+      .news-detail-article[data-news-slug="20150624"] .news-detail-date,
+      .news-detail-article[data-news-slug="20150624"] .news-detail-title,
+      .news-detail-article[data-news-slug="20150624"] .n-text,
+      .news-detail-article[data-news-slug="20150815"] .news-detail-date,
+      .news-detail-article[data-news-slug="20150815"] .news-detail-title,
+      .news-detail-article[data-news-slug="20150815"] .n-text,
+      .news-detail-article[data-news-slug="20150824"] .news-detail-date,
+      .news-detail-article[data-news-slug="20150824"] .news-detail-title,
+      .news-detail-article[data-news-slug="20150824"] .n-text,
+      .news-detail-article[data-news-slug="20150928"] .news-detail-date,
+      .news-detail-article[data-news-slug="20150928"] .news-detail-title,
+      .news-detail-article[data-news-slug="20150928"] .n-text { text-align: center; }
+      .news-detail-article[data-news-slug="20150624"] .news-posted,
+      .news-detail-article[data-news-slug="20150815"] .news-posted,
+      .news-detail-article[data-news-slug="20150824"] .news-posted,
+      .news-detail-article[data-news-slug="20150928"] .news-posted { text-align: right; }
+      .news-detail-article[data-news-slug="20150624"] .n-text,
+      .news-detail-article[data-news-slug="20150815"] .n-text,
+      .news-detail-article[data-news-slug="20150824"] .n-text,
+      .news-detail-article[data-news-slug="20150928"] .n-text { overflow-wrap: anywhere; }
       /* 2018.08.22 Amu脱退のお知らせ：タイトル・本文・署名「GRIMOIRE」行とも左寄せ（Posted行のみ右寄せ） */
       .news-detail-article[data-news-slug="20180822"] .news-official .sign { text-align: left; }
       .news-detail-article[data-news-slug="20180822"] .news-posted { text-align: right; }
@@ -3202,8 +3228,12 @@
           <li><a class="news-link" href="#news-2016"><span class="n-date">2016年</span><span class="n-body">TIMELY RECORDS所属</span></a></li>
           <li><a class="news-link" href="#news-20160408"><span class="n-date">2016.04.08</span><span class="n-body">オリジナルチェキケース販売＆「ひとりトピア」50枚限定増版決定</span></a></li>
           <li><a class="news-link" href="#news-20151110"><span class="n-date">2015.11.10</span><span class="n-body">1stシングル「ぼくとタルパ」発売＆インストアイベント「おはなし会」開催</span></a></li>
+          <li><a class="news-link" href="#news-20150928"><span class="n-date">2015.09.28</span><span class="n-body">100人限定イベント「おべんきょうかい」開催決定</span></a></li>
+          <li><a class="news-link" href="#news-20150824"><span class="n-date">2015.08.24</span><span class="n-body">おひろめきねん0thシングルリリース＆インストアイベント開催決定</span></a></li>
           <li><a class="news-link" href="#news-20150823"><span class="n-date">2015.08.23</span><span class="n-body">始動ワンマン「おひろめえんそうかい 〜はじまりエンドロール〜」（新宿RUIDO K4）</span></a></li>
+          <li><a class="news-link" href="#news-20150815"><span class="n-date">2015.08.15</span><span class="n-body">8.23「おひろめえんそうかい」物販に関しまして</span></a></li>
           <li><a class="news-link" href="#news-20150626"><span class="n-date">2015.06.26</span><span class="n-body">おでかけ。</span></a></li>
+          <li><a class="news-link" href="#news-20150624"><span class="n-date">2015.06.24</span><span class="n-body">おひろめえんそうかい</span></a></li>
         </ul>
         <p class="nk-note" id="nkNewsEmpty">ニワカアメのおしらせはまだありません</p>
 
@@ -3470,10 +3500,66 @@
         <article class="news-detail-article" data-news-slug="20150626" hidden>
           <p class="news-detail-date">2015.06.26</p>
           <h3 class="news-detail-title">おでかけ。</h3>
+          <p class="n-text">おでかけ。</p>
           <p class="n-text">6月29日</p>
           <p class="n-text">新宿アルタ<br />17:00～</p>
           <p class="n-text">19:00～</p>
           <p class="news-posted">Posted : 2015.06.26</p>
+        </article>
+        <article class="news-detail-article" data-news-slug="20150928" hidden>
+          <p class="news-detail-date">2015.09.28</p>
+          <h3 class="news-detail-title">100人限定イベント「おべんきょうかい」開催決定</h3>
+          <p class="n-text">100人限定イベント「おべんきょうかい」開催決定</p>
+          <p class="n-text">2015.11.09 [Mon] 新宿RUIDO K4</p>
+          <p class="n-text">100人限定イベント「おべんきょうかい」開催決定</p>
+          <p class="n-text">http://www.gri-moire.com/schedule/43948/</p>
+          <p class="n-text">当日物販に関しまして</p>
+          <p class="n-text">チェキ1枚 500円</p>
+          <p class="n-text">・Kie、Amu、Lune、Melの4種類からランダム販売(過去チェキのみメンバー指定可)</p>
+          <p class="n-text">・「あたりチェキ」を引かれたお客様、もしくは10枚まとめてご購入のお客様には「撮影券」をお渡し致します。</p>
+          <p class="n-text">・「撮影券」をお持ちのお客様はKie、Amu、Lune、Melとの5ショット撮影会にご参加頂けます。</p>
+          <p class="n-text">・10枚まとめてのご購入はお1人様何回でも可能ですが並び直しでのご購入枚数の合算は無効とさせて頂きます。</p>
+          <p class="n-text">・10枚ご購入の内、「あたりチェキ」が入っていた場合は2回撮影会にご参加頂けます。</p>
+          <p class="n-text">・5ショット撮影会はお客様ご自身でお持ちのカメラ機器を使用させて頂きますので予めご了承下さいませ。</p>
+          <p class="n-text">・チェキは数に限りがございますのでご了承下さいませ。</p>
+          <p class="news-posted">Posted : 2015.09.28</p>
+        </article>
+        <article class="news-detail-article" data-news-slug="20150824" hidden>
+          <p class="news-detail-date">2015.08.24</p>
+          <h3 class="news-detail-title">おひろめきねん0thシングルリリース＆インストアイベント開催決定</h3>
+          <p class="n-text">グリモアおひろめきねん0thシングル『ひとりトピア』</p>
+          <p class="n-text">9月2日(水)</p>
+          <p class="n-text">全国のライカエジソン、リトルハーツにて発売</p>
+          <p class="n-text">[CD]<br />価格：¥1,200(tax in)<br />品番：GMPI-0001</p>
+          <p class="n-text">[CD]<br />1.ひとりトピア / 2.げんそうシンドローム</p>
+          <p class="n-text">おひろめきねん0thシングル発売に伴い、インストアイベント「おはなしかい」開催</p>
+          <p class="n-text">日程／2015年9月20日（日）<br />時間／START 14：30～<br />会場／ライカエジソン東京店<br />条件／ライカエジソン東京店でCDをご購入の方<br />内容／トーク&amp;サイン会</p>
+          <p class="n-text">※サインはCDジャケットのみとさせて頂きます。</p>
+          <p class="n-text">日程／2015年9月20日（日）<br />時間／START 18：00～<br />会場／リトルハーツ新宿店<br />条件／リトルハーツ新宿店でCDをご購入の方<br />内容／トーク&amp;握手会</p>
+          <p class="news-posted">Posted : 2015.08.24</p>
+        </article>
+        <article class="news-detail-article" data-news-slug="20150815" hidden>
+          <p class="news-detail-date">2015.08.15</p>
+          <h3 class="news-detail-title">8.23「おひろめえんそうかい」物販に関しまして</h3>
+          <p class="n-text">8.23「おひろめえんそうかい」物販に関しまして</p>
+          <p class="n-text">チェキ1枚 500円</p>
+          <p class="n-text">・Kie、Amu、Lune、Melの4種類からランダム販売(過去チェキのみメンバー指定可)</p>
+          <p class="n-text">・「あたりチェキ」を引かれたお客様、もしくは10枚まとめてご購入のお客様には「撮影券」をお渡し致します。</p>
+          <p class="n-text">・「撮影券」をお持ちのお客様はKie、Amu、Lune、Melとの5ショット撮影会にご参加頂けます。</p>
+          <p class="n-text">・10枚まとめてのご購入はお1人様何回でも可能ですが並び直しでのご購入枚数の合算は無効とさせて頂きます。</p>
+          <p class="n-text">・10枚ご購入の内、「あたりチェキ」が入っていた場合は2回撮影会にご参加頂けます。</p>
+          <p class="n-text">・5ショット撮影会はお客様ご自身でお持ちのカメラ機器を使用させて頂きますので予めご了承下さいませ。</p>
+          <p class="n-text">・チェキは数に限りがございますのでご了承下さいませ。</p>
+          <p class="news-posted">Posted : 2015.08.15</p>
+        </article>
+        <article class="news-detail-article" data-news-slug="20150624" hidden>
+          <p class="news-detail-date">2015.06.24</p>
+          <h3 class="news-detail-title">おひろめえんそうかい</h3>
+          <p class="n-text">おひろめえんそうかい</p>
+          <p class="n-text">2015.08.23（sun）<br />おひろめえんそうかい～はじまりエンドロール～</p>
+          <p class="n-text">詳細 http://www.gri-moire.com/schedule/39487/</p>
+          <p class="n-text">TITLE おひろめえんそうかい～はじまりエンドロール～<br />DATE 2015.08.23[Sun]<br />VENUE 新宿 RUIDO K4<br />TIME 開場 / 未定 開演 / 未定<br />TICKET 前売¥3,000 / 当日¥3,500</p>
+          <p class="news-posted">Posted : 2015.06.24</p>
         </article>
         <!-- ニワカアメモード NEWS記事ページ（公式HP掲載の全12件・原文ママ。ニワカアメモード中だけ開ける） -->
         <article class="news-detail-article nk-news-article" data-news-slug="nk-activity-end" hidden>
