@@ -1504,6 +1504,11 @@
          英字見出し（タブ名・セクション見出し・サブ見出し・メンバー名）は
          統一前のセリフ体（Shippori Mincho 系）の方が良いとの指示により、
          見出し要素だけ --font-serif 本来のセリフ体スタックへ戻す。
+         あわせて、ゴシック統一で太字（700）に寄せた見出しの太さも
+         統一前の見出し仕様（400）へ戻す（タブ名・各タブのページ見出し・
+         BIOのタイトル／コンセプト文・MEDIAのタイトル・CONTACTの名前・
+         曲名見出し・メンバー名・about見出しが対象）。
+         .en-sub は元の 500、.bio-logo は元の 700 のままにするため太さは触らない。
          本文・日付・件数などの数字は上のゴシック統一のまま、
          LIVEタブ年見出し（summary.live-year：ゴシック太字）も変更しない。
          ニワカアメモードは従来どおり対象外 */
@@ -1513,9 +1518,17 @@
       body:not(.niwakame) .tab-btn,
       body:not(.niwakame) .section-heading .en,
       body:not(.niwakame) .sub-head,
-      body:not(.niwakame) .sub-head .en-sub,
       body:not(.niwakame) .member-card .mc-name,
-      body:not(.niwakame) .bio-member-nav .bio-member-list a { font-family: var(--font-head-serif); }
+      body:not(.niwakame) .bio-member-nav .bio-member-list a,
+      body:not(.niwakame) .bio-intro .bio-title,
+      body:not(.niwakame) .bio-intro .bio-concept p,
+      body:not(.niwakame) .mv-title,
+      body:not(.niwakame) .media-channel a,
+      body:not(.niwakame) .contact-name,
+      body:not(.niwakame) .song-detail-name,
+      body:not(.niwakame) details.about summary { font-family: var(--font-head-serif); font-weight: 400; }
+      body:not(.niwakame) .sub-head .en-sub,
+      body:not(.niwakame) .bio-intro .bio-logo { font-family: var(--font-head-serif); }
 
       /* ---------- 隠しギミック：ニワカアメモード ----------
          フッター隅の小さな雨マーク（.rain-toggle）を押すと body に .niwakame が付き、
