@@ -538,6 +538,17 @@
         font-size: 13px; color: var(--ink-dim); letter-spacing: .06em;
       }
       td.act, td.note-cell { color: var(--ink-dim); }
+      /* ソロ・関連公演のセトリ併記行 */
+      tr.solo-setlist-row td { padding-top: 0; }
+      tr.solo-setlist-row:hover { background: transparent; }
+      .solo-setlist-label { font-size: 12px; letter-spacing: .2em; color: var(--ink-faint); }
+      ol.solo-setlist {
+        margin: 2px 0 6px; padding-left: 1.7em;
+        font-size: 13.5px; line-height: 1.85; color: var(--ink-dim);
+      }
+      ol.solo-setlist li::marker { color: var(--ink-faint); font-size: 11.5px; }
+      .solo-setlist-group { margin-top: 4px; }
+      .solo-setlist-band { font-size: 12.5px; letter-spacing: .14em; color: var(--head-bright); }
       td.event .unknown { color: var(--ink-faint); }
       tr.placeholder-row td { color: var(--ink-dim); }
       tr.placeholder-row td.event { color: #d3a3a3; font-weight: 400; letter-spacing: .08em; }
@@ -2095,9 +2106,9 @@
           <p class="period">始動 <b>2015/08/23</b>〜</p>
           <p class="total-count">
             <span class="tc-label">総ライブ本数</span>
-            <span class="tc-value"><span class="tc-num" id="totalCount">322</span><span class="tc-unit">本</span></span>
+            <span class="tc-value"><span class="tc-num" id="totalCount">323</span><span class="tc-unit">本</span></span>
           </p>
-          <p class="total-sub" id="totalAll">＋インストア<b>58</b>件／全<b>380</b>件</p>
+          <p class="total-sub" id="totalAll">＋インストア<b>67</b>件／全<b>390</b>件</p>
           <div>
             <span class="status-strip"><span class="dot" aria-hidden="true"></span>随時更新中</span>
           </div>
@@ -2831,9 +2842,9 @@
             ヴィジュアル系バンド <b>GRIMOIRE（グリモア）</b> のライブ履歴をまとめたページです。
             バンド始動の<b>2015年8月23日</b>以降の期間を対象に、
             ワンマンライブ・イベントライブ等を年ごとに、日付順で記録しています。
-            現在<b>全322件</b>を収録しています
-            （このほか、インストアイベント<b>58件</b>も各年の本表に統合して掲載しており、ライブと合わせた収録総数は<b>全380件</b>です。
-            ページ下部に参考としてメンバーソロ出演<b>34件</b>を別枠で掲載し、
+            現在<b>全323件</b>を収録しています
+            （このほか、インストアイベント<b>67件</b>も各年の本表に統合して掲載しており、ライブと合わせた収録総数は<b>全390件</b>です。
+            ページ下部に参考としてメンバーソロ出演<b>35件</b>を別枠で掲載し、
             <b>12件</b>は、末尾の「要確認」セクションに分けて掲載しています）。
           </p>
           <p>
@@ -3256,6 +3267,7 @@
         gensou: true の行は始動前の前身名義「げんそうシンドローム」の公演（行に「げんそうシンドローム名義」と表示され、ACT欄は「げんそうシンドローム」になる）。日付が不明な行は date を空にし、dateLabel で日付欄の表示文言を指定する。
         excludeCount: true の行は表示はするが本表の件数（年別件数・総本数）には数えない（始動前の関連公演など）。
         SOLO_DATA（メンバーソロ出演）・PENDING_DATA（要確認：告知のみ・実施未確認）は本表とは別の参考データで、合計件数には含めない。
+        SOLO_DATA の行に setlist（曲名の配列）がある場合は行の下にセトリを併記し、setlists（バンド別の {band, songs} の配列）がある場合はバンド別セトリを併記する。
       */
       var LIVE_DATA = {
         2015: [
@@ -3265,19 +3277,19 @@
           { date: "2015-08-28", venue: "新宿RUIDO K4", event: "bell＋ presents 「Break Rush~vol.8~」", type: "不明", self: true, with: "My Fairytale / 弾丸 NO LIMIT / DADAROMA / VAN9ISH / SALIVAN / VAASTU / いろはにほへと", setlist: ["にわかあめ", "ブラッディマイパレード", "ゼロとくろ", "エデンのそこ"], time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,000+D/当日¥3,500+D（D代¥600）" },
           { date: "2015-09-11", venue: "新宿RUIDO K4", event: "bell＋ presents 「Break Rush~vol.9~」", type: "不明", x: true, with: "ALIVE / ぞんび / 弾丸NO LIMIT / Lydiar / アンフィル / SALIVAN / 【TRIANGLE▼SONiX】 / Purple Stone", setlist: ["にわかあめ", "「シン」せかい", "げんそうシンドローム", "エデンのそこ"], time: "開場 15:30 / 開演 16:00", ticket: "前売¥3,000/当日¥3,500" },
           { date: "2015-09-16", venue: "池袋EDGE", event: "rivabook presents 「Neo STARGATE」", type: "不明", x: true, with: "LAGNA / RoA / アポロ計画 / PIGLOW in GLOOMY / inc. RIBON / きらぎら / Lig", setlist: ["からくりパルム", "「シン」せかい", "げんそうシンドローム", "ゼロとくろ"], time: "開場 16:30 / 開演 17:00", ticket: "前売¥3,100/当日¥3,600" },
-          { date: "2015-10-08", venue: "池袋EDGE", event: "", type: "不明", x: true, self: true, with: "ヴァリル / 弾丸 NO LIMIT / VAASTU / ザアザア / yazzmad / Develop One's Faculties", setlist: ["げんそうシンドローム", "ゼロとくろ", "からくりパルム", "エデンのそこ"], time: "開場 16:30 / 開演 17:00", ticket: "前売¥3,100/当日¥3,600" },
+          { date: "2015-10-08", venue: "池袋EDGE", event: "rivabook presents 「October Stakes」", type: "不明", x: true, self: true, with: "ヴァリル / 弾丸 NO LIMIT / VAASTU / ザアザア / yazzmad / Develop One's Faculties", setlist: ["げんそうシンドローム", "ゼロとくろ", "からくりパルム", "エデンのそこ"], time: "開場 16:30 / 開演 17:00", ticket: "前売¥3,100/当日¥3,600" },
           { date: "2015-10-30", venue: "池袋EDGE", event: "rivabook presents 「ハロウィンぱーりーナイト」", type: "イベント", x: true, with: "CLØWD / Develop One's Faculties / トランスノート / DiCE / ソニックデスモンキー / VERY BERRY", setlist: ["からくりパルム", "「シン」せかい", "げんそうシンドローム", "ゼロとくろ"], time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,300/当日¥3,800" },
           { date: "2015-10-06", venue: "池袋EDGE", event: "BlitZ解散主催TOUR『全国のみんなに会いに行きます』", type: "対バン・イベント", self: true, with: "Blitz / アヴァンチック / Awake / Azero / メルヴェル", setlist: ["ブラッディマイパレード", "「シン」せかい", "げんそうシンドローム", "ゼロとくろ"], time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,500/当日¥4,000" },
           { date: "2015-10-22", venue: "高田馬場AREA", event: "GOEMON RECORDS presents 「SCANDALOUS BLUE」", type: "不明", single: true, with: "ペンタゴン / SCAPEGOAT / ソニックデスモンキー / SALIVAN / トランスノート / RE / V", setlist: ["ひとりトピア", "げんそうシンドローム", "ブラッディマイパレード", "ゼロとくろ", "エデンのそこ"], time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,500/当日¥4,000" },
           { date: "2015-11-01", venue: "池袋BlackHole", event: "RoNo☆Cro Minami＆メロ生誕祭『Mina×Mello-Double Birthday-』", type: "不明", self: true, with: "RoNo☆Cro / Neverland / Sick2 / 昨日までの今日に無ィ明日。 / ∞INFi2TY / SERIAL⇔NUMBER", setlist: ["アルギュロスのはね", "ブラッディマイパレード", "げんそうシンドローム", "ゼロとくろ"], time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,500/当日¥4,000" },
           { date: "2015-11-09", venue: "新宿RUIDO K4", event: "「おべんきょうかい」（100人限定）", type: "ワンマン", single: true, note: "100人限定", setlist: ["ゼロとくろ", "ブラッディマイパレード", "アルギュロスのはね", "よわむしクエスト", "からくりパルム", "「シン」せかい", "げんそうシンドローム"], time: "開場 18:00 / 開演 18:30", ticket: "前売¥1,000+D/当日¥1,500+D" },
-          { date: "2015-11-10", venue: "池袋EDGE", event: "", type: "不明", self: true, with: "ソニックデスモンキー / ぞんび / Awake / DiCE / 叙情四重奏「カノン」 / アネモネ / NANIKA NO HAJIMARI", setlist: ["アルギュロスのはね", "「シン」せかい", "からくりパルム", "ゼロとくろ"], time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,300/当日¥3,800" },
+          { date: "2015-11-10", venue: "池袋EDGE", event: "rivabook presents 「Neo STARGATE」", type: "不明", self: true, with: "ソニックデスモンキー / ぞんび / Awake / DiCE / 叙情四重奏「カノン」 / アネモネ / NANIKA NO HAJIMARI", setlist: ["アルギュロスのはね", "「シン」せかい", "からくりパルム", "ゼロとくろ"], time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,300/当日¥3,800" },
           { date: "2015-12-10", venue: "池袋EDGE", event: "rivabook presents 「December stakes」", type: "不明", self: true, with: "CLØWD / Develop One's Faculties / LiPS / the LOTUS / SALIVAN / ぞんび", setlist: ["げんそうシンドローム", "ブラッディマイパレード", "エデンのそこ", "ぼくとタルパ"], time: "開場 16:30 / 開演 17:00", ticket: "前売¥3,100/当日¥3,600" },
-          { date: "2015-12-18", venue: "新宿RUIDO K4", event: "", type: "不明", self: true, with: "DADAROMA / LONDBOY / 『危険分子』 / ♯ロストワールド / トランスノート / The Valentine.", setlist: ["からくりパルム", "ブラッディマイパレード", "ぼくとタルパ", "ゼロとくろ"], time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,000/当日¥3,500" },
+          { date: "2015-12-18", venue: "新宿RUIDO K4", event: "bell＋ presents 「Break Rush~vol.11~」", type: "不明", self: true, with: "DADAROMA / LONDBOY / 『危険分子』 / ♯ロストワールド / トランスノート / The Valentine.", setlist: ["からくりパルム", "ブラッディマイパレード", "ぼくとタルパ", "ゼロとくろ"], time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,000/当日¥3,500" },
           { date: "2015-12-31", venue: "新宿RUIDO K4", event: "K4『R』 presents NO NOISE LIMITATION THE WORLD 15→16", type: "対バン・イベント", official: true, with: "ALIVE / アンフィル / CLØWD / シビレバシル / ぞんび / DADAROMA / 弾丸 NO LIMIT / Neverland / Nihilizm / ViV / LOUD GRAPE / RUVISH", time: "開場 12:00 / 開演 12:30", ticket: "前売¥3,500/当日¥4,000" },
           /* インストアイベント（旧・参考セクションから本表へ統合） */
-          { date: "2015-09-20", venue: "littleHEARTS.新宿店", event: "インストアイベント", type: "インストア", instore: true, self: true, time: "開場 17:45 / 開演 18:00" },
-          { date: "2015-09-20", venue: "ライカ東京", event: "インストアイベント", type: "インストア", instore: true, self: true, time: "開始 14:30" }
+          { date: "2015-09-20", venue: "littleHEARTS.新宿店", event: "0thシングル「ひとりトピア」発売記念インストアイベント（トーク&握手会）", type: "インストア", instore: true, self: true, time: "開場 17:45 / 開演 18:00" },
+          { date: "2015-09-20", venue: "ライカ東京", event: "0thシングル「ひとりトピア」発売記念インストアイベント（トーク&CDジャケットサイン会）", type: "インストア", instore: true, self: true, time: "開始 14:30" }
         ],
         2016: [
           { date: "2016-01-20", venue: "池袋EDGE", event: "rivabook presents 「January stakes」", type: "対バン・イベント", official: true, with: "CLØWD / Develop One's Faculties / エルム / Lig / SALIVAN / LiPS", setlist: ["ぼくとタルパ", "「シン」せかい", "からくりパルム", "ゼロとくろ"], time: "開場 16:30 / 開演 17:00", ticket: "前売¥3,100/当日¥3,600" },
@@ -3294,7 +3306,7 @@
           { date: "2016-04-22", venue: "池袋EDGE", event: "GRIMOIRE主催「おともだちごっこ」（vol.1）", type: "主催イベント", x: true, with: "ソニックデスモンキー / マーブルヘッド / 叙情四重奏「カノン」 / KILLANETH / MEABEL / Vexent / ＃ロストワールド", setlist: ["ひとりトピア", "ブラッディマイパレード", "「シン」せかい", "げんそうシンドローム", "よわむしクエスト", "ぼくとタルパ"], time: "開場 15:30 / 開演 16:00", ticket: "前売¥3,300/当日¥3,800" },
           { date: "2016-05-01", venue: "新宿RUIDO K4", event: "", setlist: ["ネバーエンド", "からくりパルム", "「シン」せかい", "エデンのそこ", "アルギュロスのはね", "ブラッディマイパレード", "ゼロとくろ", "ぼくとタルパ"] },
           { date: "2016-05-10", venue: "池袋EDGE", event: "Vexent presents Vexent 2nd Single 「ARTERY」 レコ発記念主催 『心臓』", type: "不明", x: true, with: "Vexent / MeteoroiD / マーブルヘッド / DIEALO / SALIVAN / スタア区。", setlist: ["ネバーエンド", "ブラッディマイパレード", "げんそうシンドローム", "「シン」せかい", "ぼくとタルパ"], time: "開場 15:30 / 開演 16:00", ticket: "前売¥3,300/当日¥3,800" },
-          { date: "2016-05-11", venue: "渋谷REX", event: "#ロストワールド presents #ロストワールド 三ヶ月連続主催 第二頁「禁止魔術目録～ねくろのまほう～」", type: "不明", x: true, setlist: ["ぼくとタルパ", "からくりパルム", "アルギュロスのはね", "ゼロとくろ", "ブラッディマイパレード"] },
+          { date: "2016-05-11", venue: "渋谷REX", event: "#ロストワールド presents #ロストワールド 三ヶ月連続主催 第二頁「禁止魔術目録～ねくろのまほう～」", type: "不明", x: true, with: "#ロストワールド / LIEVRE CLAY / ツヅキマシテ、 / SERIAL⇔NUMBER / iNSOMNiA / Lig / BUK BUK / MORRIGAN", setlist: ["ぼくとタルパ", "からくりパルム", "アルギュロスのはね", "ゼロとくろ", "ブラッディマイパレード"] },
           { date: "2016-07-01", venue: "高田馬場AREA", event: "MadWink. PRESENTS グリーヴァ４周年記念EVENT 「闇市‐参‐」", type: "不明", x: true, with: "グリーヴァ / DADAROMA / BLESSCODE / chariots", setlist: ["ぼくとタルパ", "タロットゲーム", "ブラッディマイパレード", "ネバーエンド", "アルギュロスのはね", "エデンのそこ", "ゼロとくろ"], time: "開場 16:30 / 開演 17:00", ticket: "前売￥3,500/当日￥4,000" },
           { date: "2016-07-21", venue: "渋谷REX", event: "ZEAL LINK presents SHIBUYA ZEAL LINK -Vol.13-", type: "不明", x: true, with: "黒姫の夢遊病 / レイヴ / 0.1gの誤算 / Lydiar", setlist: ["エデンのそこ", "ブラッディマイパレード", "「シン」せかい", "タロットゲーム", "げんそうシンドローム", "ぼくとタルパ", "ゼロとくろ"], time: "開場 17:00 / 開演 17:30", ticket: "前売¥3,240-/当日¥3,780-(tax in)+DRINK代" },
           { date: "2016-09-11", venue: "池袋EDGE", event: "rivabook presents エルムVSグリモア ～悪夢とげんじつ～", type: "不明", x: true, with: "エルム", setlist: ["ひとりトピア", "アルギュロスのはね", "ブラッディマイパレード", "タロットゲーム", "プラスチックシアター", "からくりパルム", "よわむしクエスト", "ぼくとタルパ", "「シン」せかい", "ゼロとくろ"] },
@@ -3329,9 +3341,9 @@
           { date: "2016-12-28", venue: "高田馬場AREA", event: "rivabook presents『今年最後』", type: "対バン・イベント", official: true, setlist: ["ブラッディマイパレード", "タロットゲーム", "プラスチックシアター", "ゼロとくろ", "「シン」せかい"] },
           { date: "2016-12-29", venue: "高田馬場AREA", event: "littleHEARTS. presents Next Edition Vol.12", type: "不明", self: true, with: "ザアザア / DADAROMA / RAZOR（GRIMOIREはO.A出演）", setlist: ["マイムマイム", "ブラッディマイパレード", "「シン」せかい", "ぼくとタルパ"], time: "開場 17:00 / 開演 17:30", ticket: "当日¥4,500（D代込）" },
           /* インストアイベント（旧・参考セクションから本表へ統合） */
-          { date: "2016-01-24", venue: "ライカ東京", event: "インストアイベント", type: "インストア", instore: true, self: true },
-          { date: "2016-01-24", venue: "littleHEARTS.新宿店", event: "インストアイベント", type: "インストア", instore: true, self: true },
-          { date: "2016-06-11", venue: "ライカ東京", event: "トーク&握手会", type: "インストア", instore: true, self: true, time: "開始 12:00" },
+          { date: "2016-01-24", venue: "ライカ東京", event: "1stシングル「ぼくとタルパ」発売記念インストアイベント「おはなし会」（トーク&サイン会）", type: "インストア", instore: true, self: true, time: "開始 18:00", ticket: "ライカエジソン東京店でCDをご購入の方", info: "サインはCDジャケットのみ" },
+          { date: "2016-01-24", venue: "littleHEARTS.新宿店", event: "1stシングル「ぼくとタルパ」発売記念インストアイベント「おはなし会」（トーク&握手会）", type: "インストア", instore: true, self: true, time: "開始 15:00", ticket: "リトルハーツ新宿店でCDをご購入の方" },
+          { date: "2016-06-11", venue: "ライカ東京", event: "2ndシングル「ワールドエンドトゥリー」発売記念インストアイベント（トーク&握手会）", type: "インストア", instore: true, self: true, time: "開始 12:00" },
           { date: "2016-06-11", venue: "littleHEARTS.新宿店", event: "『ワールドエンドトゥリー』トーク&CDジャケットサイン会", type: "インストア", instore: true, self: true, time: "開場 15:15 / 開演 15:30" },
           { date: "2016-12-03", venue: "ライカ東京", event: "インストアイベント", type: "インストア", instore: true, self: true },
           { date: "2016-12-04", venue: "タワーレコード新宿店", event: "インストアイベント", type: "インストア", instore: true, self: true },
@@ -3348,7 +3360,7 @@
           { date: "2017-03-17", venue: "アメリカ村Drop", event: "littleHEARTS. Presents「Next Edition Vol.15」", type: "対バン", x: true, with: "ザアザア / -真天地開闢集団-ジグザグ / Rides In ReVellion", setlist: ["フラブジャスナハト", "ブラッディマイパレード", "クライクライネ", "せいたんデビル", "「シン」せかい", "ぼくとタルパ", "タロットゲーム"] },
           { date: "2017-03-25", venue: "池袋BlackHole", event: "", type: "不明", self: true, setlist: ["フラブジャスナハト", "クライクライネ", "せいたんデビル", "プラスチックシアター", "げんそうシンドローム", "ぼくとタルパ", "クロノメイト", "ブラッディマイパレード", "「シン」せかい", "タロットゲーム", "ゼロとくろ"] },
           { date: "2017-05-07", venue: "池袋Black Hole", event: "RAINDIA presents GIG『馴鹿ト共二有レ。』vol.02", type: "ツーマン", official: true, with: "RAINDIA", setlist: ["アルギュロスのはね", "ブラッディマイパレード", "ぼくとタルパ", "フラブジャスナハト", "げんそうシンドローム", "ネバーエンド", "プラスチックシアター", "せいたんデビル", "「シン」せかい", "タロットゲーム", "ゼロとくろ"], time: "開場 16:00 / 開演 16:30", ticket: "前売り¥3500/当日券¥4000" },
-          { date: "2017-05-10", venue: "池袋Black Hole", event: "Neverland 2マン", type: "ツーマン", x: true, with: "Neverland", setlist: ["ひとりトピア", "フラブジャスナハト", "クライクライネ", "からくりパルム", "げんそうシンドローム", "クロノメイト", "プラスチックシアター", "せいたんデビル", "「シン」せかい", "ぼくとタルパ", "ブラッディマイパレード"], time: "開場 18:00 / 開演 18:30", ticket: "前売り￥3,500/当日￥4,000" },
+          { date: "2017-05-10", venue: "池袋Black Hole", event: "Dream Agent presents 3MAN『G.C.N-40min-』", type: "スリーマン", official: true, x: true, with: "Chanty / Neverland", setlist: ["ひとりトピア", "フラブジャスナハト", "クライクライネ", "からくりパルム", "げんそうシンドローム", "クロノメイト", "プラスチックシアター", "せいたんデビル", "「シン」せかい", "ぼくとタルパ", "ブラッディマイパレード"], time: "開場 18:00 / 開演 18:30", ticket: "前売り￥3,500/当日￥4,000" },
           { date: "2017-08-29", venue: "渋谷REX", event: "千歌繚乱vol.13", type: "不明", x: true, with: "ヴァージュ / シェルミィ / DIMLIM / MEIDARA / メリーバッドエンド", setlist: ["フラブジャスナハト", "ねじれインサイド", "せいたんデビル", "ブラッディマイパレード", "ゆめのまほろば"], time: "開場 17:00 / 開演 17:30", ticket: "前売：先行3,500円/一般3,800円/当日4,000円（ドリンク別）" },
           { date: "2017-09-08", venue: "池袋EDGE", event: "", type: "不明", x: true, with: "REIGN / グリーヴァ / GreeΣ / ゴア / THE BLACK SWAN", setlist: ["せいたんデビル", "エデンのそこ", "いらないもの", "タロットゲーム", "ぼくとタルパ", "ゼロとくろ"], time: "開場 16:30 / 開演 17:00", ticket: "前売¥3,500/当日¥4,000(税込)（DRINK¥500）" },
           { date: "2017-09-11", venue: "高田馬場AREA", event: "SCAPEGOAT presents 「初期症状」", type: "不明", x: true, with: "SCAPEGOAT / Develop One's Faculties / MIZTAVLA マゼラン(O.A)", setlist: ["ねじれインサイド", "「シン」せかい", "せいたんデビル", "ぼくとタルパ", "アルカイクスマイル", "タロットゲーム", "ゼロとくろ"], time: "開場 16:30 / 開演 17:00", ticket: "前売3,500円(D代別)/当日4,000円(D代別)" },
@@ -3424,7 +3436,7 @@
           { date: "2017-07-22", venue: "自主盤倶楽部", event: "インストアイベント", type: "インストア", instore: true, self: true },
           { date: "2017-08-13", venue: "littleHEARTS.名古屋店", event: "インストアイベント", type: "インストア", instore: true, self: true },
           { date: "2017-08-19", venue: "littleHEARTS.新宿店", event: "インストアイベント", type: "インストア", instore: true, self: true },
-          { date: "2017-12-05", venue: "池袋P'PARCO ニコぶくろスタジオ", event: "インストアイベント", type: "インストア", instore: true, self: true }
+          { date: "2017-12-05", venue: "池袋P'PARCO ニコぶくろスタジオ", event: "ニコニコ生放送「ニコびじゅ」ゲスト出演", type: "メディア出演", single: true, self: true, excludeCount: true, with: "アクメ", info: "ニコ生トーク番組『ニコびじゅ』ゲスト出演（観覧可）" }
         ],
         2018: [
           { date: "2018-01-05", venue: "名古屋E.L.L", event: "SPEED DISK PRESENTS〜森羅万象 NEW YEAR CIRCUIT'2018", type: "対バン（ツアー）", official: true, with: "REIGN / ベル / アクメ / ジャシー / Develop One's Faculties", time: "開場 16:30 / 開演 17:00", ticket: "前売¥4,000/当日¥4,500(税込)（当日DRINK代¥500）" , setlist: ["すいそうのうみ", "ねじれインサイド", "ブラッディマイパレード", "「シン」せかい", "ぼくとタルパ"] },
@@ -3507,13 +3519,23 @@
           { date: "2018-01-21", venue: "littleHEARTS.新宿店", event: "インストアイベント", type: "インストア", instore: true, self: true },
           { date: "2018-02-04", venue: "littleHEARTS.新宿店", event: "インストアイベント", type: "インストア", instore: true, self: true },
           { date: "2018-02-10", venue: "ヴィレッジヴァンガード渋谷", event: "インストアイベント", type: "インストア", instore: true, self: true },
-          { date: "2018-02-24", venue: "ブランドX", event: "インストアイベント（トーク&ジャケットサイン&握手会）", type: "インストア", instore: true, self: true , time: "開始 16:30" },
-          { date: "2018-05-03", venue: "littleHEARTS.町田店", event: "インストアイベント", type: "インストア", instore: true, self: true },
-          { date: "2018-05-06", venue: "littleHEARTS.新宿店", event: "インストアイベント（1部・2部）", type: "インストア", instore: true, self: true },
-          { date: "2018-05-12", venue: "自主盤倶楽部", event: "インストアイベント", type: "インストア", instore: true, self: true },
-          { date: "2018-06-16", venue: "littleHEARTS.札幌店", event: "インストアイベント", type: "インストア", instore: true, self: true },
-          { date: "2018-06-30", venue: "渋谷TSUTAYA", event: "インストアイベント", type: "インストア", instore: true, self: true },
-          { date: "2018-07-01", venue: "タワーレコード新宿店", event: "インストアイベント", type: "インストア", instore: true, self: true }
+          { date: "2018-02-24", venue: "ブランドX", event: "『ウラノメトリア』発売記念インストアイベント（トーク&ジャケットサイン&握手会）", type: "インストア", instore: true, self: true , time: "開始 16:30" },
+          { date: "2018-04-15", venue: "littleHEARTS.大阪店", event: "『プシュコマキア』購入者対象インストアイベント（握手&CDサイン会）", type: "インストア", instore: true, official: true, time: "開始 15:00", with: "Kie / Amu / Lune / Mel" },
+          { date: "2018-04-18", venue: "HMV＆BOOKS HAKATA", event: "『プシュコマキア』購入者対象インストアイベント（握手&CDサイン会）", type: "インストア", instore: true, official: true, time: "開始 15:00", with: "Kie / Amu / Lune / Mel" },
+          { date: "2018-04-20", venue: "littleHEARTS.名古屋店", event: "『プシュコマキア』購入者対象インストアイベント（握手&CDサイン会）", type: "インストア", instore: true, official: true, time: "開始 12:00", with: "Kie / Amu / Lune / Mel" },
+          { date: "2018-05-03", venue: "littleHEARTS.町田店", event: "『プシュコマキア』購入者対象インストアイベント（トーク&握手会）", type: "インストア", instore: true, self: true, time: "開始 15:00", with: "Kie / Amu / Lune / Mel" },
+          { date: "2018-05-06", venue: "littleHEARTS.新宿店", event: "『プシュコマキア』購入者対象インストアイベント（1部・トーク&握手会）", type: "インストア", instore: true, self: true, time: "開始 13:00", with: "Kie / Amu / Lune / Mel" },
+          { date: "2018-05-06", venue: "littleHEARTS.新宿店", event: "『プシュコマキア』購入者対象インストアイベント（2部・握手&CDサイン会）", type: "インストア", instore: true, self: true, time: "開始 15:00", with: "RyNK", info: "2部はRyNKのみ参加。初回限定盤購入で直筆メッセージカード手渡し" },
+          { date: "2018-05-12", venue: "自主盤倶楽部", event: "『プシュコマキア』購入者対象インストアイベント（トーク&私物サイン会）", type: "インストア", instore: true, self: true, time: "開始 12:00", with: "Kie / Amu / Lune / Mel" },
+          { date: "2018-05-19", venue: "littleHEARTS.名古屋店", event: "『プシュコマキア』購入者対象インストアイベント（トーク&握手会）", type: "インストア", instore: true, official: true, time: "開始 11:00", with: "Kie / Amu / Lune / Mel" },
+          { date: "2018-05-26", venue: "littleHEARTS.大阪店", event: "『プシュコマキア』購入者対象インストアイベント（トーク&握手会）", type: "インストア", instore: true, official: true, time: "開始 13:00", with: "Kie / Amu / Lune / Mel" },
+          { date: "2018-05-27", venue: "littleHEARTS.静岡店", event: "『プシュコマキア』購入者対象インストアイベント（握手&CDサイン会）", type: "インストア", instore: true, official: true, time: "開始 15:00", with: "Kie / Amu / Lune / Mel" },
+          { date: "2018-06-02", venue: "littleHEARTS.仙台店", event: "『プシュコマキア』購入者対象インストアイベント（トーク&握手会）", type: "インストア", instore: true, official: true, time: "開始 15:00", with: "Kie / Amu / Lune / Mel" },
+          { date: "2018-06-09", venue: "HMVイオンモール岡山", event: "『プシュコマキア』購入者対象インストアイベント（トーク&握手会）", type: "インストア", instore: true, official: true, time: "開始 12:00", with: "Kie / Amu / Lune / Mel" },
+          { date: "2018-06-10", venue: "littleHEARTS.高松店", event: "『プシュコマキア』購入者対象インストアイベント（握手&CDサイン会）", type: "インストア", instore: true, official: true, time: "開始 15:00", with: "Kie / Amu / Lune / Mel" },
+          { date: "2018-06-16", venue: "littleHEARTS.札幌店", event: "『プシュコマキア』購入者対象インストアイベント（握手&CDサイン会）", type: "インストア", instore: true, self: true, time: "開始 13:00", with: "Kie / Amu / Lune / Mel" },
+          { date: "2018-06-30", venue: "渋谷TSUTAYA", event: "『プシュコマキア』購入者対象インストアイベント（トーク&私物サイン会）", type: "インストア", instore: true, self: true, time: "開始 15:00", with: "Kie / Amu / Lune / Mel" },
+          { date: "2018-07-01", venue: "タワーレコード新宿店", event: "『プシュコマキア』購入者対象インストアイベント（握手&CDサイン会）", type: "インストア", instore: true, self: true, time: "開始 14:00", with: "Kie / Amu / Lune / Mel" }
         ],
         2019: [
           { date: "2019-01-06", venue: "渋谷clubasia", event: "GRIMOIRE presents「おともだちごっこ4」", type: "主催イベント" , with: "-真天地開闢集団-ジグザグ / 怪盗戦隊ヌスムンジャー" , setlist: ["リバイバルジャーニー", "せいたんデビル", "ねじれインサイド", "ピンキー", "いちぶんのいち", "「シン」せかい", "ぼくとタルパ", "グッドナイトピクシー", "さよならプロローグ", "つきのかけら"] },
@@ -3581,21 +3603,21 @@
           { date: "2019-01-27", venue: "ブランドX", event: "インストアイベント", type: "インストア", instore: true, self: true },
           { date: "2019-01-27", venue: "ヴィレッジヴァンガード池袋", event: "インストアイベント", type: "インストア", instore: true, self: true },
           { date: "2019-02-02", venue: "Space emo池袋", event: "インストアイベント", type: "インストア", instore: true, self: true },
-          { date: "2019-02-09", venue: "渋谷TSUTAYA", event: "インストアイベント（2階特設会場・握手会＆4ショットチェキ撮影会）", type: "インストア", instore: true, self: true , time: "開始 18:00" , with: "Kie / Lune / Mel" },
+          { date: "2019-02-09", venue: "渋谷TSUTAYA", event: "「ノベルファンタジア」インストアイベント（2階特設会場・握手会＆4ショットチェキ撮影会）", type: "インストア", instore: true, self: true , time: "開始 18:00" , with: "Kie / Lune / Mel" },
           { date: "2019-02-09", venue: "タワーレコード渋谷店", event: "インストアイベント（5Fイベントスペース・CDサイン会・4ショットチェキ撮影会）", type: "インストア", instore: true, self: true , time: "開始 15:30" },
           { date: "2019-02-23", venue: "自主盤倶楽部", event: "「ノベルファンタジア」インストアイベント（トーク会・4ショットチェキ撮影会）", type: "インストア", instore: true, self: true , time: "開始 13:00" , with: "Kie / Lune / Mel" , ticket: "『ノベルファンタジア』購入者対象" },
           { date: "2019-02-23", venue: "タワーレコード新宿店", event: "「ノベルファンタジア」インストアイベント（7Fヴィジュアルコーナー・握手会＆4ショットチェキ撮影会）", type: "インストア", instore: true, self: true , time: "開始 16:00" , with: "Kie / Lune / Mel" },
           { date: "2019-02-24", venue: "littleHEARTS.新宿店", event: "「ノベルファンタジア」インストアイベント（1部・2部）", type: "インストア", instore: true, self: true },
-          { date: "2019-03-02", venue: "littleHEARTS.町田店", event: "「ノベルファンタジア」インストアイベント（トーク＆4ショットチェキ撮影会）", type: "インストア", instore: true, self: true , time: "開場 14:45 / 開演 15:00" , with: "Kie / Lune / Mel" },
+          { date: "2019-03-02", venue: "littleHEARTS.町田店", event: "「ノベルファンタジア」インストアイベント（トーク＆4ショットチェキ撮影会）", type: "インストア", instore: true, self: true , time: "開場 14:45 / 開演 15:00" , with: "Kie / Lune / Mel", ticket: "初回限定盤購入→4ショットチェキ撮影会参加券／通常盤購入→トーク参加券" },
           { date: "2019-03-15", venue: "littleHEARTS.仙台店", event: "「ノベルファンタジア」インストアイベント", type: "インストア", instore: true },
-          { date: "2019-03-25", venue: "名古屋fiveStars", event: "「ノベルファンタジア」インストアイベント", type: "インストア", instore: true },
+          { date: "2019-03-25", venue: "名古屋fiveStars", event: "「ノベルファンタジア」インストアイベント（トーク&4ショットチェキ撮影会）", type: "インストア", instore: true, time: "開場 14:30 / 開演 15:00", with: "Kie / Lune / Mel", ticket: "初回限定盤購入→トーク＋撮影会参加可／通常盤購入→トークのみ" },
           { date: "2019-03-27", venue: "HMV＆BOOKS HAKATA", event: "「ノベルファンタジア」インストアイベント", type: "インストア", instore: true },
           { date: "2019-03-29", venue: "HMVイオンモール岡山", event: "「ノベルファンタジア」インストアイベント", type: "インストア", instore: true },
           { date: "2019-03-30", venue: "littleHEARTS.大阪店", event: "「ノベルファンタジア」インストアイベント（トーク＆撮影会）", type: "インストア", instore: true, self: true , time: "開場 13:45 / 開演 14:00" , with: "Kie / Lune / Mel" },
           { date: "2019-08-04", venue: "littleHEARTS.新宿店", event: "はじまりエンドロール発売記念インストアイベント", type: "インストア", instore: true, self: true, time: "開場 13:45 / 開演 14:00", ticket: "littleHEARTS.イベント新宿店にて7月24日発売『はじまりエンドロール』をご購入でイベント参加券を差し上げます。インストアイベントチケットの発券は発売日7月24日開店時より行います。" , with: "RyNK / Kie / Lune / Mel" , info: "内容：トーク＆5ショットチェキ撮影会（隣指定可能）／参加メンバー：RyNK / Kie / Lune / Mel／通信販売でご注文の方は必ず通信販売ご利用ガイドをご確認の上、ご注文をお願い致します。／※注意事項※ トーク参加券は1人1枚とさせて頂きます" },
-          { date: "2019-08-18", venue: "ライカ東京", event: "インストアイベント", type: "インストア", instore: true, self: true, time: "開場 12:45 / 開演 13:00", ticket: "記載なし（対象CD購入で参加券配布）" },
-          { date: "2019-08-24", venue: "自主盤倶楽部", event: "インストアイベント（トーク＆5ショットチェキ撮影会）", type: "インストア", instore: true, self: true, with: "RyNK / Kie / Lune / Mel", time: "開場 13:45 / 開演 14:00", ticket: "記載なし（対象CD購入で参加券配布）" },
-          { date: "2019-11-09", venue: "littleHEARTS.新宿店", event: "インストアイベント（私物サイン＆5ショット撮影会）", type: "インストア", instore: true, self: true , time: "開場 14:45 / 開演 15:00" },
+          { date: "2019-08-18", venue: "ライカ東京", event: "『はじまりエンドロール』発売記念インストアイベント", type: "インストア", instore: true, self: true, time: "開場 12:45 / 開演 13:00", ticket: "記載なし（対象CD購入で参加券配布）" },
+          { date: "2019-08-24", venue: "自主盤倶楽部", event: "『はじまりエンドロール』発売記念インストアイベント（トーク＆5ショットチェキ撮影会）", type: "インストア", instore: true, self: true, with: "RyNK / Kie / Lune / Mel", time: "開場 13:45 / 開演 14:00", ticket: "『はじまりエンドロール』購入者対象" },
+          { date: "2019-11-09", venue: "littleHEARTS.新宿店", event: "5thシングル『ばけもの』リリースイベント（私物サイン＆5ショット撮影会）", type: "インストア", instore: true, self: true , time: "開場 14:45 / 開演 15:00" },
           { date: "2019-12-14", venue: "ライカ東京", event: "インストアイベント", type: "インストア", instore: true, self: true },
           { date: "2019-10-12", venue: "ライカエジソン東京店", event: "5thシングル『ばけもの』リリースイベント（ジャケットサイン＆5ショット撮影会）", type: "インストア", instore: true, self: true, time: "開場 13:45 / 開演 14:00" },
           { date: "2019-10-20", venue: "自主盤倶楽部", event: "5thシングル『ばけもの』リリースイベント（トーク＆5ショット撮影会）", type: "インストア", instore: true, self: true, time: "開場 14:45 / 開演 15:00" },
@@ -3610,12 +3632,13 @@
           { date: "2020-02-09", venue: "高田馬場AREA", event: "KØU ソロ1周年主催『Ø+1』", type: "対バン・イベント", official: true, with: "KØU / WING WORKS / HOWL / ジャックケイパー / ビバラッシュ", setlist: ["システムエラー", "ばけもの", "グッドナイトピクシー", "ぼくとタルパ", "タロットゲーム", "ピンキー"], time: "開場 16:30 / 開演 17:00", ticket: "当日¥5,100（D代込）" },
           { date: "2020-02-10", venue: "高田馬場AREA", event: "コスモタウン～ニットの日～", type: "対バン・イベント", official: true, with: "XANVALA / Smileberry / 椎名ひかり / 戮 / ミウラアイム", time: "開場 16:30 / 開演 17:00", ticket: "前売￥3,500/当日￥4,000（D代別+¥600）" },
           { date: "2020-02-19", venue: "TSUTAYA O-WEST", event: "rivabook presents「rivabook」", type: "対バン・イベント", official: true, with: "Chanty / ベル / SCAPEGOAT / Ashmaze. / グラビティ / Develop One's Faculties", time: "開場 16:15 / 開演 16:45", ticket: "前売¥4,100/当日¥4,600（ドリンク代別途）" , setlist: ["ばけもの", "せいたんデビル", "グッドナイトピクシー", "いらないもの", "ピンキー"] },
-          { date: "2020-02-24", venue: "新宿 Live Freak", event: "GRIMOIRE presents キィバースデーバレンタインワンマン「チョコオォォォオン！」", type: "ワンマン", official: true, time: "開場 17:30 / 開演 18:00", ticket: "前売¥3,500/当日¥4,000" , setlist: ["からくりパルム", "エデンのそこ", "マイムマイム", "ばけもの", "いちぶんのいち", "ブラッディマイパレード", "「シン」せかい", "クライクライネ", "ベルフェとゆううつ", "パルプディストーション", "せいたんデビル", "グラのしょくたく", "いらないもの", "ぼくとタルパ", "シャンバラ", "げんそうシンドローム"] },
-          { date: "2020-04-05", venue: "池袋EDGE", event: "無観客ライブ『夢遊病』", type: "無観客ライブ", x: true },
+          { date: "2020-02-24", venue: "新宿 Live Freak", event: "GRIMOIRE presents キィバースデーバレンタインワンマン「チョコオォォォオン！」", type: "ワンマン", official: true, time: "開場 17:30 / 開演 18:00", ticket: "前売¥3,500/当日¥4,000" , setlist: ["からくりパルム", "エデンのそこ", "マイムマイム", "ばけもの", "いちぶんのいち", "ブラッディマイパレード", "「シン」せかい", "クライクライネ", "ベルフェとゆううつ", "ネバーエンド", "パルプディストーション", "せいたんデビル", "グラのしょくたく", "いらないもの", "ぼくとタルパ", "シャンバラ", "げんそうシンドローム"] },
+          { date: "2020-04-05", venue: "池袋EDGE", event: "無観客ライブ『夢遊病』", type: "無観客ライブ", x: true, setlist: ["システムエラー", "じひとじひと", "ねじれインサイド", "いちぶんのいち", "ぎゃっこうシティ", "アヴァリティアリティ", "ウラノメトリア", "パルプディストーション", "ピンキー"] },
+          { date: "2020-07-18", venue: "（配信）", event: "無観客配信ライブ", type: "配信", x: true, setlist: ["グルーミィグルーミー", "つきのかけら", "グッドナイトピクシー", "ばけもの", "アヴァリティアリティ", "マイムマイム", "ぼくとタルパ", "せいたんデビル", "いちぶんのいち", "パルプディストーション", "ぎゃっこうシティ", "トロイメライ"] },
           { date: "2020-08-23", venue: "（配信）", event: "5周年記念生配信", type: "配信", x: true },
           { date: "2020-10-24", venue: "大塚Deepa（配信併用）", event: "Luneバースデーワンマン「コネクト」", type: "配信ワンマン", x: true, self: true, time: "開場 18:30 / 開演 19:00", ticket: "前売¥4,000/当日未定" },
           { date: "2020-03-04", venue: "HOLIDAY SHINJUKU", event: "entrance presents『回転式時計-壱-』", type: "対バン・イベント", official: true, with: "蟻 / MIMIC / 蛇道", time: "開場 17:00 / 開演 17:30", ticket: "前売¥3,000/当日¥3,500（Drink代別途）" , setlist: ["システムエラー", "ばけもの", "グルーミィグルーミー", "すいそうのうみ", "ウラノメトリア", "ぼくとタルパ", "シャンバラ", "ピンキー"] },
-          { date: "2020-03-24", venue: "東高円寺二万電圧", event: "YOKE AGAIN RECORDS presents 蘭図2Man Live「交雑図」VS GRIMOIRE「生物学」", type: "ツーマン", official: true, with: "蘭図", time: "開場 18:00 / 開演 18:30", ticket: "前売¥3,500/当日¥4,000" },
+          { date: "2020-03-24", venue: "東高円寺二万電圧", event: "YOKE AGAIN RECORDS presents 蘭図2Man Live「交雑図」VS GRIMOIRE「生物学」", type: "ツーマン", official: true, with: "蘭図", time: "開場 18:00 / 開演 18:30", ticket: "前売¥3,500/当日¥4,000" , setlist: ["ばけもの", "からくりパルム", "ぼくとタルパ", "すいそうのうみ", "ウラノメトリア", "グッドナイトピクシー", "シャンバラ", "パルプディストーション", "いらないもの", "ピンキー"] },
           { date: "2020-12-15", venue: "池袋RED-Zone", event: "GRIMOIRE presents Melバースデーワンマン「うん。」（e+で販売）", type: "ワンマン", official: true, self: true, time: "開場 18:30 / 開演 19:00", ticket: "前売¥3,500/当日¥4,000/DRINK ¥500" , setlist: ["エデンのそこ", "ホワイティユアパレード", "せいたんデビル", "すいそうのうみ", "ウラノメトリア", "トロイメライ", "ドラムソロ", "パルプディストーション", "ゼロとくろ", "グラのしょくたく", "げんそうシンドローム", "よわむしクエスト", "クロノメイト", "ティンクルベル", "ピンキー"] , encore: ["ぼくとタルパ", "エデンのそこ"] }
         ],
         2021: [
@@ -3625,7 +3648,7 @@
           { date: "2021-03-26", venue: "高田馬場AREA", event: "Takadanobaba AREA presents Magic Friday～vol.4", type: "不明", single: true , setlist: ["マイムマイム", "ブラッディマイパレード", "「シン」せかい", "シャンバラ", "ぼくとタルパ", "ピンキー"] , with: "LAY ABOUT WORLD / LIPHLICH / マチルダ" , time: "開場 17:00 / 開演 17:30" , ticket: "当日¥5,500（D代込）" },
           { date: "2021-03-29", venue: "池袋EDGE", event: "新東京遊撃作戦 麒麟大作戦G", type: "不明", x: true , setlist: ["システムエラー", "ばけもの", "クライクライネ", "ぼくとタルパ", "グッドナイトピクシー", "いらないもの", "ホワイティユアパレード", "ぎゃっこうシティ", "ピンキー", "フラブジャスナハト", "タロットゲーム", "パルプディストーション"] , time: "開場 17:30 / 開演 18:00" , ticket: "当日¥5,100（1DRINK込）" },
           { date: "2021-04-03", venue: "高田馬場AREA", event: "", type: "不明", x: true },
-          { date: "2021-04-19", venue: "渋谷LOFT HEAVEN", event: "RyNKバースデー", type: "ワンマン系", x: true },
+          { date: "2021-04-19", venue: "渋谷LOFT HEAVEN", event: "RyNKバースデー「おたんじょうびかい」", type: "ワンマン系", x: true, setlist: ["せいたんデビル", "ピンキー", "ぼくとタルパ", "ひとりトピア", "ぎゃっこうシティ", "ネバーエンド", "つきのかけら", "クロノメイト", "いちぶんのいち", "からくりパルム", "299792458（カバー）", "トロイメライ"] },
           { date: "2021-05-26", venue: "池袋BlackHole", event: "Sick² 2マン", type: "ツーマン", self: true, with: "Sick²" , setlist: ["システムエラー", "ばけもの", "ハロー&グッバイ", "シャンバラ", "せいたんデビル", "「シン」せかい", "ブラッディマイパレード", "ベルフェとゆううつ", "ぎゃっこうシティ", "タロットゲーム", "ぼくとタルパ", "ピンキー"] },
           { date: "2021-06-06", venue: "池袋EDGE", event: "見世物小屋は終わらない", type: "対バン・イベント", x: true , setlist: ["すいそうのうみ", "ねじれインサイド", "パルプディストーション", "トロイメライ", "シャンバラ", "タロットゲーム", "ぼくとタルパ", "にわかあめ"] , with: "アマミツヽキ / ベル" , time: "開場 16:30 / 開演 17:00" , ticket: "当日¥5,100（1DRINK込）" },
           { date: "2021-06-26", venue: "初台DOORS", event: "まぶだちごっこ", type: "不明", self: true , setlist: ["ウラノメトリア", "ブラッディマイパレード", "タロットゲーム", "ばけもの", "シャンバラ", "ぼくとタルパ", "空想日和"] , with: "アンフィル / Develop One's Faculties / Chanty" , info: "GRIMOIRE出演 19:45-20:20" },
@@ -3640,18 +3663,18 @@
           { date: "2021-09-05", venue: "池袋BlackHole", event: "BLUESounds presents『ユメノツヅキ act.11』", type: "不明", self: true , setlist: ["mAsk", "ブラッディマイパレード", "グッドナイトピクシー", "すいそうのうみ", "フラブジャスナハト", "パルプディストーション", "ばけもの"] , with: "グラビティ / マチルダ / ヤミテラ / LAY ABOUT WORLD / タラれば（O.A.）" , time: "開場 14:45 / 開演 15:15" , ticket: "前売¥4,000/当日¥4,500" },
           { date: "2021-09-10", venue: "TSUTAYA O-WEST", event: "ゼラ主催『透明な迷宮』", type: "対バン・イベント", x: true, with: "KAKUMAY / アンドゥー / ミスイ / Sick² / XANVALA / ゼラ", setlist: ["mAsk", "シャンバラ", "クライクライネ", "嫌いなんです。", "エデンのそこ"], setlistNote: "新曲1曲披露" , time: "開場 15:30 / 開演 16:00" , ticket: "当日券¥5,400" , info: "GRIMOIRE出演 18:00〜" },
           { date: "2021-10-28", venue: "TSUTAYA O-WEST", event: "Sick²主催イベント『やっぱりハロウィンって渋谷なの？』", type: "不明", self: true , setlist: ["トリックホリック", "ブラッディマイパレード", "ばけもの", "嫌いなんです。", "パルプディストーション"] , with: "Houts / ゼブラッコ / 3470.MON / ジャックケイパー / グラビティ / ビバラッシュ / Sick²" , time: "開場 15:30 / 開演 16:00" , ticket: "当日券¥5,400" , withPartial: true },
-          { date: "2021-12-20", venue: "池袋RED-Zone", event: "", type: "不明", self: true }
+          { date: "2021-12-20", venue: "池袋RED-Zone", event: "Melバースデーワンマン「うんうん。」", type: "ワンマン", self: true, setlist: ["よわむしクエスト", "王子様と透明人間", "せいたんデビル", "「シン」せかい", "タロットゲーム", "ブラッディマイパレード", "グラのしょくたく", "嫌いなんです。", "ピンキー", "ぼくとタルパ", "げんそうシンドローム", "エデンのそこ", "つきのかけら", "トロイメライ", "ゼロとくろ", "空想日和"] }
         ],
         2022: [
-          { date: "2022-01-22", venue: "堺東Goith", event: "TOUR 2022「LEGOism」", type: "対バン（ツアー）", x: true, self: true, setlist: ["王子様と透明人間", "ハロー&グッバイ", "ねじれインサイド", "マイムマイム", "せいたんデビル", "mAsk", "シャンバラ", "グラのしょくたく", "グルーミィグルーミー", "パルプディストーション", "嫌いなんです。", "ピンキーモノクロさん", "ばけもの", "エデンのそこ", "タロットゲーム", "空想日和"] },
-          { date: "2022-01-23", venue: "名古屋LIVEHOUSE SOUNDNOTE NAGOYA", event: "TOUR 2022「LEGOism」", type: "不明", self: true },
+          { date: "2022-01-22", venue: "堺東goith", event: "TOUR 2022「LEGOism」", type: "対バン（ツアー）", x: true, self: true, setlist: ["王子様と透明人間", "ハロー&グッバイ", "ねじれインサイド", "マイムマイム", "せいたんデビル", "mAsk", "シャンバラ", "グラのしょくたく", "グルーミィグルーミー", "パルプディストーション", "嫌いなんです。", "ピンキー", "モノクロさん", "ばけもの", "エデンのそこ", "タロットゲーム", "空想日和"] },
+          { date: "2022-01-23", venue: "名古屋LIVEHOUSE SOUNDNOTE NAGOYA", event: "TOUR 2022「LEGOism」", type: "不明", self: true, setlist: ["王子様と透明人間", "せいたんデビル", "にわかあめ", "マイムマイム", "フラブジャスナハト", "mAsk", "「シン」せかい", "いらないもの", "グルーミィグルーミー", "パルプディストーション", "嫌いなんです。", "ピンキー", "モノクロさん", "ばけもの", "シャンバラ", "グラのしょくたく", "空想日和"] },
           { date: "2022-01-29", venue: "初台DOORS", event: "LEGOismツアー", type: "対バン（ツアー）", x: true, self: true },
           { date: "2022-02-26", venue: "WildSide Tokyo", event: "Kieバースデーワンマン「おはよう。」", type: "ワンマン", x: true, self: true, setlist: ["マイムマイム", "ホワイティユアパレード", "いらないもの", "ばけもの", "王子様と透明人間", "クライクライネ", "プラスチックシアター", "ベルフェとゆううつ", "ネバーエンド", "嫌いなんです。", "ブラッディマイパレード", "せいたんデビル", "シャンバラ", "タロットゲーム", "「シン」せかい", "げんそうシンドローム", "エデンのそこ"], encore: ["グラのしょくたく"] },
           { date: "2022-03-12", venue: "渋谷Milky Way", event: "Rorschach.inc 2マン（曲交換あり）", type: "ツーマン", x: true, with: "Rorschach.inc", setlist: ["システムエラー", "王子様と透明人間", "グッドナイトピクシー", "ハロー&グッバイ", "フラブジャスナハト", "ぼくとタルパ", "WATCHMEN※", "タロットゲーム", "ウラノメトリア"], setlistNote: "※WATCHMENは曲交換によるRorschach.inc楽曲の可能性" },
           { date: "2022-03-28", venue: "東高円寺二万電圧", event: "グリブロス", type: "ツーマン", x: true, self: true, with: "ヘルブロス", setlist: ["あましずくとマクガフィン", "王子様と透明人間", "マイムマイム", "いらないもの", "いちぶんのいち", "グッドナイトピクシー", "シャンバラ", "ぼくとタルパ", "パルプディストーション", "嫌いなんです。", "ゼロとくろ"] },
           { date: "2022-04-09", venue: "高田馬場CLUB PHASE", event: "ベル presents ベル×GRIMOIRE 2マン企画『サクラ大戦-第弐夜-』REVENGE", type: "ツーマン", x: true, with: "ベル", note: "同イベントは4/2 heidi.、4/9 GRIMOIRE、4/16 Leetspeak monstersの日替わり2マン形式", setlist: ["フラブジャスナハト", "王子様と透明人間", "クライクライネ", "エデンのそこ", "グッドナイトピクシー", "嫌いなんです。", "mAsk", "ベルフェとゆううつ", "ブラッディマイパレード", "シャンバラ", "いらないもの", "げんそうシンドローム", "「シン」せかい"] },
           { date: "2022-04-17", venue: "原宿ストロボカフェ", event: "RyNKバースデーイベント「おたんじょうびかい」（アコースティック）", type: "バースデーイベント", x: true, self: true, setlist: ["モノクロさん", "せいたんデビル", "ひとりトピア", "ピコッキー", "ぼくとタルパ", "嫌いなんです。", "凛々（カバー）", "299792458（カバー）", "ネバーエンド", "つきのかけら", "クロノメイト"] },
-          { date: "2022-05-07", venue: "初台DOORS", event: "ゆめのまほろば 〜いつか〜", type: "ワンマン（活動休止ライブ）", self: true }
+          { date: "2022-05-07", venue: "初台DOORS", event: "ゆめのまほろば 〜いつか〜", type: "ワンマン（活動休止ライブ）", self: true, setlist: ["空想日和", "プラスチックシアター", "ねじれインサイド", "シャンバラ", "いらないもの", "おはようスペルビア", "グルーミィグルーミー", "じひとじひと", "ベルフェとゆううつ", "アヴァリティアリティ", "グラのしょくたく", "ラストプレィ", "システムエラー", "よわむしクエスト", "つきのかけら", "ピンキー", "モノクロさん", "フラブジャスナハト", "ブラッディマイパレード", "「シン」せかい", "タロットゲーム", "マイムマイム", "パルプディストーション", "嫌いなんです。", "ウラノメトリア", "ゼロとくろ", "げんそうシンドローム", "ぼくとタルパ", "トロイメライ"] }
         ],
         2023: [
         ],
@@ -3696,7 +3719,8 @@
           { date: "2020-03-15", venue: "池袋Black Hole", event: "感染² ジェネ★バースデー『誕生日に自分を殺しました。２』", act: "Mel のみ" },
           { date: "2020-03-31", venue: "高田馬場AREA", event: "感染² 祭-まつり-バースデー『マツリマニマニ２』", act: "Mel のみ" },
           { date: "2020-10-29", venue: "高田馬場AREA", event: "感染² 祭-まつり-バースデー『マツリマニマニ２』", act: "Mel のみ", official: true },
-          { date: "2020-12-17", venue: "池袋RED-Zone", event: "Mel presents メル × ベル 合同生誕祭ワンマン「戦友学」", act: "Mel 中心", official: true, self: true },
+          { date: "2020-12-17", venue: "池袋RED-Zone", event: "Mel presents メル × ベル 合同生誕祭ワンマン「戦友学」", act: "Mel 中心", official: true, self: true, setlist: ["ジャパニーズロウレゾキャラメルタウン（彩冷える）", "キスミィスノウ（彩冷える）", "月詠い（彩冷える）", "天上アクアリウム（少女-ロリヰタ-23区）", "うさぎにげる花園（少女-ロリヰタ-23区）", "brilliant lover's（Ruvie）", "人魚（ヴィドール）", "心臓愛狂います。", "丸の内サディスティック（椎名林檎）", "ギブス（椎名林檎）", "つきのかけら（GRIMOIRE）", "ストロベリー・オン・ザ・ナイトメア（ドレミ・ファ）", "斜陽（ヘルタースケルター）"] },
+          { date: "2021-12-21", venue: "池袋RED-Zone", event: "Mel presents「戦友学 2021」", act: "Mel 主催", self: true, with: "翔梧（アンフィル）／公佑／白（Chanty）／てら", setlists: [{ band: "GRIMOIRE", songs: ["ぼくとタルパ", "せいたんデビル", "ウラノメトリア"] }, { band: "アンフィル", songs: ["kILLER GOURMET", "迷い姫"] }, { band: "LEZARD", songs: ["Driving[DPY]", "とっとこスーパーパンチ"] }, { band: "Chanty", songs: ["m.o.b", "犬小屋より愛をこめて"] }, { band: "NEVERLAND", songs: ["ココロアンブレラ", "NIGHT PARADE"] }] },
           { date: "2020-12-24", venue: "目黒Kahoo", event: "RyNK presents（クリスマスソロイベント）", act: "RyNK のみ" },
           { date: "2020-12-29", venue: "TSUTAYA O-WEST", event: "rivabook presents「FINAL CUP 2020」", act: "Mel のみ" },
           { date: "2021-08-07", venue: "EINS HIMMEL+", event: "Eine Bindung VOL.17 一日店長イベント", act: "Lune（グリモア）", self: true , time: "17:00-20:00" },
@@ -3906,6 +3930,21 @@
           html += '<td class="event">' + (r.event ? esc(r.event) : '<span class="unknown">（不明）</span>') + "</td>";
           html += '<td class="act">' + esc(r.act) + "</td>";
           html += "</tr>";
+          if (r.setlist || r.setlists) {
+            html += '<tr class="solo-setlist-row"><td colspan="4">';
+            if (r.setlist) {
+              html += '<span class="solo-setlist-label">セットリスト</span>';
+              html += '<ol class="solo-setlist">' + r.setlist.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ol>";
+            }
+            if (r.setlists) {
+              html += '<span class="solo-setlist-label">セットリスト</span>';
+              r.setlists.forEach(function (g) {
+                html += '<div class="solo-setlist-group"><span class="solo-setlist-band">' + esc(g.band) + "</span>";
+                html += '<ol class="solo-setlist">' + g.songs.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ol></div>";
+              });
+            }
+            html += "</td></tr>";
+          }
         });
         html += "</tbody></table></div>";
         html += "</div>";
