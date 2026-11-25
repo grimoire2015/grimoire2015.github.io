@@ -2716,9 +2716,9 @@
           <p class="period">始動 <b>2015/08/23</b>〜</p>
           <p class="total-count">
             <span class="tc-label">総ライブ本数</span>
-            <span class="tc-value"><span class="tc-num" id="totalCount">335</span><span class="tc-unit">本</span></span>
+            <span class="tc-value"><span class="tc-num" id="totalCount">326</span><span class="tc-unit">本</span></span>
           </p>
-          <p class="total-sub" id="totalAll">＋インストア<b>81</b>件／全<b>416</b>件</p>
+          <p class="total-sub" id="totalAll">＋インストア<b>81</b>件／全<b>407</b>件</p>
           <div>
             <span class="status-strip"><span class="dot" aria-hidden="true"></span>随時更新中</span>
           </div>
@@ -7927,13 +7927,13 @@
             ヴィジュアル系バンド <b>GRIMOIRE（グリモア）</b> のライブ履歴をまとめたページです。
             バンド始動の<b>2015年8月23日</b>以降の期間を対象に、
             ワンマンライブ・イベントライブ等を年ごとに、日付順で記録しています。
-            現在<b>全335件</b>を収録しています
-            （このほか、インストアイベント<b>81件</b>も各年の本表に統合して掲載しており、ライブと合わせた収録総数は<b>全416件</b>です。
-            ページ下部に参考としてメンバーソロ出演<b>40件</b>を別枠で掲載し、
+            現在<b>全326件</b>を収録しています
+            （このほか、インストアイベント<b>81件</b>も各年の本表に統合して掲載しており、ライブと合わせた収録総数は<b>全407件</b>です。
+            ページ下部に参考としてメンバーソロ出演<b>35件</b>を別枠で掲載し、
             <b>12件</b>は、末尾の「要確認」セクションに分けて掲載しています）。
           </p>
           <p>
-            中止となった公演は、公演名にその旨を注記したうえで掲載しています。
+            中止となった公演は、公演名にその旨を注記したうえで掲載しています（上記の件数には含めていません）。
           </p>
           <p>
             情報は<b>随時追加・更新</b>されます。日付・会場・公演名などに誤りや漏れが見つかった場合は、
@@ -8375,15 +8375,15 @@
         instore: true の行はインストアイベント（種別欄に「インストア」と表示され、ライブ本数の集計からは除き、インストア込みの全件数にのみ数える）。
         niwakame: true の行はニワカアメ名義の公演（行に「ニワカアメ名義」と表示される）。
         gensou: true の行は始動前の前身名義「げんそうシンドローム」の公演（行に「げんそうシンドローム名義」と表示され、ACT欄は「げんそうシンドローム」になる）。日付が不明な行は date を空にし、dateLabel で日付欄の表示文言を指定する。
-        excludeCount: true の行は表示はするが本表の件数（年別件数・総本数）には数えない（始動前の関連公演など）。
+        excludeCount: true の行は表示はするが件数（年別件数・総本数・インストア件数・ソロ件数）には数えない（中止公演など）。
         SOLO_DATA（メンバーソロ出演）・PENDING_DATA（要確認：告知のみ・実施未確認）は本表とは別の参考データで、合計件数には含めない。
         SOLO_DATA の行に setlist（曲名の配列）がある場合は行の下にセトリを併記し、setlists（バンド別の {band, songs} の配列）がある場合はバンド別セトリを併記する。
       */
       var LIVE_DATA = {
         2015: [
-          { date: "2015-06-29", venue: "新宿アルタ", event: "おでかけ", type: "イベント", official: true, excludeCount: true, note: "GRIMOIRE始動前（2015-08-23より前）の関連イベント。始動前の関連公演として本表の件数には含めていません", time: "17:00～／19:00～（2回実施）", info: "新宿アルタ前でKie・Amu・Lune・Melがフライヤーを配布した。時間：17:00～／19:00～（2回実施）" },
-          { date: "2015-07-09", venue: "池袋EDGE", event: "NEW AGE Vol.11", type: "対バン・イベント", self: true, gensou: true, excludeCount: true, note: "GRIMOIRE始動前（2015-08-23より前）に前身名義「げんそうシンドローム」で出演した公演。始動前の関連公演として本表の件数には含めていません", with: "【TRIANGLE▼SONiX】 / DiCE / SALIVAN / Artemis / PIGLOW in GLOOMY / DEEP RAVE 他", setlist: ["ひとりトピア"], info: "幕が閉じたまま演奏が始まり、サビで幕が開く演出。1曲のみで終了。", time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,300" },
-          { date: "2015-07-27", venue: "HOLIDAY SHINJUKU", event: "CROWN×CROWN presents「reflection of desire GOLD 〜新宿絶対幽閉区域〜 vol.75」", type: "対バン・イベント", self: true, gensou: true, excludeCount: true, note: "GRIMOIRE始動前（2015-08-23より前）に前身名義「げんそうシンドローム」で出演した公演。始動前の関連公演として本表の件数には含めていません", with: "DADAROMA / FakeFixion / EGOIST / Krad. / THE VELVET / DAMY / Dead Children / BLESSCODE / メルヴェル / ゆきねセッション", setlist: ["ひとりトピア"], info: "幕が閉じたまま演奏が始まり、サビで幕が開く演出。1曲のみで終了。", time: "開場 15:00 / 開演 15:30", ticket: "前売¥3,500" },
+          { date: "2015-06-29", venue: "新宿アルタ", event: "おでかけ", type: "インストア", instore: true, official: true, note: "GRIMOIRE始動前（2015-08-23より前）の関連イベント。インストアイベントとして件数に含めています", time: "17:00～／19:00～（2回実施）", info: "新宿アルタ前でKie・Amu・Lune・Melがフライヤーを配布した。時間：17:00～／19:00～（2回実施）" },
+          { date: "2015-07-09", venue: "池袋EDGE", event: "NEW AGE Vol.11", type: "対バン・イベント", self: true, gensou: true, note: "GRIMOIRE始動前（2015-08-23より前）に前身名義「げんそうシンドローム」で出演した公演", with: "【TRIANGLE▼SONiX】 / DiCE / SALIVAN / Artemis / PIGLOW in GLOOMY / DEEP RAVE 他", setlist: ["ひとりトピア"], info: "幕が閉じたまま演奏が始まり、サビで幕が開く演出。1曲のみで終了。", time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,300" },
+          { date: "2015-07-27", venue: "HOLIDAY SHINJUKU", event: "CROWN×CROWN presents「reflection of desire GOLD 〜新宿絶対幽閉区域〜 vol.75」", type: "対バン・イベント", self: true, gensou: true, note: "GRIMOIRE始動前（2015-08-23より前）に前身名義「げんそうシンドローム」で出演した公演", with: "DADAROMA / FakeFixion / EGOIST / Krad. / THE VELVET / DAMY / Dead Children / BLESSCODE / メルヴェル / ゆきねセッション", setlist: ["ひとりトピア"], info: "幕が閉じたまま演奏が始まり、サビで幕が開く演出。1曲のみで終了。", time: "開場 15:00 / 開演 15:30", ticket: "前売¥3,500" },
           { date: "2015-08-23", venue: "新宿RUIDO K4", event: "おひろめえんそうかい 〜はじまりエンドロール〜", type: "ワンマン（始動ライブ）", setlist: ["ひとりトピア", "にわかあめ", "ブラッディマイパレード", "からくりパルム", "ゼロとくろ", "「シン」せかい", "アルギュロスのはね", "エデンのそこ", "よわむしクエスト", "げんそうシンドローム"], time: "開場 17:30 / 開演 18:00", ticket: "前売¥3,000/当日¥3,500＋ドリンク(ドリンク¥600)" },
           { date: "2015-08-28", venue: "新宿RUIDO K4", event: "bell＋ presents 「Break Rush~vol.8~」", type: "不明", self: true, with: "My Fairytale / 弾丸 NO LIMIT / DADAROMA / VAN9ISH / SALIVAN / VAASTU / いろはにほへと", setlist: ["にわかあめ", "ブラッディマイパレード", "ゼロとくろ", "エデンのそこ"], time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,000+D/当日¥3,500+D（D代¥600）" },
           { date: "2015-09-11", venue: "新宿RUIDO K4", event: "bell＋ presents 「Break Rush~vol.9~」", type: "不明", x: true, with: "ALIVE / ぞんび / 弾丸NO LIMIT / Lydiar / アンフィル / SALIVAN / 【TRIANGLE▼SONiX】 / Purple Stone", setlist: ["にわかあめ", "「シン」せかい", "げんそうシンドローム", "エデンのそこ"], time: "開場 15:30 / 開演 16:00", ticket: "前売¥3,000/当日¥3,500" },
@@ -8744,7 +8744,7 @@
           { date: "2019-08-24", venue: "自主盤倶楽部", event: "『はじまりエンドロール』発売記念インストアイベント（トーク＆5ショットチェキ撮影会）", type: "インストア", instore: true, self: true, with: "RyNK / Kie / Lune / Mel", time: "開場 13:45 / 開演 14:00", ticket: "『はじまりエンドロール』購入者対象" },
           { date: "2019-11-09", venue: "littleHEARTS.新宿店", event: "5thシングル『ばけもの』リリースイベント（私物サイン＆5ショット撮影会）", type: "インストア", instore: true, self: true , time: "開場 14:45 / 開演 15:00" },
           { date: "2019-12-14", venue: "ライカ東京", event: "インストアイベント（振替開催）", type: "インストア", instore: true, self: true, time: "開始 17:00", info: "2019-10-12 ライカエジソン東京店『ばけもの』インストア（台風19号のため中止）の振替開催" },
-          { date: "2019-10-12", venue: "ライカエジソン東京店", event: "5thシングル『ばけもの』リリースイベント（ジャケットサイン＆5ショット撮影会）※台風19号のため中止（振替：2019-12-14）", type: "インストア", instore: true, self: true, time: "開場 13:45 / 開演 14:00" },
+          { date: "2019-10-12", venue: "ライカエジソン東京店", event: "5thシングル『ばけもの』リリースイベント（ジャケットサイン＆5ショット撮影会）※台風19号のため中止（振替：2019-12-14）", type: "インストア", instore: true, excludeCount: true, self: true, time: "開場 13:45 / 開演 14:00" },
           { date: "2019-10-20", venue: "自主盤倶楽部", event: "5thシングル『ばけもの』リリースイベント（トーク＆5ショット撮影会）", type: "インストア", instore: true, self: true, time: "開場 14:45 / 開演 15:00" },
           { date: "2019-11-23", venue: "ライカエジソン大阪店", event: "5thシングル『ばけもの』リリースイベント（トーク＆5ショット撮影会）", type: "インストア", instore: true, self: true, time: "開場 12:45 / 開演 13:00" },
           { date: "2019-11-29", venue: "fiveStars名古屋", event: "5thシングル『ばけもの』リリースイベント（トーク＆5ショット撮影会）", type: "インストア", instore: true, self: true, time: "開場 13:45 / 開演 14:00" }
@@ -8759,17 +8759,17 @@
           { date: "2020-02-19", venue: "TSUTAYA O-WEST", event: "rivabook presents「rivabook」", type: "対バン・イベント", official: true, with: "Chanty / ベル / SCAPEGOAT / Ashmaze. / グラビティ / Develop One's Faculties", time: "開場 16:15 / 開演 16:45", ticket: "前売¥4,100/当日¥4,600（ドリンク代別途）" , setlist: ["ばけもの", "せいたんデビル", "グッドナイトピクシー", "いらないもの", "ピンキー"] },
           { date: "2020-02-24", venue: "新宿 Live Freak", event: "GRIMOIRE presents キィバースデーバレンタインワンマン「チョコオォォォオン！」", type: "ワンマン", official: true, time: "開場 17:30 / 開演 18:00", ticket: "前売¥3,500/当日¥4,000" , setlist: ["からくりパルム", "エデンのそこ", "マイムマイム", "ばけもの", "いちぶんのいち", "ブラッディマイパレード", "「シン」せかい", "クライクライネ", "ベルフェとゆううつ", "ネバーエンド", "パルプディストーション", "せいたんデビル", "グラのしょくたく", "いらないもの", "ぼくとタルパ", "シャンバラ", "げんそうシンドローム"] },
           { date: "2020-04-05", venue: "池袋EDGE", event: "無観客ライブ『夢遊病』", type: "無観客ライブ", x: true, with: "REIGN / 感染²", info: "新型コロナウイルス感染拡大防止のため、チャリティー無観客ライブとして開催された。O.A.を予定していたゼラの出演は取りやめとなった", setlist: ["システムエラー", "じひとじひと", "ねじれインサイド", "いちぶんのいち", "ぎゃっこうシティ", "アヴァリティアリティ", "ウラノメトリア", "パルプディストーション", "ピンキー"] },
-          { date: "2020-05-02", venue: "渋谷Star lounge", event: "5周年記念特別企画「まぶだちごっこ〜5つのやくそく〜」「シャングリラ」※新型コロナウイルスのため中止", type: "ツーマン", with: "Chanty" },
-          { date: "2020-05-09", venue: "渋谷Star lounge", event: "5周年記念特別企画「まぶだちごっこ〜5つのやくそく〜」「きせきてききげきのつづき」※新型コロナウイルスのため中止", type: "ツーマン", with: "アンフィル" },
-          { date: "2020-05-10", venue: "新宿club SCIENCE", event: "新宿無双※新型コロナウイルスのため中止", type: "対バン・イベント", time: "開場 11:30 / 開演 12:00", ticket: "前売¥4,000/当日¥4,500" },
-          { date: "2020-05-24", venue: "渋谷Milkyway", event: "5周年記念特別企画「まぶだちごっこ〜5つのやくそく〜」「はくちゅうむびより」※新型コロナウイルスのため中止", type: "ツーマン", with: "Neverland" },
-          { date: "2020-05-31", venue: "渋谷Milkyway", event: "5周年記念特別企画「まぶだちごっこ〜5つのやくそく〜」「ファーストインプレッション」※新型コロナウイルスのため中止", type: "ツーマン", with: "Develop One's Faculties" },
-          { date: "2020-06-07", venue: "渋谷Space Odd", event: "5周年記念特別企画「まぶだちごっこ〜5つのやくそく〜」「このゆびとまれ」※新型コロナウイルスのため中止", type: "対バン・イベント", with: "Chanty / アンフィル / Neverland / Develop One's Faculties" },
-          { date: "2020-06-27", venue: "沖縄ヒューマンステージ", event: "5大都市ワンマンツアー「クインテットカーニバル」※新型コロナウイルスのため中止", type: "ワンマン（ツアー）" },
-          { date: "2020-07-04", venue: "名古屋Sound note", event: "5大都市ワンマンツアー「クインテットカーニバル」※新型コロナウイルスのため中止", type: "ワンマン（ツアー）" },
-          { date: "2020-07-05", venue: "大阪 goith", event: "5大都市ワンマンツアー「クインテットカーニバル」※新型コロナウイルスのため中止", type: "ワンマン（ツアー）" },
-          { date: "2020-07-11", venue: "仙台 enn3rd", event: "5大都市ワンマンツアー「クインテットカーニバル」※新型コロナウイルスのため中止", type: "ワンマン（ツアー）" },
-          { date: "2020-08-30", venue: "TSUTAYA O-WEST", event: "5周年記念ワンマン「ゆめのまほろば～そのご～」※新型コロナウイルスのため中止", type: "ワンマン", time: "開場 16:30 / 開演 17:00", ticket: "前売¥4,500/当日¥5,000" },
+          { date: "2020-05-02", venue: "渋谷Star lounge", event: "5周年記念特別企画「まぶだちごっこ〜5つのやくそく〜」「シャングリラ」※新型コロナウイルスのため中止", type: "ツーマン", excludeCount: true, with: "Chanty" },
+          { date: "2020-05-09", venue: "渋谷Star lounge", event: "5周年記念特別企画「まぶだちごっこ〜5つのやくそく〜」「きせきてききげきのつづき」※新型コロナウイルスのため中止", type: "ツーマン", excludeCount: true, with: "アンフィル" },
+          { date: "2020-05-10", venue: "新宿club SCIENCE", event: "新宿無双※新型コロナウイルスのため中止", type: "対バン・イベント", excludeCount: true, time: "開場 11:30 / 開演 12:00", ticket: "前売¥4,000/当日¥4,500" },
+          { date: "2020-05-24", venue: "渋谷Milkyway", event: "5周年記念特別企画「まぶだちごっこ〜5つのやくそく〜」「はくちゅうむびより」※新型コロナウイルスのため中止", type: "ツーマン", excludeCount: true, with: "Neverland" },
+          { date: "2020-05-31", venue: "渋谷Milkyway", event: "5周年記念特別企画「まぶだちごっこ〜5つのやくそく〜」「ファーストインプレッション」※新型コロナウイルスのため中止", type: "ツーマン", excludeCount: true, with: "Develop One's Faculties" },
+          { date: "2020-06-07", venue: "渋谷Space Odd", event: "5周年記念特別企画「まぶだちごっこ〜5つのやくそく〜」「このゆびとまれ」※新型コロナウイルスのため中止", type: "対バン・イベント", excludeCount: true, with: "Chanty / アンフィル / Neverland / Develop One's Faculties" },
+          { date: "2020-06-27", venue: "沖縄ヒューマンステージ", event: "5大都市ワンマンツアー「クインテットカーニバル」※新型コロナウイルスのため中止", type: "ワンマン（ツアー）", excludeCount: true },
+          { date: "2020-07-04", venue: "名古屋Sound note", event: "5大都市ワンマンツアー「クインテットカーニバル」※新型コロナウイルスのため中止", type: "ワンマン（ツアー）", excludeCount: true },
+          { date: "2020-07-05", venue: "大阪 goith", event: "5大都市ワンマンツアー「クインテットカーニバル」※新型コロナウイルスのため中止", type: "ワンマン（ツアー）", excludeCount: true },
+          { date: "2020-07-11", venue: "仙台 enn3rd", event: "5大都市ワンマンツアー「クインテットカーニバル」※新型コロナウイルスのため中止", type: "ワンマン（ツアー）", excludeCount: true },
+          { date: "2020-08-30", venue: "TSUTAYA O-WEST", event: "5周年記念ワンマン「ゆめのまほろば～そのご～」※新型コロナウイルスのため中止", type: "ワンマン", excludeCount: true, time: "開場 16:30 / 開演 17:00", ticket: "前売¥4,500/当日¥5,000" },
           { date: "2020-07-18", venue: "（配信）", event: "無観客配信ライブ", type: "配信", x: true, info: "5大都市ワンマンツアー「クインテットカーニバル」池袋EDGE公演を無観客生配信に変更して開催", setlist: ["グルーミィグルーミー", "つきのかけら", "グッドナイトピクシー", "ばけもの", "アヴァリティアリティ", "マイムマイム", "ぼくとタルパ", "せいたんデビル", "いちぶんのいち", "パルプディストーション", "ぎゃっこうシティ", "トロイメライ"] },
           { date: "2020-08-23", venue: "（配信）", event: "5周年記念生配信", type: "配信", x: true },
           { date: "2020-10-24", venue: "大塚Deepa（配信併用）", event: "Luneバースデーワンマン「コネクト」", type: "配信ワンマン", x: true, self: true, time: "開場 18:30 / 開演 19:00", ticket: "前売¥4,000/当日未定" },
@@ -8855,11 +8855,11 @@
           { date: "2020-03-14", venue: "池袋EDGE", event: "ジャックケイパー東京23区ワンマンツアー『御礼参り〜豊島区〜編』", act: "Mel のみ" },
           { date: "2020-03-15", venue: "池袋Black Hole", event: "感染² ジェネ★バースデー『誕生日に自分を殺しました。２』", act: "Mel のみ" },
           { date: "2020-03-31", venue: "高田馬場AREA", event: "感染² 祭-まつり-バースデー『マツリマニマニ２』", act: "Mel のみ" },
-          { date: "2020-05-16", venue: "目黒カフー", event: "RyNKソロ 1年企画「おひとりさまですか？」※新型コロナウイルスのため中止", act: "RyNK ソロ" },
-          { date: "2020-06-21", venue: "目黒カフー", event: "RyNKソロ 1年企画「おひとりさまですか？」※新型コロナウイルスのため中止", act: "RyNK ソロ" },
-          { date: "2020-07-19", venue: "目黒カフー", event: "RyNKソロ 1年企画「おひとりさまですか？」※新型コロナウイルスのため中止", act: "RyNK ソロ" },
-          { date: "2020-07-30", venue: "渋谷LOFT HEAVEN", event: "", act: "RyNK のみ", info: "RyNKのみ出演予定だったが、新型コロナウイルスのため出演中止" },
-          { date: "2020-08-16", venue: "目黒カフー", event: "RyNKソロ 1年企画「おひとりさまですか？」※新型コロナウイルスのため中止", act: "RyNK ソロ" },
+          { date: "2020-05-16", venue: "目黒カフー", event: "RyNKソロ 1年企画「おひとりさまですか？」※新型コロナウイルスのため中止", act: "RyNK ソロ", excludeCount: true },
+          { date: "2020-06-21", venue: "目黒カフー", event: "RyNKソロ 1年企画「おひとりさまですか？」※新型コロナウイルスのため中止", act: "RyNK ソロ", excludeCount: true },
+          { date: "2020-07-19", venue: "目黒カフー", event: "RyNKソロ 1年企画「おひとりさまですか？」※新型コロナウイルスのため中止", act: "RyNK ソロ", excludeCount: true },
+          { date: "2020-07-30", venue: "渋谷LOFT HEAVEN", event: "", act: "RyNK のみ", excludeCount: true, info: "RyNKのみ出演予定だったが、新型コロナウイルスのため出演中止" },
+          { date: "2020-08-16", venue: "目黒カフー", event: "RyNKソロ 1年企画「おひとりさまですか？」※新型コロナウイルスのため中止", act: "RyNK ソロ", excludeCount: true },
           { date: "2020-10-29", venue: "高田馬場AREA", event: "感染² 祭-まつり-バースデー『マツリマニマニ２』", act: "Mel のみ", official: true },
           { date: "2020-12-17", venue: "池袋RED-Zone", event: "Mel presents メル × ベル 合同生誕祭ワンマン「戦友学」", act: "Mel 中心", official: true, self: true, setlist: ["ジャパニーズロウレゾキャラメルタウン（彩冷える）", "キスミィスノウ（彩冷える）", "月詠い（彩冷える）", "天上アクアリウム（少女-ロリヰタ-23区）", "うさぎにげる花園（少女-ロリヰタ-23区）", "brilliant lover's（Ruvie）", "人魚（ヴィドール）", "心臓愛狂います。", "丸の内サディスティック（椎名林檎）", "ギブス（椎名林檎）", "つきのかけら（GRIMOIRE）", "ストロベリー・オン・ザ・ナイトメア（ドレミ・ファ）", "斜陽（ヘルタースケルター）"] },
           { date: "2021-12-21", venue: "池袋RED-Zone", event: "Mel presents「戦友学 2021」", act: "Mel 主催", self: true, with: "翔梧（アンフィル）／公佑／白（Chanty）／てら", setlists: [{ band: "GRIMOIRE", songs: ["ぼくとタルパ", "せいたんデビル", "ウラノメトリア"] }, { band: "アンフィル", songs: ["kILLER GOURMET", "迷い姫"] }, { band: "LEZARD", songs: ["Driving[DPY]", "とっとこスーパーパンチ"] }, { band: "Chanty", songs: ["m.o.b", "犬小屋より愛をこめて"] }, { band: "NEVERLAND", songs: ["ココロアンブレラ", "NIGHT PARADE"] }] },
@@ -9066,7 +9066,7 @@
           html += '<summary class="year-head">';
           html += "<h2>" + y + '<span class="jp">年</span></h2>';
           html += '<span class="count-badge' + (n === 0 ? " zero" : "") + '">全' + n + "件</span>";
-          var instoreCount = rows.filter(function (r) { return r.instore; }).length;
+          var instoreCount = rows.filter(function (r) { return r.instore && !r.excludeCount; }).length;
           if (instoreCount > 0) {
             html += '<span class="instore-note">うち インストア' + instoreCount + '件</span>';
           }
@@ -9124,7 +9124,7 @@
         }
         html += '<details class="year ref" id="ref-solo">';
         html += '<summary class="year-head"><h2>参考<span class="jp">メンバーソロ出演</span></h2>';
-        html += '<span class="count-badge">全' + solo.length + '件</span><span class="chev" aria-hidden="true">▼</span></summary>';
+        html += '<span class="count-badge">全' + solo.filter(function (r) { return !r.excludeCount; }).length + '件</span><span class="chev" aria-hidden="true">▼</span></summary>';
         html += '<div class="year-body">';
         html += '<p class="ref-note">バンド全体の公演ではない、メンバーのみの出演・ソロ公演や、メンバー関連ユニットの公演です。本表の合計件数には含めていません。</p>';
         html += '<div class="table-scroll"><table class="lives">';
@@ -9213,7 +9213,7 @@
       var TOTAL_INSTORE = 0;
       YEARS.forEach(function (y) {
         LIVE_DATA[y].forEach(function (r) {
-          if (r.instore) TOTAL_INSTORE++; else if (!r.excludeCount) TOTAL_LIVES++;
+          if (r.instore) { if (!r.excludeCount) TOTAL_INSTORE++; } else if (!r.excludeCount) TOTAL_LIVES++;
         });
       });
       document.getElementById("totalCount").textContent = TOTAL_LIVES;
