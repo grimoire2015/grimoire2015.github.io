@@ -276,7 +276,7 @@
       /* ---------- Accordion : about ---------- */
       details.about {
         border: 1px dotted var(--dot);
-        margin: 0 0 36px;
+        margin: 44px 0 36px;
       }
       details.about summary {
         cursor: pointer; list-style: none;
@@ -531,7 +531,9 @@
          実物スクリーンショットから切り出した筆文字バナーを先頭に置き、
          「YYYY.MM.DD - 会場名 ＞」だけの行リストにする。年別ナビと件数表示は出さず、
          年見出しだけを薄く残す（アンカー #year-xxxx は年見出しが担う）。
-         詳細は行タップで公演詳細ページ（#live-g-…）へ遷移する */
+         詳細は行タップで公演詳細ページ（#live-g-…）へ遷移する。
+         年見出しはアコーディオン（details）になっており、タップでその年の
+         行リストが開閉する。初期状態は最新年のみ開く */
       #panel-live .year-nav, #panel-live .sched-heading { display: none; }
       .yakusoku-banner {
         display: block; width: 100%; height: auto;
@@ -541,12 +543,33 @@
         display: block; width: 100%; height: auto;
         margin: 0 0 20px;
       }
-      .live-year {
+      /* GRIMOIREモードのNEWS／LIVEタブは当時の公式サイトどおりバナーから始めるため、
+         タブ名見出し（NEWS／LIVE）は通常モードでは出さない。
+         ニワカアメモードではこの見出しがグレーの見出しバーとして使われるため、
+         要素自体は残し、通常モードでのみ隠す */
+      body:not(.niwakame) #news-heading,
+      body:not(.niwakame) #live-heading { display: none; }
+      details.live-acc { margin: 26px 0 0; scroll-margin-top: 150px; }
+      details.live-acc:first-child { margin-top: 2px; }
+      summary.live-year {
+        display: flex; align-items: center; gap: 12px;
+        min-height: 2.75rem; padding: 6px 2px;
+        cursor: pointer; list-style: none;
         font-family: var(--font-serif); font-weight: 400;
         font-size: 14px; letter-spacing: .34em; color: #555555;
-        margin: 32px 0 2px; scroll-margin-top: 150px;
       }
-      .live-year:first-child { margin-top: 8px; }
+      summary.live-year::-webkit-details-marker { display: none; }
+      summary.live-year:hover { color: #8a8a8a; }
+      summary.live-year:focus-visible { outline: 2px solid var(--head); outline-offset: 2px; }
+      .live-year-text { flex: 1 1 auto; }
+      .live-year-chev {
+        flex: 0 0 auto; font-size: 10px; letter-spacing: 0; color: #666666;
+        transition: transform .25s ease;
+      }
+      details.live-acc[open ] > summary.live-year .live-year-chev { transform: rotate(180deg); }
+      @media (prefers-reduced-motion: reduce) {
+        .live-year-chev { transition: none; }
+      }
       ul.live-list { list-style: none; margin: 0; padding: 0; }
       a.live-row {
         display: flex; align-items: center; gap: 12px;
@@ -2036,11 +2059,11 @@
         <div class="nk-home-main">
           <h2 class="nk-h">HEADLINE NEWS</h2>
           <ul class="nk-headline">
-            <li><a href="#news"><span class="nk-date">2015.03.19</span>ニワカアメ活動終了主催</a></li>
-            <li><a href="#news"><span class="nk-date">2015.02.26</span>ライブ追加情報</a></li>
-            <li><a href="#news"><span class="nk-date">2015.02.21</span>ライブ追加情報</a></li>
-            <li><a href="#news"><span class="nk-date">2015.02.17</span>ニワカヘドバンムービー</a></li>
-            <li><a href="#news"><span class="nk-date">2015.02.12</span>ライブ追加情報</a></li>
+            <li><a href="#news-nk-activity-end"><span class="nk-date">2015.03.19</span>ニワカアメ活動終了主催</a></li>
+            <li><a href="#news-nk-20150226"><span class="nk-date">2015.02.26</span>ライブ追加情報</a></li>
+            <li><a href="#news-nk-20150221"><span class="nk-date">2015.02.21</span>ライブ追加情報</a></li>
+            <li><a href="#news-nk-20150217"><span class="nk-date">2015.02.17</span>ニワカヘドバンムービー</a></li>
+            <li><a href="#news-nk-20150212a"><span class="nk-date">2015.02.12</span>ライブ追加情報</a></li>
           </ul>
           <p class="nk-more"><a href="#news">&gt;&gt; 一覧を見る</a></p>
         </div>
@@ -2892,28 +2915,6 @@
       </div>
 
       <div class="tab-panel" id="panel-live" data-panel="live" role="tabpanel" aria-labelledby="tab-live" hidden>
-      <details class="about">
-        <summary>このページについて<span class="chev" aria-hidden="true">▼</span></summary>
-        <div class="about-body">
-          <p>
-            ヴィジュアル系バンド <b>GRIMOIRE（グリモア）</b> のライブ履歴をまとめたページです。
-            バンド始動の<b>2015年8月23日</b>以降の期間を対象に、
-            ワンマンライブ・イベントライブ等を年ごとに、日付順で記録しています。
-            現在<b>全323件</b>を収録しています
-            （このほか、インストアイベント<b>69件</b>も各年の本表に統合して掲載しており、ライブと合わせた収録総数は<b>全392件</b>です。
-            ページ下部に参考としてメンバーソロ出演<b>36件</b>を別枠で掲載し、
-            <b>12件</b>は、末尾の「要確認」セクションに分けて掲載しています）。
-          </p>
-          <p>
-            中止・延期となった公演は、実施されていないため本表には含めていません。
-          </p>
-          <p>
-            情報は<b>随時追加・更新</b>されます。日付・会場・公演名などに誤りや漏れが見つかった場合は、
-            判明次第このページへ反映します。
-          </p>
-        </div>
-      </details>
-
       <!-- ニワカアメモード SCHEDULE：一覧は日付＋会場名だけの行（タイトル・時間・料金・共演は出さない）。
            各公演をタップすると詳細ページ（#live-nk-xxxxxxxx）へ遷移する（NEWSと同じハッシュ遷移方式）。
            詳細ページ本体は panel-live の直後にある panel-live-detail 内に置く -->
@@ -2944,6 +2945,29 @@
       </section>
 
       <div id="refRoot"></div>
+
+      <!-- 「このページについて」は当時の公式サイトの見た目に寄せ、LIVEタブの一番下に置く -->
+      <details class="about">
+        <summary>このページについて<span class="chev" aria-hidden="true">▼</span></summary>
+        <div class="about-body">
+          <p>
+            ヴィジュアル系バンド <b>GRIMOIRE（グリモア）</b> のライブ履歴をまとめたページです。
+            バンド始動の<b>2015年8月23日</b>以降の期間を対象に、
+            ワンマンライブ・イベントライブ等を年ごとに、日付順で記録しています。
+            現在<b>全323件</b>を収録しています
+            （このほか、インストアイベント<b>69件</b>も各年の本表に統合して掲載しており、ライブと合わせた収録総数は<b>全392件</b>です。
+            ページ下部に参考としてメンバーソロ出演<b>36件</b>を別枠で掲載し、
+            <b>12件</b>は、末尾の「要確認」セクションに分けて掲載しています）。
+          </p>
+          <p>
+            中止・延期となった公演は、実施されていないため本表には含めていません。
+          </p>
+          <p>
+            情報は<b>随時追加・更新</b>されます。日付・会場・公演名などに誤りや漏れが見つかった場合は、
+            判明次第このページへ反映します。
+          </p>
+        </div>
+      </details>
       </div>
 
       <!-- ニワカアメモード SCHEDULE詳細ページ（#live-nk-xxxxxxxx・ニワカアメモード中だけ開ける） -->
@@ -4004,7 +4028,12 @@
              薄い年見出し＋「YYYY.MM.DD - 会場名 ＞」の行のみを並べ、
              詳細は行タップで公演詳細ページ（#live-g-…）へ遷移する */
           if (!NK_FILTER) {
-            html += '<h3 class="live-year" id="year-' + y + '">' + y + "</h3>";
+            /* 年ごとのアコーディオン：年見出しタップでその年の行リストが開閉する。
+               初期状態は最新年のみ開く */
+            var openAttr = y === years[years.length - 1] ? " open" : "";
+            html += '<details class="live-acc" id="year-' + y + '"' + openAttr + ">";
+            html += '<summary class="live-year"><span class="live-year-text">' + y + "</span>" +
+              '<span class="live-year-chev" aria-hidden="true">▼</span></summary>';
             if (rows.length === 0) {
               html += '<p class="live-empty">' +
                 (isHiatus ? "活動休止期間のため公演なし" : "公演情報は順次追加します") +
@@ -4020,6 +4049,7 @@
               });
               html += "</ul>";
             }
+            html += "</details>";
             return;
           }
 
@@ -4353,6 +4383,8 @@
           if (raw) {
             var target = document.getElementById(raw);
             if (target) {
+              /* アンカー先がアコーディオン（#year-xxxx 等）の場合は開いてから表示する */
+              if (target.tagName === "DETAILS") target.open = true;
               var p = target;
               while (p && !(p.classList && p.classList.contains("tab-panel"))) p = p.parentNode;
               if (p) {
