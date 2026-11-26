@@ -1736,6 +1736,45 @@
       .contact-note a { color: var(--ink-dim); text-decoration: underline; text-underline-offset: 3px; }
       .contact-note a:hover, .contact-note a:focus-visible { color: #e8e8e8; }
 
+      /* ---------- CONTACT：情報を探しています ---------- */
+      .wanted-box {
+        max-width: 640px; margin: 36px auto 0;
+        padding: 24px 6px 0;
+        border-top: 1px dotted var(--dot);
+      }
+      .wanted-heading {
+        margin: 0 0 14px; text-align: center;
+        font-family: var(--font-serif); font-weight: 400;
+        font-size: 19px; color: #dedede; letter-spacing: .14em;
+      }
+      .wanted-lead, .wanted-foot {
+        margin: 0 0 10px; color: var(--ink-dim);
+        font-size: 14px; line-height: 1.9;
+      }
+      .wanted-foot { margin: 16px 0 0; }
+      .wanted-lead a, .wanted-foot a { color: var(--ink-dim); text-decoration: underline; text-underline-offset: 3px; }
+      .wanted-lead a:hover, .wanted-lead a:focus-visible,
+      .wanted-foot a:hover, .wanted-foot a:focus-visible { color: #e8e8e8; }
+      .wanted-year {
+        margin: 22px 0 2px;
+        font-family: var(--font-sans); font-weight: 700;
+        font-size: 16px; letter-spacing: .02em; color: #555555;
+      }
+      ul.wanted-list { list-style: none; margin: 0; padding: 0; }
+      .wanted-row {
+        display: flex; flex-wrap: wrap; align-items: baseline;
+        gap: 2px 16px; padding: 10px 2px;
+        color: #999999; font-size: 15px; line-height: 1.6;
+        text-decoration: none;
+      }
+      a.wanted-row:hover { color: #d6d6d6; }
+      a.wanted-row:focus-visible { outline: 2px solid var(--head); outline-offset: 2px; color: #d6d6d6; }
+      .wanted-row-text { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
+      .wanted-flags {
+        flex: 0 0 auto; margin-left: auto;
+        font-size: 12.5px; letter-spacing: .08em; color: #c8c8c8; white-space: nowrap;
+      }
+
       /* ---------- 星の吊り帯（フッター直上の装飾） ---------- */
       .star-band { margin: 72px 0 0; line-height: 0; }
       .star-band svg { display: block; width: 100%; height: auto; }
@@ -2251,6 +2290,7 @@
       body.niwakame #media .media-nk .mv-note { padding-left: 36px; }
       body.niwakame #goods .nk-note { color: #333333; font-size: 13px; letter-spacing: 0; }
       body.niwakame #contact .contact-box { display: none; }
+      body.niwakame #contact .wanted-box { display: none; }
       table.nk-form-table { width: 100%; border-collapse: collapse; font-size: 13px; }
       table.nk-form-table th, table.nk-form-table td { border: 1px solid #cccccc; padding: 10px 12px; text-align: left; vertical-align: top; }
       table.nk-form-table th { width: 34%; background: #f5f5f5; font-weight: 400; }
@@ -8251,6 +8291,15 @@
           </div>
         </div>
 
+        <!-- 情報を探しています：タイトル・出演者・セットリストのいずれかが不明な公演の一覧。
+             一覧の中身は下のスクリプトが公演データ（本表・ソロ関連・要確認）から自動生成する -->
+        <div class="wanted-box">
+          <h3 class="wanted-heading">情報を探しています</h3>
+          <p class="wanted-lead">ライブ履歴をできるだけ正確に残していくため、下記の公演について情報を探しています。各公演の横に、まだ分かっていない項目を記載しています。<span id="wantedCount"></span></p>
+          <div id="wantedRoot"></div>
+          <p class="wanted-foot">上記の公演について、イベントタイトル・出演者・セットリストなどの情報をお持ちの方は、<a href="https://x.com/unlock_000" target="_blank" rel="noopener noreferrer">X</a>または<a href="https://www.instagram.com/palette0823/" target="_blank" rel="noopener noreferrer">Instagram</a>からご連絡いただけると助かります。フライヤーや半券の写真、当日のメモなど、小さな手がかりでも大歓迎です。</p>
+        </div>
+
         <!-- ニワカアメモード CONTACT（公式HPのフォーム項目の再現・送信はできない表示のみ） -->
         <div class="nk-only nk-contact">
           <table class="nk-form-table">
@@ -9205,6 +9254,94 @@
         root.innerHTML = html;
       }
 
+      /* CONTACT「情報を探しています」：公演データ（本表・インストア・ソロ関連・要確認）から、
+         タイトル／出演者／セットリストのいずれかが不明な公演を機械的に洗い出して年別に一覧化する。
+         判定ルール：
+         ・タイトル不明 … event が空の公演
+         ・出演者不明 … 本表・インストアは共演者（with）未収録かつワンマン系でない公演（ワンマンは共演者なしが確定のため除く）、
+           ソロ関連は act 未設定の公演、要確認は出演者情報自体がないため全件
+         ・セットリスト不明 … setlist／partial（ソロ関連は setlists）未収録の公演。
+           ただし開催前の公演と中止公演（excludeCount）は対象外とする
+         インストア公演にも本表と同一の基準を適用する（カテゴリによる判定の除外はしない）
+         要確認のうち本表と日付・会場が一致するものは、本表側で情報が判明済みのため除く */
+      function buildWanted() {
+        var root = document.getElementById("wantedRoot");
+        if (!root) return;
+        var now = new Date();
+        var todayStr = now.getFullYear() + "-" +
+          ("0" + (now.getMonth() + 1)).slice(-2) + "-" +
+          ("0" + now.getDate()).slice(-2);
+        function held(r) { return !r.date || r.date <= todayStr; }
+
+        var liveKeys = {};
+        YEARS.forEach(function (y) {
+          LIVE_DATA[y].forEach(function (r) {
+            if (r.date) liveKeys[r.date + "|" + r.venue] = true;
+          });
+        });
+
+        var items = [];
+        YEARS.forEach(function (y) {
+          LIVE_DATA[y].forEach(function (r) {
+            var flags = [];
+            if (!r.event) flags.push("タイトル不明");
+            if (!r.with && !/ワンマン/.test(r.type || "")) flags.push("出演者不明");
+            if (held(r) && !r.excludeCount && !r.setlist && !r.partial) flags.push("セットリスト不明");
+            if (flags.length) {
+              items.push({ date: r.date, dateLabel: r.dateLabel, venue: r.venue, flags: flags, slug: r._slug || null });
+            }
+          });
+        });
+        SOLO_DATA.forEach(function (r) {
+          var flags = [];
+          if (!r.event) flags.push("タイトル不明");
+          if (!r.act) flags.push("出演者不明");
+          if (held(r) && !r.excludeCount && !r.setlist && !r.setlists) flags.push("セットリスト不明");
+          if (flags.length) {
+            items.push({ date: r.date, dateLabel: null, venue: r.venue, flags: flags, slug: null });
+          }
+        });
+        PENDING_DATA.forEach(function (r) {
+          if (r.date && liveKeys[r.date + "|" + r.venue]) return;
+          var flags = [];
+          if (!r.event) flags.push("タイトル不明");
+          flags.push("出演者不明");
+          if (held(r)) flags.push("セットリスト不明");
+          items.push({ date: r.date, dateLabel: null, venue: r.venue, flags: flags, slug: null });
+        });
+        items.sort(function (a, b) {
+          var da = a.date || "9999", db = b.date || "9999";
+          return da < db ? -1 : da > db ? 1 : 0;
+        });
+
+        var countEl = document.getElementById("wantedCount");
+        if (countEl) countEl.textContent = "対象は全" + items.length + "件です。";
+
+        var html = "";
+        var curYear = null;
+        items.forEach(function (it) {
+          var yr = it.date ? it.date.slice(0, 4) : "日付不明";
+          if (yr !== curYear) {
+            if (curYear !== null) html += "</ul>";
+            curYear = yr;
+            html += '<h4 class="wanted-year">' + esc(yr) + "</h4>";
+            html += '<ul class="wanted-list">';
+          }
+          var f = it.date ? fmtDate(it.date) : null;
+          var label = (f ? f.text : esc(it.dateLabel || "日付不明")) + " - " + esc(it.venue);
+          var flagsHtml = '<span class="wanted-flags">' + it.flags.map(esc).join("・") + "</span>";
+          if (it.slug) {
+            html += '<li><a class="wanted-row" href="#live-' + it.slug + '">' +
+              '<span class="wanted-row-text">' + label + "</span>" + flagsHtml + "</a></li>";
+          } else {
+            html += '<li><span class="wanted-row">' +
+              '<span class="wanted-row-text">' + label + "</span>" + flagsHtml + "</span></li>";
+          }
+        });
+        if (curYear !== null) html += "</ul>";
+        root.innerHTML = html;
+      }
+
       var YEARS = Object.keys(LIVE_DATA).map(Number).sort(function (a, b) { return a - b; });
 
       /* 総ライブ本数：本表（LIVE_DATA）のうちインストアを除くライブのみを自動集計してヘッダーへ表示。
@@ -9226,6 +9363,7 @@
       buildSections(YEARS);
       buildRefSections();
       buildLiveDetails();
+      buildWanted();
 
       /* ニワカアメモードの切り替え（雨マークのスクリプトから呼ばれる）。
          NK_FILTER を切り替えて再描画するだけなので、OFF にすれば全件表示に戻る */
