@@ -158,8 +158,6 @@
         color: var(--ink-dim);
       }
       .total-sub b { color: var(--head-bright); font-weight: 400; }
-      /* BIOパネル末尾へ移設した統計ブロック（旧ヘッダー分・中央寄せを維持） */
-      .bio-stats { text-align: center; margin: 0 0 10px; }
       .status-strip {
         display: inline-flex; align-items: center; gap: 9px;
         margin-top: 20px; padding: 7px 18px;
@@ -708,7 +706,9 @@
       }
 
       /* BIO下部：FLYERセクション（フライヤーを小見出し付きで集約する専用セクション。
-         大見出しはPROFILEと同じ .section-heading の体裁を使う。
+         PROFILEと同じプルダウン（アコーディオン）形式で、初期状態は閉じており、
+         見出し（summary）をタップ／クリックで開閉する。大見出しはPROFILEと同じ
+         .section-heading の体裁を使う。
          フライヤーを追加する場合は .flyer-list の中に .flyer-item を増やす：
          小見出し（.flyer-title＝何のフライヤーか）＋画像＋日程・会場のキャプション） */
       .flyer-list { display: flex; flex-direction: column; gap: 46px; }
@@ -2366,8 +2366,7 @@
       body.niwakame #panel-artist .bio-intro,
       body.niwakame #panel-artist .bio-member-nav,
       body.niwakame #panel-artist #profile,
-      body.niwakame #panel-artist #flyer,
-      body.niwakame #panel-artist .bio-stats { display: none; }
+      body.niwakame #panel-artist #flyer { display: none; }
       .nk-bio-name { font-size: 22px; letter-spacing: .3em; margin: 18px 0 2px; }
       ul.nk-members { list-style: none; margin: 18px 0; padding: 0; }
       ul.nk-members li { border-bottom: 1px dotted #cccccc; padding: 9px 2px; font-size: 14px; }
@@ -2865,8 +2864,11 @@
         </div>
       </details>
 
-      <section class="section-block" id="flyer" aria-labelledby="flyer-heading">
-        <h2 class="section-heading" id="flyer-heading"><span class="en">FLYER</span><span class="jp">フライヤー</span></h2>
+      <details class="section-block profile-acc flyer-acc" id="flyer" aria-labelledby="flyer-heading">
+        <summary class="profile-summary">
+          <h2 class="section-heading" id="flyer-heading"><span class="en">FLYER</span><span class="jp">フライヤー</span></h2>
+          <span class="chev" aria-hidden="true">▼</span>
+        </summary>
         <div class="flyer-list">
           <article class="flyer-item">
             <h3 class="sub-head flyer-title">Leetspeak monsters + GRIMOIRE COUPLING TOUR『Monsters and Tulpa』（2018）</h3>
@@ -2876,19 +2878,7 @@
             </figure>
           </article>
         </div>
-      </section>
-
-        <div class="bio-stats">
-          <p class="period">始動 <b>2015/08/23</b>〜</p>
-          <p class="total-count">
-            <span class="tc-label">総ライブ本数</span>
-            <span class="tc-value"><span class="tc-num" id="totalCount">326</span><span class="tc-unit">本</span></span>
-          </p>
-          <p class="total-sub" id="totalAll">＋インストア<b>81</b>件／全<b>407</b>件</p>
-          <div>
-            <span class="status-strip"><span class="dot" aria-hidden="true"></span>随時更新中</span>
-          </div>
-        </div>
+      </details>
       </div>
 
       <div class="tab-panel" id="panel-member-detail" data-panel="member-detail" role="tabpanel" aria-labelledby="tab-bio" hidden>
@@ -9711,9 +9701,9 @@
 
       var YEARS = Object.keys(LIVE_DATA).map(Number).sort(function (a, b) { return a - b; });
 
-      /* 総ライブ本数：本表（LIVE_DATA）のうちインストアを除くライブのみを自動集計してヘッダーへ表示。
-         あわせてインストア件数と、インストア込みの全件数もヘッダーへ表示する
-         （参考セクションの SOLO_DATA / PENDING_DATA は含めない） */
+      /* 総ライブ本数：本表（LIVE_DATA）のうちインストアを除くライブのみを自動集計する。
+         BIO末尾の統計ブロックは削除済みのため、表示先（#totalCount／#totalAll）が
+         存在する場合のみ書き込む（参考セクションの SOLO_DATA / PENDING_DATA は含めない） */
       var TOTAL_LIVES = 0;
       var TOTAL_INSTORE = 0;
       YEARS.forEach(function (y) {
@@ -9721,8 +9711,10 @@
           if (r.instore) { if (!r.excludeCount) TOTAL_INSTORE++; } else if (!r.excludeCount) TOTAL_LIVES++;
         });
       });
-      document.getElementById("totalCount").textContent = TOTAL_LIVES;
-      document.getElementById("totalAll").innerHTML =
+      var totalCountEl = document.getElementById("totalCount");
+      if (totalCountEl) totalCountEl.textContent = TOTAL_LIVES;
+      var totalAllEl = document.getElementById("totalAll");
+      if (totalAllEl) totalAllEl.innerHTML =
         "＋インストア<b>" + TOTAL_INSTORE + "</b>件／全<b>" + (TOTAL_LIVES + TOTAL_INSTORE) + "</b>件";
 
       assignLiveSlugs();
