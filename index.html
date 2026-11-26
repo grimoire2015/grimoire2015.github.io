@@ -8292,7 +8292,7 @@
         </div>
 
         <!-- 情報を探しています：タイトル・出演者・セットリストのいずれかが不明な公演の一覧。
-             一覧の中身は下のスクリプトが公演データ（本表・ソロ関連・要確認）から自動生成する -->
+             一覧の中身は下のスクリプトが公演データ（本表・要確認）から自動生成する -->
         <div class="wanted-box">
           <h3 class="wanted-heading">情報を探しています</h3>
           <p class="wanted-lead">ライブ履歴をできるだけ正確に残していくため、下記の公演について情報を探しています。各公演の横に、まだ分かっていない項目を記載しています。<span id="wantedCount"></span></p>
@@ -9254,17 +9254,18 @@
         root.innerHTML = html;
       }
 
-      /* CONTACT「情報を探しています」：公演データ（本表・ソロ関連・要確認）から、
+      /* CONTACT「情報を探しています」：公演データ（本表・要確認）から、
          タイトル／出演者／セットリストのいずれかが不明な公演を機械的に洗い出して年別に一覧化する。
          判定ルール：
          ・タイトル不明 … event が空の公演
          ・出演者不明 … 本表は共演者（with）未収録かつワンマン系でない公演（ワンマンは共演者なしが確定のため除く）、
-           ソロ関連は act 未設定の公演、要確認は出演者情報自体がないため全件
-         ・セットリスト不明 … setlist／partial（ソロ関連は setlists）未収録の公演。
+           要確認は出演者情報自体がないため全件
+         ・セットリスト不明 … setlist／partial 未収録の公演。
            ただし開催前の公演と中止公演（excludeCount）は対象外とする
          対象外とする公演：
-         ・ニワカアメ名義の公演（本表の niwakame フラグ付き、およびソロ関連のニワカアメ時代の公演）
+         ・ニワカアメ名義の公演（本表の niwakame フラグ付き）
          ・インストア公演（ライブではないため、本表の instore フラグ付きは全て除く）
+         ・ソロ・関連イベント（SOLO_DATA の公演は全て除く）
          要確認のうち本表と日付・会場が一致するものは、本表側で情報が判明済みのため除く */
       function buildWanted() {
         var root = document.getElementById("wantedRoot");
@@ -9295,16 +9296,6 @@
               items.push({ date: r.date, dateLabel: r.dateLabel, venue: r.venue, flags: flags, slug: r._slug || null });
             }
           });
-        });
-        SOLO_DATA.forEach(function (r) {
-          if (NK_RE.test((r.act || "") + " " + (r.event || ""))) return;
-          var flags = [];
-          if (!r.event) flags.push("タイトル不明");
-          if (!r.act) flags.push("出演者不明");
-          if (held(r) && !r.excludeCount && !r.setlist && !r.setlists) flags.push("セットリスト不明");
-          if (flags.length) {
-            items.push({ date: r.date, dateLabel: null, venue: r.venue, flags: flags, slug: null });
-          }
         });
         PENDING_DATA.forEach(function (r) {
           if (r.date && liveKeys[r.date + "|" + r.venue]) return;
