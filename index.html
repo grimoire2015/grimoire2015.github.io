@@ -1012,12 +1012,17 @@
         display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px;
       }
       ul.song-list li {
-        display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+        display: flex; align-items: flex-start; gap: 10px;
         padding: 7px 2px; border-bottom: 1px dotted var(--dot);
         font-size: 14px;
       }
-      ul.song-list .song-name { color: #c9c9c9; }
-      ul.song-list .song-src { color: var(--ink-faint); font-size: 12.5px; text-align: right; white-space: nowrap; }
+      ul.song-list .song-name { color: #c9c9c9; line-height: 1.55; padding-top: 4px; }
+      /* 収録作品は曲名の下に独立した行として置く。全行で左端から始まるため、
+         アイコンの数や曲名の長さに左右されず開始位置が常に揃う */
+      ul.song-list .song-src {
+        display: block; color: var(--ink-faint); font-size: 12.5px;
+        line-height: 1.5; text-align: left;
+      }
       /* ニワカアメ専用曲（timeless color／age／レベルゼロ）：通常モードの楽曲一覧（58曲）には出さず、
          ニワカアメモードの楽曲一覧でのみ「にわかあめ」と並べて表示する */
       ul.song-list li.nk-song { display: none; }
@@ -1032,13 +1037,28 @@
       ul.song-list li:has(.song-btn) { padding: 0; }
       /* 楽曲一覧：配信リンク（各サービスの公式アイコン素材を行の右端に小さく並べる。
          ボタンの外に置き、曲名タップ（詳細パネル）とリンクを両立させる） */
-      ul.song-list li:has(.song-stream) { align-items: center; }
       ul.song-list .song-btn { flex: 1 1 auto; width: auto; min-width: 0; }
-      .song-stream { display: inline-flex; flex: 0 0 auto; gap: 4px; padding-left: 8px; }
+      /* アイコンエリアはサービス4種（Apple Music／LINE MUSIC／Spotify／YouTube Music）の
+         固定幅スロットを常時確保する。その曲に無いサービスはプレースホルダで幅だけ保ち、
+         アイコン数（0〜4個）によらず全行の幅・高さ・各列の位置が揃うようにする。
+         スロットの並び替えとプレースホルダ挿入は末尾のJSが行う */
+      .song-stream {
+        display: grid; grid-template-columns: repeat(4, 30px); gap: 4px;
+        flex: 0 0 132px; width: 132px; margin-top: 7px;
+      }
       .song-stream .stream-link { width: 30px; height: 30px; min-height: 30px; border-radius: 8px; }
       .song-stream .stream-link img { width: 24px; height: 24px; border-radius: 6px; }
+      .song-stream .stream-slot-empty {
+        display: block; width: 30px; height: 30px; border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, .08);
+        background: rgba(255, 255, 255, .02);
+      }
+      body.niwakame .song-stream .stream-slot-empty {
+        border-color: rgba(0, 0, 0, .10);
+        background: rgba(0, 0, 0, .02);
+      }
       .song-btn {
-        display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+        display: flex; flex-direction: column; align-items: flex-start; gap: 1px;
         width: 100%; padding: 7px 2px;
         background: none; border: none; font: inherit; color: inherit;
         text-align: left; cursor: pointer;
@@ -10162,6 +10182,40 @@
           li.appendChild(btn);
           if (streamEl) li.appendChild(streamEl);
           btn.addEventListener("click", function () { openPanel(btn, name, src); });
+        });
+
+        /* 配信アイコンのスロット統一：全行にサービス4種分の固定スロットを用意し、
+           常に Apple Music／LINE MUSIC／Spotify／YouTube Music の順で並べる。
+           リンクの無いサービスはプレースホルダ（.stream-slot-empty）で幅だけ確保し、
+           リンク自体が無い曲にも空のスロット列を付け足す。これによりアイコン数に
+           よらず全行のレイアウトが揃い、収録作品の表示位置がずれない */
+        var SERVICES = ["apple", "line", "spotify", "ytmusic"];
+        Array.prototype.forEach.call(list.querySelectorAll("li"), function (li) {
+          var streamEl = li.querySelector(".song-stream");
+          if (!streamEl) {
+            streamEl = document.createElement("span");
+            streamEl.className = "song-stream";
+            streamEl.setAttribute("aria-hidden", "true");
+            li.appendChild(streamEl);
+          }
+          var byService = {};
+          Array.prototype.forEach.call(streamEl.querySelectorAll(".stream-link"), function (a) {
+            SERVICES.forEach(function (s) {
+              if (a.classList.contains("stream-" + s)) byService[s] = a;
+            });
+          });
+          streamEl.textContent = "";
+          SERVICES.forEach(function (s) {
+            if (byService[s]) {
+              streamEl.appendChild(byService[s]);
+            } else {
+              var ph = document.createElement("span");
+              ph.className = "stream-slot-empty";
+              ph.setAttribute("aria-hidden", "true");
+              streamEl.appendChild(ph);
+            }
+          });
+          if (streamEl.querySelector(".stream-link")) streamEl.removeAttribute("aria-hidden");
         });
       })();
     </script>
