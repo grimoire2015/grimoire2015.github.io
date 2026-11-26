@@ -9662,6 +9662,60 @@
         root.innerHTML = html;
       }
 
+      /* ソロ公演のスラッグ（同日複数公演は -2, -3… を付ける） */
+      function soloWithSlugs() {
+        var arr = SOLO_DATA.slice().sort(function (a, b) {
+          return a.date < b.date ? -1 : a.date > b.date ? 1 : 0;
+        });
+        var seen = {};
+        arr.forEach(function (r) {
+          var base = "s-" + r.date.replace(/-/g, "");
+          seen[base] = (seen[base] || 0) + 1;
+          r._slug = seen[base] > 1 ? base + "-" + seen[base] : base;
+        });
+        return arr;
+      }
+
+      /* ソロ公演の詳細ページ中身（本表の schedRowsHTML と同じテンプレ） */
+      function soloRowsHTML(r) {
+        var f = r.date ? fmtDate(r.date) : null;
+        var title = r.event ? esc(r.event) : '<span class="unknown">（不明）</span>';
+        var html = "";
+        html += '<div class="sched-row"><div class="sched-label">TITLE</div>' +
+          '<div class="sched-value sched-title">' + title + "</div></div>";
+        html += '<div class="sched-row"><div class="sched-label">LIVE</div>' +
+          '<div class="sched-value sched-live">' + (f ? esc(f.text) + " [" + f.dowEn + "] " : "") + esc(r.venue) + "</div></div>";
+        html += '<div class="sched-row"><div class="sched-label">ACT</div>' +
+          '<div class="sched-value">' + esc(r.act || "") + "</div></div>";
+        html += '<div class="sched-row"><div class="sched-label">TIME</div>' +
+          '<div class="sched-value">' + (r.time ? esc(r.time) : "") + "</div></div>";
+        html += '<div class="sched-row"><div class="sched-label">TICKET</div>' +
+          '<div class="sched-value">' + (r.ticket ? esc(r.ticket) : "") + "</div></div>";
+        html += '<div class="sched-row"><div class="sched-label">DETAIL</div>' +
+          '<div class="sched-value"><button type="button" class="detail-toggle" aria-expanded="false">&gt;&gt; 詳細を見る</button></div></div>';
+        html += '<div class="sched-detail" hidden>';
+        var cast = esc(r.act || "");
+        if (r.with) cast += " ／ 共演：" + esc(r.with);
+        html += '<div class="detail-block"><h4>出演</h4><p class="cast-line">' + cast + "</p></div>";
+        if (r.setlist) {
+          html += '<div class="detail-block"><h4>セットリスト</h4>' +
+            '<ol class="detail-setlist">' + r.setlist.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ol></div>";
+        }
+        if (r.setlists) {
+          html += '<div class="detail-block"><h4>セットリスト</h4>';
+          r.setlists.forEach(function (g) {
+            html += '<p class="cast-line">' + esc(g.band) + "</p>" +
+              '<ol class="detail-setlist">' + g.songs.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ol>";
+          });
+          html += "</div>";
+        }
+        if (r.info) {
+          html += '<div class="detail-block"><h4>詳細</h4><p class="cast-line">' + esc(r.info) + "</p></div>";
+        }
+        html += "</div>";
+        return html;
+      }
+
       /* 通常モードの公演詳細ページ（#live-g-…）を panel-live-detail 内へ生成する。
          中身は従来の一覧内表示と同一（schedRowsHTML をそのまま使う） */
       function buildLiveDetails() {
@@ -9676,6 +9730,12 @@
             html += "</article>";
           });
         });
+        soloWithSlugs().forEach(function (r) {
+          html += '<article class="live-detail-article g-live-detail" data-live-slug="g-' + r._slug + '" hidden>';
+          html += '<div class="sched">' + soloRowsHTML(r) + "</div>";
+          html += '<p class="g-live-back"><a href="#live">&gt;&gt; 一覧に戻る</a></p>';
+          html += "</article>";
+        });
         root.innerHTML = html;
       }
 
@@ -9683,9 +9743,7 @@
         var root = document.getElementById("refRoot");
         var html = "";
 
-        var solo = SOLO_DATA.slice().sort(function (a, b) {
-          return a.date < b.date ? -1 : a.date > b.date ? 1 : 0;
-        });
+        var solo = soloWithSlugs();
         if (NK_FILTER) {
           solo = solo.filter(function (r) {
             return NK_RE.test((r.event || "") + " " + (r.act || ""));
@@ -9696,44 +9754,29 @@
         html += '<span class="count-badge">全' + solo.filter(function (r) { return !r.excludeCount; }).length + '件</span><span class="chev" aria-hidden="true">▼</span></summary>';
         html += '<div class="year-body">';
         html += '<p class="ref-note">バンド全体の公演ではない、メンバーのみの出演・ソロ公演や、メンバー関連ユニットの公演です。本表の合計件数には含めていません。</p>';
-        html += '<div class="table-scroll"><table class="lives">';
-        html += "<thead><tr>" +
-          "<th scope=\"col\">日付</th>" +
-          "<th scope=\"col\">会場</th>" +
-          "<th scope=\"col\">イベント・公演名</th>" +
-          "<th scope=\"col\">出演</th>" +
-          "</tr></thead><tbody>";
+        /* 本表と同じ形式：年別アコーディオン＋「YYYY.MM.DD - 会場 (member)」の行。
+           行タップで公演詳細ページへ（ニワカアメモードでは既存の nk 詳細へ） */
+        var soloYears = [];
         solo.forEach(function (r) {
-          var f = fmtDate(r.date);
-          html += "<tr>";
-          html += '<td class="date">' + esc(f.text) + '<span class="dow">（' + f.dow + "）</span>" + (r.member ? '<span class="member-tag">(' + esc(r.member) + ')</span>' : '') + "</td>";
-          html += '<td class="venue">' + esc(r.venue) + "</td>";
-          html += '<td class="event">' + (r.event ? esc(r.event) : '<span class="unknown">（不明）</span>') + "</td>";
-          html += '<td class="act">' + esc(r.act) + "</td>";
-          html += "</tr>";
-          if (r.info) {
-            html += '<tr class="solo-setlist-row"><td colspan="4">';
-            html += '<span class="solo-setlist-label">詳細</span>';
-            html += '<p class="solo-info-text">' + esc(r.info) + "</p>";
-            html += "</td></tr>";
-          }
-          if (r.setlist || r.setlists) {
-            html += '<tr class="solo-setlist-row"><td colspan="4">';
-            if (r.setlist) {
-              html += '<span class="solo-setlist-label">セットリスト</span>';
-              html += '<ol class="solo-setlist">' + r.setlist.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ol>";
-            }
-            if (r.setlists) {
-              html += '<span class="solo-setlist-label">セットリスト</span>';
-              r.setlists.forEach(function (g) {
-                html += '<div class="solo-setlist-group"><span class="solo-setlist-band">' + esc(g.band) + "</span>";
-                html += '<ol class="solo-setlist">' + g.songs.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ol></div>";
-              });
-            }
-            html += "</td></tr>";
-          }
+          var y = r.date.slice(0, 4);
+          if (soloYears.indexOf(y) < 0) soloYears.push(y);
         });
-        html += "</tbody></table></div>";
+        soloYears.forEach(function (y) {
+          html += '<details class="live-acc" id="solo-year-' + y + '">';
+          html += '<summary class="live-year"><span class="live-year-text">' + y + "</span>" +
+            '<span class="live-year-chev" aria-hidden="true">▼</span></summary>';
+          html += '<ul class="live-list">';
+          solo.filter(function (r) { return r.date.slice(0, 4) === y; }).forEach(function (r) {
+            var f = fmtDate(r.date);
+            var label = f.text + " - " + esc(r.venue) + (r.member ? " (" + esc(r.member) + ")" : "");
+            var href = NK_FILTER ? "#live-nk-" + r.date.replace(/-/g, "") : "#live-g-" + r._slug;
+            html += '<li><a class="live-row" href="' + href + '">' +
+              '<span class="live-row-text">' + label + "</span>" +
+              '<span class="live-chev" aria-hidden="true">＞</span></a></li>';
+          });
+          html += "</ul>";
+          html += "</details>";
+        });
         html += "</div>";
         html += "</details>";
 
