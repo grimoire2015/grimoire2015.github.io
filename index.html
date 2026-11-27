@@ -2030,8 +2030,8 @@
          統一前の見出し仕様（400）へ戻す（各タブのページ見出し・
          MEDIAのタイトル・CONTACTの名前・
          曲名見出し・メンバー名・about見出しが対象。
-         BIOのタイトル／コンセプト文は2026-11-27の指示で対象外とし、
-         CONTACT本文などと同じゴシック体のままにする）。
+         BIOのタイトル／コンセプト文は対象外（直後の専用ルールで、
+         各タブ見出しの和文と同じ手書き風フォントにする）。
          ※タブボタン（ナビ）の文字は対象外：公式サイト（gri-moire.com）の
          見た目どおり、細めのサンセリフ体・薄いグレーのままにする
          （直後の専用ルールで明示する）。
@@ -2053,6 +2053,11 @@
       body:not(.niwakame) details.about summary { font-family: var(--font-head-serif); font-weight: 400; }
       body:not(.niwakame) .sub-head .en-sub,
       body:not(.niwakame) .bio-intro .bio-logo { font-family: var(--font-head-serif); }
+
+      /* BIOのタイトル／コンセプト文は、各タブ見出しの和文（「連絡先」など）と
+         同じオシャレ文字（手書き風フォント）にする（2026-11-27の指示） */
+      body:not(.niwakame) .bio-intro .bio-title,
+      body:not(.niwakame) .bio-intro .bio-concept p { font-family: var(--font-hand); font-weight: 400; }
 
       /* ---------- タブボタン（ナビ）のフォント：公式サイト準拠 ----------
          HOME／NEWS／LIVE／BIO／DISCO／MEDIA／GOODS／CONTACT の文字は、
