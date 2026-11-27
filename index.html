@@ -9222,7 +9222,7 @@
           { date: "2015-11-10", venue: "池袋EDGE", event: "rivabook presents 「Neo STARGATE」", type: "不明", self: true, with: "ソニックデスモンキー / ぞんび / Awake / DiCE / 叙情四重奏「カノン」 / アネモネ / NANIKA NO HAJIMARI", setlist: ["アルギュロスのはね", "「シン」せかい", "からくりパルム", "ゼロとくろ"], time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,300/当日¥3,800" },
           { date: "2015-12-10", venue: "池袋EDGE", event: "rivabook presents 「December stake 5」", type: "不明", self: true, with: "CLØWD / Develop One's Faculties / LiPS / the LOTUS / SALIVAN / ぞんび", setlist: ["げんそうシンドローム", "ブラッディマイパレード", "エデンのそこ", "ぼくとタルパ"], time: "開場 16:30 / 開演 17:00", ticket: "前売¥3,100/当日¥3,600" },
           { date: "2015-12-18", venue: "新宿RUIDO K4", event: "bell＋ presents 「Break Rush~vol.11~」", type: "不明", self: true, with: "DADAROMA / LONDBOY / 『危険分子』 / ♯ロストワールド / トランスノート / The Valentine.", setlist: ["からくりパルム", "ブラッディマイパレード", "ぼくとタルパ", "ゼロとくろ"], time: "開場 16:00 / 開演 16:30", ticket: "前売¥3,000/当日¥3,500" },
-          { date: "2015-12-31", venue: "新宿RUIDO K4", event: "K4『R』 presents NO NOISE LIMITATION THE WORLD 15→16", type: "対バン・イベント", official: true, with: "ALIVE / アンフィル / CLØWD / シビレバシル / ぞんび / DADAROMA / 弾丸 NO LIMIT / Neverland / Nihilizm / ViV / LOUD GRAPE / RUVISH", time: "開場 12:00 / 開演 12:30", ticket: "前売¥3,500/当日¥4,000" },
+          { date: "2015-12-31", venue: "新宿RUIDO K4", event: "K4『R』 presents NO NOISE LIMITATION THE WORLD 15→16", type: "対バン・イベント", official: true, with: "ALIVE / アンフィル / CLØWD / シビレバシル / ぞんび / DADAROMA / 弾丸 NO LIMIT / Neverland / Nihilizm / ViV / LOUD GRAPE / RUVISH", time: "開場 12:00 / 開演 12:30", ticket: "前売¥3,500/当日¥4,000", partial: "※不確定　5曲演奏と思われる。ぼくとタルパ／よわむしクエスト／からくりパルム／ゼロとくろ" },
           /* インストアイベント（旧・参考セクションから本表へ統合） */
           { date: "2015-09-20", venue: "littleHEARTS.新宿店", event: "0thシングル「ひとりトピア」発売記念インストアイベント（トーク&握手会）", type: "インストア", instore: true, self: true, time: "開場 17:45 / 開演 18:00" },
           { date: "2015-09-20", venue: "ライカ東京", event: "0thシングル「ひとりトピア」発売記念インストアイベント（トーク&CDジャケットサイン会）", type: "インストア", instore: true, self: true, time: "開始 14:30" }
@@ -10126,7 +10126,14 @@
         });
 
         var countEl = document.getElementById("wantedCount");
-        if (countEl) countEl.textContent = "対象は全" + items.length + "件です。";
+        if (countEl) countEl.textContent = items.length ? "対象は全" + items.length + "件です。" : "";
+
+        if (!items.length) {
+          var leadEl = document.querySelector(".wanted-lead");
+          if (leadEl) leadEl.textContent = "現在、情報を探している公演はありません。";
+          root.innerHTML = "";
+          return;
+        }
 
         var html = "";
         var curYear = null;
