@@ -2045,7 +2045,6 @@
       body:not(.niwakame) .section-heading .en,
       body:not(.niwakame) .sub-head,
       body:not(.niwakame) .member-card .mc-name,
-      body:not(.niwakame) .bio-member-nav .bio-member-list a,
       body:not(.niwakame) .mv-title,
       body:not(.niwakame) .media-channel a,
       body:not(.niwakame) .contact-name,
@@ -2054,10 +2053,12 @@
       body:not(.niwakame) .sub-head .en-sub,
       body:not(.niwakame) .bio-intro .bio-logo { font-family: var(--font-head-serif); }
 
-      /* BIOのタイトル／コンセプト文は、各タブ見出しの和文（「連絡先」など）と
-         同じオシャレ文字（手書き風フォント）にする（2026-11-27の指示） */
-      body:not(.niwakame) .bio-intro .bio-title,
+      /* BIOのタイトル／コンセプト文とメンバー名一覧は、各タブ見出しの和文
+         （「連絡先」など）と同じオシャレ文字（手書き風フォント）にする
+         （2026-11-27の指示）。タイトル「グリモア」だけ太字にする */
+      body:not(.niwakame) .bio-intro .bio-title { font-family: var(--font-hand); font-weight: 700; }
       body:not(.niwakame) .bio-intro .bio-concept p { font-family: var(--font-hand); font-weight: 400; }
+      body:not(.niwakame) .bio-member-nav .bio-member-list a { font-family: var(--font-hand); font-weight: 400; }
 
       /* ---------- タブボタン（ナビ）のフォント：公式サイト準拠 ----------
          HOME／NEWS／LIVE／BIO／DISCO／MEDIA／GOODS／CONTACT の文字は、
