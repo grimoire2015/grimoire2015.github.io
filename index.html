@@ -585,7 +585,7 @@
       }
       .live-total {
         margin: 20px 0 0; padding: 12px 2px 0;
-        color: var(--ink-faint); font-size: 13px; letter-spacing: .14em; text-align: center;
+        color: var(--ink-faint); font-size: 12.5px; letter-spacing: .08em; text-align: center; white-space: nowrap;
       }
       /* 通常モードの公演詳細ページの「一覧に戻る」 */
       .g-live-back { margin: 20px 0 0; font-size: 14px; }
@@ -9936,7 +9936,7 @@
           html += "</details>";
         });
         if (!NK_FILTER) {
-          html += '<p class="live-total">トータル 全' + (TOTAL_LIVES + TOTAL_INSTORE) + '件（ライブ' + TOTAL_LIVES + '件・インストア' + TOTAL_INSTORE + '件）</p>';
+          html += '<p class="live-total">全' + (TOTAL_LIVES + TOTAL_INSTORE) + '件（ライブ' + TOTAL_LIVES + '件・インストア' + TOTAL_INSTORE + '件）</p>';
         }
         root.innerHTML = html;
       }
